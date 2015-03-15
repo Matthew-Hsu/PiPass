@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	List containing both official and non-official Nintendo zones currently being used by PiPass.
+     
+	Visit https://docs.google.com/spreadsheet/ccc?key=0AvvH5W4E2lIwdEFCUkxrM085ZGp0UkZlenp6SkJablE#gid=0
+	for up to date information regarding Nintendo Zones.
+
+	Credits to FatMagic (http://reddit.com/u/FatMagic) for supplying information.
+-->
+
+<NINTENDO_ZONE_CATALOG>
+
+	<ZONE>
+		<MAC>4E:53:50:4F:4F:46</MAC>
+		<SSID>NZ@McD1</SSID>
+		<OFFICIAL_ZONE>No</OFFICIAL_ZONE>
+		<DESCRIPTION>Prime MAC - All purpose.</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:25:9C:52:1C:6A</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Nintendo World NYC</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:0D:67:15:2D:82</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Near Nintendo World NYC</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:0D:67:15:D7:21</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Near Nintendo World NYC</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:0D:67:15:D5:44</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Near Nintendo World NYC</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:0D:67:15:D2:59</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Near Nintendo World NYC</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:0D:67:15:D6:FD</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Near Nintendo World NYC</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:0F:F7:00:2D:82</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonalds - Exit 6, I84 in Danbury, CT</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>50:3D:E5:75:50:62</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonalds - Rt. 7 in New Milford, CT</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:1A:A2:A2:17:23</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonalds - Coldwater and Victory, North Hollywood, CA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:15:63:9A:23:D2</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonalds - 23rd St, Canyon, TX</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:0D:67:1A:46:E7</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>ATT Store - Waterworks Mall, Fox Chapel, PA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:3A:99:5B:D0:82</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's - Waterworks Mall, Fox Chapel, PA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:88:65:54:B9:8B</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's, Broadway and Granville, Chicago, Il.</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:24:14:10:df:12</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's - Blandford Plaza WB Mass Pike</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:14:6a:c5:69:52</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's - Lee Plaza EB Mass Pike</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>5c:0a:5b:2f:3e:61</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Gamestop/AE - Towson Town Mall in Towson, Maryland</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:15:c6:29:5f:92</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's on Route 29 in Chillicothe, Illinois</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:11:92:8D:A3:80</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Barnes and Noble @ U.S. 1 South, St. Augustine, FL</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:26:99:4E:B2:30</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>DFW Airport, Dallas, TX, USA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:13:1A:13:06:42</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's in Walmart #100, Bentonville, AR, USA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:11:93:05:CE:F0</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Barnes and Noble, Rogers, AR, USA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>58:6d:8f:0f:ad:7b</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Barnes and Noble near Northeast Mall, Hurst, Texas, USA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>e8:40:40:cd:ed:21</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Denver International Airport (DIA) Terminal A</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>c4:71:fe:5b:de:f2</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>San Francisco International Airport (SFO) Domestic Ticketing</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>C4:71:FE:5C:2D:F2</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's, Zionsville, IN, USA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:1D:70:9B:08:62</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's, Fishers, IN, USA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:21:55:B4:E4:00</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Starbucks, Fishers, IN, USA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>F0:7D:68:16:B7:2D</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION> FedEx Kinkos 170 University Ave W, Waterloo, ON N2L 3E9</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>48:5A:B6:C0:35:27</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's Rogers City, MI, USA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:12:00:CD:0F:72</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Akron Ohio McDonalds</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>34:A8:4E:9A:E7:51</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Forum Shops at Caesar’s Palace, Las Vegas, NV</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:0D:67:68:AE:99</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Burger King/Market Express, Price, UT Exit 240</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:0d:67:6a:25:27</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's - Hudson, NY</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>20:37:06:6c:fe:c7</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's - E Main St - Westfield, MA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:0f:8f:1d:6f:d2</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Burger King - Hudson, NY</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:13:7f:53:c5:c2</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's - Hampton Beach, NH</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:1a:6c:f3:67:42</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's - Charlton Plaza WB Mass Pike</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:16:C8:17:8B:12</MAC>
+		<SSID>NZ@McD1</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's, Wilhelmshöher BHf, Kassel, GER</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:3a:9a:64:c1:b0</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>Barnes and Noble in Anchorage, Alaska on Northern Lights Blvd</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:0f:f7:20:82:62</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonalds @ 5716 Debarr Rd, Anchorage, AK</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:15:C6:6A:B3:52</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's in Sparta, TN</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:0d:67:1c:1b:24</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's in Ooltewah, TN</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:90:FB:2A:17:D0</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's, Dallas, TX, USA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:90:FB:2A:C8:96</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's, Dallas, TX, USA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:90:FB:37:97:BA</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's, Dallas, TX, USA</DESCRIPTION>
+	</ZONE>
+
+	<ZONE>
+		<MAC>00:90:FB:2A:04:14</MAC>
+		<SSID>attwifi</SSID>
+		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
+		<DESCRIPTION>McDonald's, Dallas, TX, USA</DESCRIPTION>
+	</ZONE>
+
+</NINTENDO_ZONE_CATALOG>

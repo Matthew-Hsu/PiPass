@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PiPass Dashboard for Raspberry Pi 2 Model B">
+    <meta name="author" content="Matthew Hsu">
+    <meta name="keyword" content="Nintendo, 3DS, Homepass, Raspberry, Pi, PiPass">
+
+    <title>PiPass Dashboard</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+    <!-- BOOTSTRAP CORE CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    
+    <!-- EXTERNAL CSS -->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        
+    <!-- CUSTOM STYLES FOR THIS TEMPLATE -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+  <section id="container" >
+      <!-- HEADER START -->
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <!-- LOGO START -->
+            <a class="logo"><b>PiPass Dashboard</b></a>
+            <!-- LOGO END -->
+      </header>
+      <!-- HEADER END -->
+      
+      <!-- SIDEBAR START -->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- SIDEBAR MENU START -->
+              <ul class="sidebar-menu" id="nav-accordion">
+              
+              	  <p class="centered"><img src="assets/img/mario.png" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">Mario</h5>
+              	  	
+                  <li class="mt">
+                      <a href="index.html">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Dashboard</span>
+                      </a>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a class="active" href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>Nintendo Zones</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="refresh_nzones.html">Refresh</a></li>
+                          <li class="active"><a  href="current_nzones.html">Show Current</a></li>
+                          <li><a  href="all_nzones.html">Show All</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-cogs"></i>
+                          <span>Raspberry Pi</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="restart_pi.php">Restart</a></li>
+                          <li><a  href="shutdown_pi.php">Shutdown</a></li>
+                      </ul>
+                  </li>
+              </ul>
+              <!-- SIDEBAR MENU END -->
+          </div>
+      </aside>
+      <!-- SIDEBAR END -->
+      
+      <!-- MAIN CONTENT START -->
+      <section id="main-content">
+        <section class="wrapper">
+          <h3><i class="fa fa-angle-right"></i> Show Current</h3>
+          <div class="row mt">
+            <div class="col-lg-12">
+              <div class="content-panel">
+                <h4><i class="fa fa-angle-right"></i> Nintendo Zones</h4>
+                <section id="unseen">
+                  <table class="table table-bordered table-striped table-condensed">
+                    <thead>
+                      <tr>
+                        <th>MAC Address</th>
+                        <th>SSID</th>
+                        <th>Official Zone</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <script>
+                        xmlhttp=new XMLHttpRequest();
+
+                        xmlhttp.open("GET","http://localhost/PiPass/etc/hostapd/current_zones.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML; 
+                          
+                        var x=xmlDoc.getElementsByTagName("ZONE");
+                          
+                        for (i=0;i<x.length;i++)
+                        { 
+                          document.write("<tr>");
+
+                          document.write("<td>");
+                          document.write(x[i].getElementsByTagName("MAC")[0].childNodes[0].nodeValue);
+                          document.write("</td>");
+                          document.write("<td>");
+                          document.write(x[i].getElementsByTagName("SSID")[0].childNodes[0].nodeValue);
+                          document.write("</td>");
+                          document.write("<td>");
+                          document.write(x[i].getElementsByTagName("OFFICIAL_ZONE")[0].childNodes[0].nodeValue);
+                          document.write("</td>");
+                          document.write("<td>");
+                          document.write(x[i].getElementsByTagName("DESCRIPTION")[0].childNodes[0].nodeValue);
+                          document.write("</td>");
+
+                          document.write("</tr>");
+                        }
+                      </script>
+                    </tbody>
+                  </table>
+                </section>
+              </div><!-- /CONTENT-PANEL -->
+            </div><!-- /COL-LG-4 -->     
+          </div><!-- /ROW -->
+        </section>
+      </section>
+      <!-- MAIN CONTENT END -->
+
+      <!--FOOTER START-->
+      <footer class="site-footer">
+          <div class="text-center">
+              <b>"It's a me, Mario!"</b>
+              <a href="current_nzones.html#" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+      <!--FOOTER END-->
+  </section>
+
+    <!-- JS PLACED AT THE END OF THE DOCUMENT SO THE PAGES LOAD FASTER -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="assets/js/jquery.scrollTo.min.js"></script>
+    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+    <!--COMMON SCRIPT FOR ALL PAGES-->
+    <script src="assets/js/common-scripts.js"></script>
+
+    <!--SCRIPT FOR THIS PAGE-->
+    <script>
+      //CUSTOM SELECT BOX
+      $(function(){
+          $('select.styled').customSelect();
+      });
+    </script>
+
+  </body>
+</html>
