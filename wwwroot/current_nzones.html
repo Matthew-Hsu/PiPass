@@ -50,14 +50,25 @@
                           <span>Dashboard</span>
                       </a>
                   </li>
+                  
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>PiPass</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="refresh_pi_pass.html">Refresh</a></li>
+                          <li><a  href="stop_pi_pass.html">Stop</a></li>
+                          <li><a  href="start_pi_pass.html">Start</a></li>
+                      </ul>
+                  </li>
 
                   <li class="sub-menu">
                       <a class="active" href="javascript:;" >
-                          <i class="fa fa-desktop"></i>
+                          <i class="fa fa-th"></i>
                           <span>Nintendo Zones</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="refresh_nzones.html">Refresh</a></li>
                           <li class="active"><a  href="current_nzones.html">Show Current</a></li>
                           <li><a  href="all_nzones.html">Show All</a></li>
                       </ul>
@@ -69,8 +80,8 @@
                           <span>Raspberry Pi</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="restart_pi.php">Restart</a></li>
-                          <li><a  href="shutdown_pi.php">Shutdown</a></li>
+                          <li><a  href="restart_pi.html">Restart</a></li>
+                          <li><a  href="shutdown_pi.html">Shutdown</a></li>
                       </ul>
                   </li>
               </ul>
@@ -101,7 +112,7 @@
                       <script>
                         xmlhttp=new XMLHttpRequest();
 
-                        xmlhttp.open("GET","http://localhost/PiPass/etc/hostapd/current_zones.xml",false);
+                        xmlhttp.open("GET","http://localhost/PiPass/wwwroot/assets/xml/current_zones.xml",false);
                         xmlhttp.send();
                         xmlDoc=xmlhttp.responseXML; 
                           

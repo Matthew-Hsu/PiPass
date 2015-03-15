@@ -15,7 +15,7 @@
 		<MAC>4E:53:50:4F:4F:46</MAC>
 		<SSID>NZ@McD1</SSID>
 		<OFFICIAL_ZONE>No</OFFICIAL_ZONE>
-		<DESCRIPTION>Prime MAC - All purpose.</DESCRIPTION>
+		<DESCRIPTION>Prime MAC - All purpose</DESCRIPTION>
 	</ZONE>
 
 	<ZONE>
@@ -110,28 +110,28 @@
 	</ZONE>
 
 	<ZONE>
-		<MAC>00:24:14:10:df:12</MAC>
+		<MAC>00:24:14:10:DF:12</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>McDonald's - Blandford Plaza WB Mass Pike</DESCRIPTION>
 	</ZONE>
 
 	<ZONE>
-		<MAC>00:14:6a:c5:69:52</MAC>
+		<MAC>00:14:6A:C5:69:52</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>McDonald's - Lee Plaza EB Mass Pike</DESCRIPTION>
 	</ZONE>
 
 	<ZONE>
-		<MAC>5c:0a:5b:2f:3e:61</MAC>
+		<MAC>5C:0A:5B:2F:3E:61</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>Gamestop/AE - Towson Town Mall in Towson, Maryland</DESCRIPTION>
 	</ZONE>
 
 	<ZONE>
-		<MAC>00:15:c6:29:5f:92</MAC>
+		<MAC>00:15:C6:29:5F:92</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>McDonald's on Route 29 in Chillicothe, Illinois</DESCRIPTION>
@@ -166,21 +166,21 @@
 	</ZONE>
 
 	<ZONE>
-		<MAC>58:6d:8f:0f:ad:7b</MAC>
+		<MAC>58:6D:8F:0F:AD:7B</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>Barnes and Noble near Northeast Mall, Hurst, Texas, USA</DESCRIPTION>
 	</ZONE>
 
 	<ZONE>
-		<MAC>e8:40:40:cd:ed:21</MAC>
+		<MAC>E8:40:40:CD:ED:21</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>Denver International Airport (DIA) Terminal A</DESCRIPTION>
 	</ZONE>
 
 	<ZONE>
-		<MAC>c4:71:fe:5b:de:f2</MAC>
+		<MAC>C4:71:FE:5B:DE:F2</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>San Francisco International Airport (SFO) Domestic Ticketing</DESCRIPTION>
@@ -243,35 +243,35 @@
 	</ZONE>
 
 	<ZONE>
-		<MAC>00:0d:67:6a:25:27</MAC>
+		<MAC>00:0D:67:6A:25:27</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>McDonald's - Hudson, NY</DESCRIPTION>
 	</ZONE>
 
 	<ZONE>
-		<MAC>20:37:06:6c:fe:c7</MAC>
+		<MAC>20:37:06:6C:FE:C7</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>McDonald's - E Main St - Westfield, MA</DESCRIPTION>
 	</ZONE>
 
 	<ZONE>
-		<MAC>00:0f:8f:1d:6f:d2</MAC>
+		<MAC>00:0F:8F:1D:6F:D2</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>Burger King - Hudson, NY</DESCRIPTION>
 	</ZONE>
 
 	<ZONE>
-		<MAC>00:13:7f:53:c5:c2</MAC>
+		<MAC>00:13:7F:53:C5:C2</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>McDonald's - Hampton Beach, NH</DESCRIPTION>
 	</ZONE>
 
 	<ZONE>
-		<MAC>00:1a:6c:f3:67:42</MAC>
+		<MAC>00:1A:6C:F3:67:42</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>McDonald's - Charlton Plaza WB Mass Pike</DESCRIPTION>
@@ -285,14 +285,14 @@
 	</ZONE>
 
 	<ZONE>
-		<MAC>00:3a:9a:64:c1:b0</MAC>
+		<MAC>00:3A:9A:64:C1:B0</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>Barnes and Noble in Anchorage, Alaska on Northern Lights Blvd</DESCRIPTION>
 	</ZONE>
 
 	<ZONE>
-		<MAC>00:0f:f7:20:82:62</MAC>
+		<MAC>00:0F:F7:20:82:62</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>McDonalds @ 5716 Debarr Rd, Anchorage, AK</DESCRIPTION>
@@ -306,7 +306,7 @@
 	</ZONE>
 
 	<ZONE>
-		<MAC>00:0d:67:1c:1b:24</MAC>
+		<MAC>00:0D:67:1C:1B:24</MAC>
 		<SSID>attwifi</SSID>
 		<OFFICIAL_ZONE>Yes</OFFICIAL_ZONE>
 		<DESCRIPTION>McDonald's in Ooltewah, TN</DESCRIPTION>

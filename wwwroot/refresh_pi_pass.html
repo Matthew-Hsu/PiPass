@@ -19,6 +19,19 @@
     <!-- CUSTOM STYLES FOR THIS TEMPLATE -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <!-- CALLS REFRESH.PHP TO EXECUTE SERVER SIDE COMMANDS -->
+    <script>
+      function refresh()
+      {
+        var xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.open("POST", "http://localhost/PiPass/wwwroot/assets/php/refresh.php", true);
+        xmlHttp.send();
+
+        alert("Refresh complete! Current list of Nintendo Zones are being used.");
+      }
+    </script>
   </head>
 
   <body>
@@ -46,31 +59,31 @@
               	  	
                   <li class="mt">
                       <a href="index.html">
-                          <i class="fa fa-th"></i>
+                          <i class="fa fa-dashboard"></i>
                           <span>Dashboard</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a class="active" href="javascript:;" >
                           <i class="fa fa-desktop"></i>
                           <span>PiPass</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="refresh_pi_pass.html">Refresh</a></li>
+                          <li class="active"><a  href="refresh_pi_pass.html">Refresh</a></li>
                           <li><a  href="stop_pi_pass.html">Stop</a></li>
                           <li><a  href="start_pi_pass.html">Start</a></li>
                       </ul>
                   </li>
 
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
-                          <i class="fa fa-desktop"></i>
+                      <a href="javascript:;" >
+                          <i class="fa fa-th"></i>
                           <span>Nintendo Zones</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="current_nzones.html">Show Current</a></li>
-                          <li class="active"><a  href="all_nzones.html">Show All</a></li>
+                          <li><a  href="all_nzones.html">Show All</a></li>
                       </ul>
                   </li>
 
@@ -93,14 +106,17 @@
       <!-- MAIN CONTENT START -->
       <section id="main-content">
       	<section class="wrapper site-min-height">
-      		<h3><i class="fa fa-angle-right"></i> Show All</h3>
-          	<div class="row mt">
-          		<div class="col-lg-12">
-          			<p>
-                  All of the Nintendo Zone information has been taken from this <a href="https://docs.google.com/spreadsheet/ccc?key=0AvvH5W4E2lIwdEFCUkxrM085ZGp0UkZlenp6SkJablE#gid=0" target="_blank">spreadsheet</a>. It's maintained by <a href="http://reddit.com/u/FatMagic" target="_blank">FatMagic</a>, so credits to FatMagic for putting the work into maintaining it.
-                </p>
-          		</div>
-          	</div>
+      		<h3><i class="fa fa-angle-right"></i> Refresh</h3>
+          <div class="row mt">
+          	<div class="col-lg-12">
+          		<p>
+                When making changes to the Nintendo Zone list to use, you'll need to refresh the configuration for those changes to take effect. These changes will occur after the current Nintendo Zone is finished.
+              </p>
+            </div>
+            <div class="wrapper">
+              <p class="centered"><button type="button" class="btn btn-primary btn-lg" onclick="refresh()">Refresh PiPass</button></p>
+            </div>
+          </div>
         </section>
       </section>
       <!-- MAIN CONTENT END -->
@@ -109,7 +125,7 @@
       <footer class="site-footer">
           <div class="text-center">
               <b>"It's a me, Mario!"</b>
-              <a href="all_nzones.html#" class="go-top">
+              <a href="refresh_pi_pass.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
