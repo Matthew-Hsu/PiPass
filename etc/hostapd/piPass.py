@@ -4,18 +4,19 @@
 
 from xml.dom.minidom import parse
 import xml.dom.minidom
+import subprocess
 import time
 
 #### Configuration Variables - Adjust to your Preferences ####
 
 # Controls the minutes between each Nintendo Zone cycle.
-STREETPASS_CYCLE_MINUTES = 1
+STREETPASS_CYCLE_MINUTES = 15
 
 # Path to the list of current Nintendo Zones being used.
-NINTENDO_ZONES = "/Applications/XAMPP/htdocs/PiPass/wwwroot/assets/xml/current_zones.xml"
+NINTENDO_ZONES = "/var/www/assets/xml/current_zones.xml"
 
 # Network configuration file path for PiPass to spoof as a Nintendo Zone.
-NETWORK_CONFIGURATION = "/tmp/test_configuration.txt"
+NETWORK_CONFIGURATION = "/etc/hostapd/hostapd.conf"
 
 #### PiPass Support - MODIFY AT YOUR OWN RISK ####
 
@@ -25,7 +26,17 @@ piPassStatus = "execute"
 # Temporary flag file path for piPassStatus.
 FLAG_PATH = "/tmp/pipass_flag.txt"
 
+# Converting STREETPASS_CYCLE_MINUTES to seconds.
+STREETPASS_CYCLE_SECONDS = STREETPASS_CYCLE_MINUTES * 60
+
+# Constructing hostapd command string.
+COMMAND = "timeout " + str(STREETPASS_CYCLE_SECONDS) + " hostapd " + NETWORK_CONFIGURATION
+
 #### PiPass Main #####
+
+# Ensure that hostapd is not running.
+subprocess.Popen("sudo service hostapd stop", shell=True, stdout=subprocess.PIPE)
+subprocess.Popen("sudo killall hostapd", shell=True, stdout=subprocess.PIPE)
 
 # Create/Overwrite flag file for piPassStatus.
 fo = open(FLAG_PATH, "wb")
@@ -84,7 +95,7 @@ while "Waiting for Half-Life 3":
 		currentDesc = currentZone.getElementsByTagName("DESCRIPTION")[0]
 		currentDesc = currentDesc.childNodes[0].data
 
-		conf = "interface=wlan0\nssid=attwifi\nbssid=" + currentMAC + "\nbridge=br0\ndriver=nl80211\nssid=" + currentSSID + "\nctrl_interface=wlan0\nctrl_interface_group=0\nhw_mode=g\nchannel=5\nwpa=0\nrsn_pairwise=CCMP\nbeacon_int=100\nauth_algs=3\nmacaddr_acl=1\naccept_mac_file=/etc/hostapd/accept\nwmm_enabled=0\neap_reauth_period=360000000"
+		conf = "interface=wlan0\nbridge=br0\ndriver=nl80211\nssid=" + currentSSID + "\nbssid=" + currentMAC + "\nhw_mode=g\nchannel=6\nauth_algs=1\nwpa=0\nmacaddr_acl=1\naccept_mac_file=/etc/hostapd/mac_accept\nwmm_enabled=0\nignore_broadcast_ssid=0"
 
 		fo.write(conf)
 		fo.close()
@@ -92,8 +103,9 @@ while "Waiting for Half-Life 3":
 		# Nintendo Zone identity acquired for PiPass spoofing.
 		print("Spoofing as " + currentMAC + " on " + currentSSID + " ( " + currentDesc + ") for " + str(STREETPASS_CYCLE_MINUTES) + " minute(s).")
 
-		# Pause PiPass before moving onto the next Nintendo Zone. Get those Mii's! Sleep takes in seconds so multiply by 60 to convert to minutes.
-		time.sleep(STREETPASS_CYCLE_MINUTES * 60)
+		# Run current Nintendo Zone and pause for STREETPASS_CYCLE_MINUTES until moving onto the next Nintendo Zone.
+		subprocess.Popen(COMMAND, shell=True, stdout=subprocess.PIPE)
+		time.sleep(STREETPASS_CYCLE_SECONDS)
 
 	# If the user has issued a stop, then exit out of PiPass.
 	if piPassStatus == "stop\n":

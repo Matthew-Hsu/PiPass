@@ -19,6 +19,19 @@
     <!-- CUSTOM STYLES FOR THIS TEMPLATE -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <!-- CALLS START.PHP TO EXECUTE SERVER SIDE COMMANDS -->
+    <script>
+      function start()
+      {
+        var xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.open("POST","assets/php/start.php",true);
+        xmlHttp.send();
+
+        alert("Starting PiPass! - PiPass is now running.");
+      }
+    </script>
   </head>
 
   <body>
@@ -50,26 +63,26 @@
                           <span>Dashboard</span>
                       </a>
                   </li>
-                  
+
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a class="active" href="javascript:;" >
                           <i class="fa fa-desktop"></i>
                           <span>PiPass</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="refresh_pi_pass.html">Refresh</a></li>
                           <li><a  href="stop_pi_pass.html">Stop</a></li>
-                          <li><a  href="start_pi_pass.html">Start</a></li>
+                          <li class="active"><a  href="start_pi_pass.html">Start</a></li>
                       </ul>
                   </li>
 
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
+                      <a href="javascript:;" >
                           <i class="fa fa-th"></i>
                           <span>Nintendo Zones</span>
                       </a>
                       <ul class="sub">
-                          <li class="active"><a  href="current_nzones.html">Show Current</a></li>
+                          <li><a  href="current_nzones.html">Show Current</a></li>
                           <li><a  href="all_nzones.html">Show All</a></li>
                       </ul>
                   </li>
@@ -92,58 +105,18 @@
       
       <!-- MAIN CONTENT START -->
       <section id="main-content">
-        <section class="wrapper">
-          <h3><i class="fa fa-angle-right"></i> Show Current</h3>
+      	<section class="wrapper site-min-height">
+      		<h3><i class="fa fa-angle-right"></i> Start</h3>
           <div class="row mt">
-            <div class="col-lg-12">
-              <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> Nintendo Zones</h4>
-                <section id="unseen">
-                  <table class="table table-bordered table-striped table-condensed">
-                    <thead>
-                      <tr>
-                        <th>MAC Address</th>
-                        <th>SSID</th>
-                        <th>Official Zone</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <script>
-                        xmlhttp=new XMLHttpRequest();
-
-                        xmlhttp.open("GET","http://localhost/PiPass/wwwroot/assets/xml/current_zones.xml",false);
-                        xmlhttp.send();
-                        xmlDoc=xmlhttp.responseXML; 
-                          
-                        var x=xmlDoc.getElementsByTagName("ZONE");
-                          
-                        for (i=0;i<x.length;i++)
-                        { 
-                          document.write("<tr>");
-
-                          document.write("<td>");
-                          document.write(x[i].getElementsByTagName("MAC")[0].childNodes[0].nodeValue);
-                          document.write("</td>");
-                          document.write("<td>");
-                          document.write(x[i].getElementsByTagName("SSID")[0].childNodes[0].nodeValue);
-                          document.write("</td>");
-                          document.write("<td>");
-                          document.write(x[i].getElementsByTagName("OFFICIAL_ZONE")[0].childNodes[0].nodeValue);
-                          document.write("</td>");
-                          document.write("<td>");
-                          document.write(x[i].getElementsByTagName("DESCRIPTION")[0].childNodes[0].nodeValue);
-                          document.write("</td>");
-
-                          document.write("</tr>");
-                        }
-                      </script>
-                    </tbody>
-                  </table>
-                </section>
-              </div><!-- /CONTENT-PANEL -->
-            </div><!-- /COL-LG-4 -->     
-          </div><!-- /ROW -->
+          	<div class="col-lg-12">
+          		<p>
+                This will start PiPass. Starting PiPass will immediately terminate any prior instance of PiPass before starting up.
+              </p>
+            </div>
+            <div class="wrapper">
+              <p class="centered"><button type="button" class="btn btn-primary btn-lg" onclick="start()">Start PiPass</button></p>
+            </div>
+          </div>
         </section>
       </section>
       <!-- MAIN CONTENT END -->
@@ -152,7 +125,7 @@
       <footer class="site-footer">
           <div class="text-center">
               <b>"It's a me, Mario!"</b>
-              <a href="current_nzones.html#" class="go-top">
+              <a href="start_pi_pass.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>

@@ -19,19 +19,6 @@
     <!-- CUSTOM STYLES FOR THIS TEMPLATE -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
-
-    <!-- CALLS RESTART_PI.PHP TO EXECUTE SERVER SIDE COMMANDS -->
-    <script>
-      function restart()
-      {
-        var xmlHttp = new XMLHttpRequest();
-
-        xmlHttp.open("POST", "http://localhost/PiPass/wwwroot/assets/php/restart_pi.php", true);
-        xmlHttp.send();
-
-        alert("Restarting Raspberry Pi! - In Process...");
-      }
-    </script>
   </head>
 
   <body>
@@ -63,7 +50,7 @@
                           <span>Dashboard</span>
                       </a>
                   </li>
-
+                  
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-desktop"></i>
@@ -77,23 +64,23 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a class="active" href="javascript:;" >
                           <i class="fa fa-th"></i>
                           <span>Nintendo Zones</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="current_nzones.html">Show Current</a></li>
+                          <li class="active"><a  href="current_nzones.html">Show Current</a></li>
                           <li><a  href="all_nzones.html">Show All</a></li>
                       </ul>
                   </li>
 
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
+                      <a href="javascript:;" >
                           <i class="fa fa-cogs"></i>
                           <span>Raspberry Pi</span>
                       </a>
                       <ul class="sub">
-                          <li class="active"><a  href="restart_pi.html">Restart</a></li>
+                          <li><a  href="restart_pi.html">Restart</a></li>
                           <li><a  href="shutdown_pi.html">Shutdown</a></li>
                       </ul>
                   </li>
@@ -105,18 +92,58 @@
       
       <!-- MAIN CONTENT START -->
       <section id="main-content">
-      	<section class="wrapper site-min-height">
-      		<h3><i class="fa fa-angle-right"></i> Restart</h3>
+        <section class="wrapper">
+          <h3><i class="fa fa-angle-right"></i> Show Current</h3>
           <div class="row mt">
-          	<div class="col-lg-12">
-          		<p>
-                This will restart your Raspberry Pi. Any unsaved changes will be lost.
-              </p>
-            </div>
-            <div class="wrapper">
-              <p class="centered"><button type="button" class="btn btn-primary btn-lg" onclick="restart()">Restart Raspberry Pi</button></p>
-            </div>
-          </div>
+            <div class="col-lg-12">
+              <div class="content-panel">
+                <h4><i class="fa fa-angle-right"></i> Nintendo Zones</h4>
+                <section id="unseen">
+                  <table class="table table-bordered table-striped table-condensed">
+                    <thead>
+                      <tr>
+                        <th>MAC Address</th>
+                        <th>SSID</th>
+                        <th>Official Zone</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <script>
+                        xmlhttp=new XMLHttpRequest();
+
+                        xmlhttp.open("GET","assets/xml/current_zones.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML; 
+                          
+                        var x=xmlDoc.getElementsByTagName("ZONE");
+                          
+                        for (i=0;i<x.length;i++)
+                        { 
+                          document.write("<tr>");
+
+                          document.write("<td>");
+                          document.write(x[i].getElementsByTagName("MAC")[0].childNodes[0].nodeValue);
+                          document.write("</td>");
+                          document.write("<td>");
+                          document.write(x[i].getElementsByTagName("SSID")[0].childNodes[0].nodeValue);
+                          document.write("</td>");
+                          document.write("<td>");
+                          document.write(x[i].getElementsByTagName("OFFICIAL_ZONE")[0].childNodes[0].nodeValue);
+                          document.write("</td>");
+                          document.write("<td>");
+                          document.write(x[i].getElementsByTagName("DESCRIPTION")[0].childNodes[0].nodeValue);
+                          document.write("</td>");
+
+                          document.write("</tr>");
+                        }
+                      </script>
+                    </tbody>
+                  </table>
+                </section>
+              </div><!-- /CONTENT-PANEL -->
+            </div><!-- /COL-LG-4 -->     
+          </div><!-- /ROW -->
         </section>
       </section>
       <!-- MAIN CONTENT END -->
@@ -125,7 +152,7 @@
       <footer class="site-footer">
           <div class="text-center">
               <b>"It's a me, Mario!"</b>
-              <a href="restart_pi.html#" class="go-top">
+              <a href="current_nzones.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
