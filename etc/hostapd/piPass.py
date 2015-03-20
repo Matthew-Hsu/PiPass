@@ -34,9 +34,8 @@ COMMAND = "timeout " + str(STREETPASS_CYCLE_SECONDS) + " hostapd " + NETWORK_CON
 
 #### PiPass Main #####
 
-# Ensure that hostapd is not running.
-subprocess.Popen("sudo service hostapd stop", shell=True, stdout=subprocess.PIPE)
-subprocess.Popen("sudo killall hostapd", shell=True, stdout=subprocess.PIPE)
+# Ensure that hostapd is running.
+subprocess.Popen("sudo service hostapd start", shell=True, stdout=subprocess.PIPE)
 
 # Create/Overwrite flag file for piPassStatus.
 fo = open(FLAG_PATH, "wb")
@@ -109,6 +108,8 @@ while "Waiting for Half-Life 3":
 
 	# If the user has issued a stop, then exit out of PiPass.
 	if piPassStatus == "stop\n":
+		subprocess.Popen("sudo service hostapd stop", shell=True, stdout=subprocess.PIPE)
+		subprocess.Popen("sudo killall hostapd", shell=True, stdout=subprocess.PIPE)
 		break
 
 print("\n[ Stop Detected! - PiPass has exited successfully. ]\n")
