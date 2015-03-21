@@ -1,3 +1,3 @@
 <?php
-exec('sudo echo "update" > /tmp/pipass_flag.txt');
+exec('sudo python /etc/hostapd/piPassCommand.py update');
 ?>

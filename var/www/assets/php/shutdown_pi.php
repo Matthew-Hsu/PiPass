@@ -1,3 +1,3 @@
 <?php
-exec('sudo /sbin/shutdown -h now');
+exec('sudo python /etc/hostapd/piPassCommand.py piOff');
 ?>

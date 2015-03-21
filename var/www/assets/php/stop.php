@@ -1,3 +1,3 @@
 <?php
-exec('sudo echo "stop" > /tmp/pipass_flag.txt');
+exec('sudo python /etc/hostapd/piPassCommand.py stop');
 ?>
