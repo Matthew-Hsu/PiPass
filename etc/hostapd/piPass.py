@@ -34,8 +34,12 @@ COMMAND = "timeout " + str(STREETPASS_CYCLE_SECONDS) + " hostapd " + NETWORK_CON
 
 #### PiPass Main #####
 
+print("[ PiPass - Homepass for the Nintendo 3DS ]\n")
+
 # Ensure that hostapd is running.
 subprocess.Popen("sudo service hostapd start", shell=True, stdout=subprocess.PIPE)
+print("> Starting up hostapd services...")
+time.sleep(5)
 
 # Create/Overwrite flag file for piPassStatus.
 fo = open(FLAG_PATH, "wb")
@@ -46,7 +50,7 @@ fo.close()
 DOMTree = xml.dom.minidom.parse(NINTENDO_ZONES)
 collection = DOMTree.documentElement
 
-print("PiPass is currently running...")
+print("> PiPass is currently running...")
 
 # This loop does not feel pity or remorse or fear and it cannot be stopped unless Half-Life 3 is released.
 while "Waiting for Half-Life 3":
@@ -74,12 +78,8 @@ while "Waiting for Half-Life 3":
 			fo.write(piPassStatus)
 			fo.close()
 
-			print("\n[ Update Detected! - Using new updated Nintendo Zones. ]\n")
+			print("\n< Update Detected! - Using new updated Nintendo Zones. >\n")
 
-			break
-
-		# If the user has issued a stop, then exit out of PiPass. NOTE: PiPass will stop after the current Nintendo Zone is finished.
-		if piPassStatus == "stop\n":
 			break
 
 		# Write the current zone information to NETWORK_CONFIGURATION.
@@ -100,16 +100,8 @@ while "Waiting for Half-Life 3":
 		fo.close()
 
 		# Nintendo Zone identity acquired for PiPass spoofing.
-		print("Spoofing as " + currentMAC + " on " + currentSSID + " ( " + currentDesc + ") for " + str(STREETPASS_CYCLE_MINUTES) + " minute(s).")
+		print("> Spoofing as " + currentMAC + " on " + currentSSID + " ( " + currentDesc + ") for " + str(STREETPASS_CYCLE_MINUTES) + " minute(s).")
 
 		# Run current Nintendo Zone and pause for STREETPASS_CYCLE_MINUTES until moving onto the next Nintendo Zone.
 		subprocess.Popen(COMMAND, shell=True, stdout=subprocess.PIPE)
 		time.sleep(STREETPASS_CYCLE_SECONDS)
-
-	# If the user has issued a stop, then exit out of PiPass.
-	if piPassStatus == "stop\n":
-		subprocess.Popen("sudo service hostapd stop", shell=True, stdout=subprocess.PIPE)
-		subprocess.Popen("sudo killall hostapd", shell=True, stdout=subprocess.PIPE)
-		break
-
-print("\n[ Stop Detected! - PiPass has exited successfully. ]\n")
