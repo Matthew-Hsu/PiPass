@@ -182,8 +182,8 @@ Please let me know if any other hardware is compatible and I will add them to th
 # Future Features
 I want to expand the functionality of the dashboard by adding:
 
-    + Adding/Removing Nintendo Zones.
-    + Adding/Removing Accepted MAC Addresses.
-    + Configuration File for piPass.py and piPassCommands.py and control of those settings through the Dashboard.
-    + Randomized Visiting of Nintendo Zones.
-    + PiPass Image for Seamless and Robust Installs (IN PROGRESS).
+    +   Adding/Removing Nintendo Zones.
+    +   Adding/Removing Accepted MAC Addresses.
+    +   Configuration File for piPass.py and piPassCommands.py and control of those settings through the Dashboard.
+    +   Randomized Visiting of Nintendo Zones.
+    +   PiPass Image for Seamless and Robust Installs (IN PROGRESS).
