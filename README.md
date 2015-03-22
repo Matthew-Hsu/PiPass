@@ -21,12 +21,7 @@ Make sure you have your Raspberry Pi plugged into your router via an Ethernet ca
 
 <b>Installing PiPass</b>
 
-Download PiPass from this main page as a zip file and extract the contents on your local machine. You will notice three directories inside PiPass-master: etc, opt, and var. Copy over PiPass-master to your Raspberry Pi (e.g., /home/pi/). Now, you will need to login into your Raspberry Pi and use the terminal window.
-
-    -> Navigate to PiPass-master (e.g., cd /home/pi/PiPass-master/).
-    -> Execute install.sh (e.g., sudo ./install.sh).
-    
-The install.sh script will install PiPass and also install any other software dependencies needed.
+Download PiPass from this main page as a zip file and extract the contents on your local machine. You will notice three directories inside PiPass-master: etc, opt, and var.
 
 # Hardware
 I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referal links should be helpful. The pricing on these items are exactly the same as a non-referal. As for WiFi adapters, any Ralink RT5370 based chipset should be compatible.
