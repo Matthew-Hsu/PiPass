@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PiPass Dashboard for Raspberry Pi 2 Model B">
+    <meta name="description" content="PiPass Dashboard for the Raspberry Pi">
     <meta name="author" content="Matthew Hsu">
     <meta name="keyword" content="Nintendo, 3DS, Homepass, Raspberry, Pi, PiPass">
 
@@ -14,7 +14,7 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     
     <!-- EXTERNAL CSS -->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
         
     <!-- CUSTOM STYLES FOR THIS TEMPLATE -->
     <link href="assets/css/style.css" rel="stylesheet">
@@ -29,7 +29,7 @@
         xmlHttp.open("POST","assets/php/stop.php",true);
         xmlHttp.send();
 
-        alert("Stopping PiPass! - PiPass is currently not running.");
+        alert("Stopping PiPass! - To run PiPass again, please start PiPass through the PiPass Dashboard.");
       }
     </script>
   </head>
@@ -109,9 +109,11 @@
           <h3><i class="fa fa-angle-right"></i> Stop</h3>
           <div class="row mt">
             <div class="col-lg-12">
-              <p>
-                This will stop PiPass from running. PiPass will terminate immediately.
-              </p>
+              <div class="showback">
+                <p>
+                  This will stop PiPass from running. PiPass will terminate immediately.
+                </p>
+              </div>
             </div>
             <div class="wrapper">
               <p class="centered"><button type="button" class="btn btn-primary btn-lg" onclick="stop()">Stop PiPass</button></p>

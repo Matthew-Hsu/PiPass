@@ -1,3 +1,3 @@
 <?php
-exec('sudo python /etc/hostapd/piPassCommand.py piRestart');
+exec('sudo python /opt/PiPass/piPassCommand.py piRestart');
 ?>

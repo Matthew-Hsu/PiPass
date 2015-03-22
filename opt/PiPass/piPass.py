@@ -2,6 +2,7 @@
 
 #### Imported Libraries ####
 
+from xml.dom.minidom import Document
 from xml.dom.minidom import parse
 import xml.dom.minidom
 import subprocess
@@ -12,13 +13,16 @@ import time
 # Controls the minutes between each Nintendo Zone cycle.
 STREETPASS_CYCLE_MINUTES = 15
 
-# Path to the list of current Nintendo Zones being used.
-NINTENDO_ZONES = "/var/www/assets/xml/current_zones.xml"
-
 # Network configuration file path for PiPass to spoof as a Nintendo Zone.
 NETWORK_CONFIGURATION = "/etc/hostapd/hostapd.conf"
 
 #### PiPass Support - MODIFY AT YOUR OWN RISK ####
+
+# Path to the list of current Nintendo Zones being used.
+NINTENDO_ZONES = "/var/www/assets/xml/current_zones.xml"
+
+# Path to the XML file where PiPass will write to for the PiPass Dashboard to display connection information.
+DASHBOARD_INFO = "/var/www/assets/xml/current_state.xml"
 
 # Flag that informs PiPass that updates have been made to current_zones.xml and to use those updates. Default value is "execute".
 piPassStatus = "execute"
@@ -42,7 +46,7 @@ print("> Starting up hostapd services...")
 time.sleep(5)
 
 # Create/Overwrite flag file for piPassStatus.
-fo = open(FLAG_PATH, "wb")
+fo = open(FLAG_PATH, "w")
 fo.write(piPassStatus)
 fo.close()
 
@@ -74,7 +78,7 @@ while "Waiting for Half-Life 3":
             piPassStatus = "execute"
 
             # Overwrite flag file for piPassStatus.
-            fo = open(FLAG_PATH, "wb")
+            fo = open(FLAG_PATH, "w")
             fo.write(piPassStatus)
             fo.close()
 
@@ -83,7 +87,7 @@ while "Waiting for Half-Life 3":
             break
 
         # Write the current zone information to NETWORK_CONFIGURATION.
-        fo = open(NETWORK_CONFIGURATION, "wb")
+        fo = open(NETWORK_CONFIGURATION, "w")
 
         currentMAC = currentZone.getElementsByTagName("MAC")[0]
         currentMAC = currentMAC.childNodes[0].data
@@ -101,6 +105,25 @@ while "Waiting for Half-Life 3":
 
         # Nintendo Zone identity acquired for PiPass spoofing.
         print("> Spoofing as " + currentMAC + " on " + currentSSID + " ( " + currentDesc + ") for " + str(STREETPASS_CYCLE_MINUTES) + " minute(s).")
+
+        # Write PiPass status to DASHBOARD_INFO
+        doc = Document()
+        root = doc.createElement("PI_PASS_STATUS")
+        stateXML = {'STATE':'Running', 'MAC':currentMAC, 'SSID':currentSSID, 'DESCRIPTION':currentDesc}
+
+        doc.appendChild(root)
+
+        for value in stateXML:
+            # Create Element
+            tempChild = doc.createElement(value)
+            root.appendChild(tempChild)
+
+            # Write Text
+            nodeText = doc.createTextNode(stateXML[value].strip())
+            tempChild.appendChild(nodeText)
+
+        doc.writexml(open(DASHBOARD_INFO, 'w'), indent="  ", addindent="  ", newl='\n')
+        doc.unlink()
 
         # Run current Nintendo Zone and pause for STREETPASS_CYCLE_MINUTES until moving onto the next Nintendo Zone.
         subprocess.Popen(COMMAND, shell=True, stdout=subprocess.PIPE)
