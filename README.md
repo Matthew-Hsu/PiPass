@@ -11,32 +11,22 @@ Ideally, I don't want to have many hardware requirements and have PiPass be boun
 
 For those that are interested, I can host an image of PiPass that can be readidly imaged onto a SD card.
 
-<b>Install Guide</b>
-
 There is actually a great guide already written by Semperverus that can be found <a href="https://docs.google.com/document/d/1EvmIwTIjPva5MHSFEIN0qsHtRmdRRiX3WNHu_ThxnOs/edit" target="_blank">here</a>. He does a great job in explaining how to use Linux and how to setup a Homepass Relay Station. I encourage everyone to check it out.
 
 From here on, I will assume you are running the Raspbian operating system on your Raspberry Pi. You will have to run some terminal commands and upload PiPass as well.
 
 <b>Hardware Setup</b>
 
-Make sure you have your Raspberry Pi plugged into your router via a Ethernet cable. Also, make sure you have a compatible WiFi USB dongle plugged into your Raspberry Pi.
+Make sure you have your Raspberry Pi plugged into your router via an Ethernet cable. Also, make sure you have a compatible WiFi USB dongle plugged into your Raspberry Pi.
 
-<b>Updating Your Operating System</b>
-
-It's always good to keep your Raspberry Pi up-to-date. You can run following commands in the terminal to do so:
-    -> apt-get update
-    -> apt-get upgrade
-    -> apt-get autoremove
-    
 <b>Installing PiPass</b>
 
+Download PiPass from this main page as a zip file and extract the contents on your local machine. You will notice three directories inside PiPass-master: etc, opt, and var. Copy over PiPass-master to your Raspberry Pi (e.g., /home/pi/). Now, you will need to login into your Raspberry Pi and use the terminal window.
 
-<b>Installing Software Dependencies</b>
-
-PiPass uses some software packages that needs to be installed.
-
-
-
+    -> Navigate to PiPass-master (e.g., cd /home/pi/PiPass-master/).
+    -> Execute install.sh (e.g., sudo ./install.sh).
+    
+The install.sh script will install PiPass and also install any other software dependencies needed.
 
 # Hardware
 I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referal links should be helpful. The pricing on these items are exactly the same as a non-referal. As for WiFi adapters, any Ralink RT5370 based chipset should be compatible.
