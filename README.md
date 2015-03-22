@@ -47,6 +47,12 @@ Each MAC address should be on a new line. You can either delete and replace the 
 I've added a good chunk of Nintendo Zones from <a href="https://docs.google.com/spreadsheet/ccc?key=0AvvH5W4E2lIwdEFCUkxrM085ZGp0UkZlenp6SkJablE#gid=0" target="_blank">FatMagic's list</a>. If you want to add more Nintendo Zones or remove some, you can edit the XML file by entering the following command:
 
     ->  sudo /var/www/assets/xml/current_zones.xml
+    
+By default, PiPass will be a particular Nintendo Zone for 15 minutes, before moving onto the next one. This should give you enough time to play all the mini-games before you get your next batch. If this time is too long or too short for you, you can edit the Python script here:
+
+    -> sudo /opt/PiPass/piPass.py
+    
+Be careful though and try to limit your changes to the STREETPASS_CYCLE_MINUTES variable.
 
 <b>PiPass Dashboard Permissions</b>
 
@@ -174,4 +180,10 @@ Please let me know if any other hardware is compatible and I will add them to th
 <a href="http://www.amazon.com/gp/product/B008OF9Z54/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B008OF9Z54&linkCode=as2&tag=matthew08b-20&linkId=B56OIMZL6L43DVYE">Mini USB 2.0 WiFi Wireless Adapter with Antenna, 802.11 n/g/b, 150M LAN Adapter</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=matthew08b-20&l=as2&o=1&a=B008OF9Z54" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
 # Future Features
-I definitely want to add more functionality to the dashboard. Ideally, I would like the dashboard to edit the Nintendo Zone list and also edit/show the accepted MAC addresses. Randomizing through the Nintendo Zone list will also be a nice addition and I want to create a more seamless and robust PiPass image for speedier installs.
+I want to expand the functionality of the dashboard by adding:
+
+    + Adding/Removing Nintendo Zones.
+    + Adding/Removing Accepted MAC Addresses.
+    + Configuration File for piPass.py and piPassCommands.py and control of those settings through the Dashboard.
+    + Randomized Visiting of Nintendo Zones.
+    + PiPass Image for Seamless and Robust Installs (IN PROGRESS).
