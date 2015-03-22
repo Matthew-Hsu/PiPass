@@ -180,10 +180,10 @@ Please let me know if any other hardware is compatible and I will add them to th
 <a href="http://www.amazon.com/gp/product/B008OF9Z54/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B008OF9Z54&linkCode=as2&tag=matthew08b-20&linkId=B56OIMZL6L43DVYE">Mini USB 2.0 WiFi Wireless Adapter with Antenna, 802.11 n/g/b, 150M LAN Adapter</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=matthew08b-20&l=as2&o=1&a=B008OF9Z54" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
 # Future Features
-I want to expand the functionality of the dashboard by adding:
+I want to expand the functionality of PiPass by adding the following:
 
-    +   Adding/Removing Nintendo Zones.
-    +   Adding/Removing Accepted MAC Addresses.
-    +   Configuration File for piPass.py and piPassCommands.py and control of those settings through the Dashboard.
+    +   Adding/Removing Nintendo Zones through the Dashboard.
+    +   Adding/Removing Accepted MAC Addresses through the Dashboard.
+    +   Configuration for piPass.py and piPassCommands.py and control of those settings through the Dashboard.
     +   Randomized Visiting of Nintendo Zones.
     +   PiPass Image for Seamless and Robust Installs (IN PROGRESS).
