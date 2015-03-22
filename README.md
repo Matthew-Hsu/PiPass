@@ -1,5 +1,5 @@
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
-PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can manage most of the features without the need of opening up any files manually. Though there are some setting up to do that will require getting your hands 'dirty'.
+PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can manage most of the features without the need of opening up any files manually. The dashboard is adaptive, so you will be able to control most of the features of PiPass using your Web browser and even your mobile phone. Though there are some setting up to do that will require getting your hands 'dirty'.
 
 Given you have a compatible WiFi adapter that can be used as an Access Point, PiPass should be able to run on any version of the Raspberry Pi and even on a Linux computer.
 
@@ -7,11 +7,36 @@ Given you have a compatible WiFi adapter that can be used as an Access Point, Pi
 I have developed and tested PiPass using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. My wireless network is managed by an Apple Airport Extreme.
 
 # Installation
-Ideally, I don't want to have many hardware requirements and have PiPass be bounded by strict constraints. In the end, PiPass is just a local webpage that is powered by some Python scripts. In reality, PiPass should work on any Linux based machine.
+Ideally, I don't want to have many hardware requirements and have PiPass be bounded by strict constraints. In the end, PiPass is just a local webpage that is powered by some Python scripts. PiPass should work on any Linux based machine.
 
 For those that are interested, I can host an image of PiPass that can be readidly imaged onto a SD card.
 
 <b>Install Guide</b>
+
+There is actually a great guide already written by Semperverus that can be found <a href="https://docs.google.com/document/d/1EvmIwTIjPva5MHSFEIN0qsHtRmdRRiX3WNHu_ThxnOs/edit" target="_blank">here</a>. He does a great job in explaining how to use Linux and how to setup a Homepass Relay Station. I encourage everyone to check it out.
+
+From here on, I will assume you are running the Raspbian operating system on your Raspberry Pi. You will have to run some terminal commands and upload PiPass as well.
+
+<b>Hardware Setup</b>
+
+Make sure you have your Raspberry Pi plugged into your router via a Ethernet cable. Also, make sure you have a compatible WiFi USB dongle plugged into your Raspberry Pi.
+
+<b>Updating Your Operating System</b>
+
+It's always good to keep your Raspberry Pi up-to-date. You can run following commands in the terminal to do so:
+    -> apt-get update
+    -> apt-get upgrade
+    -> apt-get autoremove
+    
+<b>Installing PiPass</b>
+
+
+<b>Installing Software Dependencies</b>
+
+PiPass uses some software packages that needs to be installed.
+
+
+
 
 # Hardware
 I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referal links should be helpful. The pricing on these items are exactly the same as a non-referal. As for WiFi adapters, any Ralink RT5370 based chipset should be compatible.
