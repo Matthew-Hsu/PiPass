@@ -1,12 +1,20 @@
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can manage most of the features without the need of opening up any files manually. Though there are some setting up to do that will require getting your hands 'dirty'.
 
-Given you have a compatible WiFi adapter that can be used as an Access Point, PiPass should be able to run on any version of the Raspberry Pi and even on a Linux computer. I have tested PiPass on a Raspberry Pi 2
+Given you have a compatible WiFi adapter that can be used as an Access Point, PiPass should be able to run on any version of the Raspberry Pi and even on a Linux computer.
 
-# Dependencies
+# Testing Environment
+I have developed and tested PiPass using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. My wireless network is managed by an Apple Airport Extreme.
+
+# Installation
+Ideally, I don't want to have many hardware requirements and have PiPass be bounded by strict constraints. In the end, PiPass is just a local webpage that is powered by some Python scripts. In reality, PiPass should work on any Linux based machine.
+
+For those that are interested, I can host an image of PiPass that can be readidly imaged onto a SD card.
+
+<b>Install Guide</b>
 
 # Hardware
-In developing PiPass, I used the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. I have also listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. As for WiFi adapters, any Ralink RT5370 based chipset should be compatible.
+I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referal links should be helpful. The pricing on these items are exactly the same as a non-referal. As for WiFi adapters, any Ralink RT5370 based chipset should be compatible.
 
 Please let me know if any other hardware is compatible and I will add them to this list.
 
