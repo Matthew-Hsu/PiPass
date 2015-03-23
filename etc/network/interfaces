@@ -1,19 +1,9 @@
 auto lo
-
 iface lo inet loopback
 
 auto br0
-iface br0 inet static
-  address 10.0.1.188   
-  netmask 255.255.255.0
-  network 10.0.1.0
-  gateway 10.0.1.1
-  broadcast 10.0.1.255   
-  bridge-ports eth0 wlan0
+iface br0 inet dhcp
+    bridge-ports eth0 wlan0
 
 allow-hotplug wlan0
-
-iface wlan0 inet static
-  address 10.0.0.8
-  netmask 255.255.255.0
-  pre-up ifconfig wlan0 10.0.0.8
+iface wlan0 inet dhcp
