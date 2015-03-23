@@ -7,7 +7,7 @@ import xml.dom.minidom
 import subprocess
 import sys
 
-#### Configuration Variables - Adjust to your Preferences ####
+#### PiPass Command Support - MODIFY AT YOUR OWN RISK ####
 
 # Path to the XML file where PiPass will write to for the PiPass Dashboard to display connection information.
 DASHBOARD_INFO = "/var/www/assets/xml/current_state.xml"

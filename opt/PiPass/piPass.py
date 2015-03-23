@@ -10,13 +10,18 @@ import time
 
 #### Configuration Variables - Adjust to your Preferences ####
 
+# Hostapd driver for your USB WiFi dongle. If the default value does not work for
+# you, you may need to research which driver is compatible. Refer to README at
+# https://github.com/Matthew-Hsu/PiPass/blob/master/README.md
+HOSTAPD_DRIVER = "nl80211"
+
 # Controls the minutes between each Nintendo Zone cycle.
 STREETPASS_CYCLE_MINUTES = 15
 
+#### PiPass Support - MODIFY AT YOUR OWN RISK ####
+
 # Network configuration file path for PiPass to spoof as a Nintendo Zone.
 NETWORK_CONFIGURATION = "/etc/hostapd/hostapd.conf"
-
-#### PiPass Support - MODIFY AT YOUR OWN RISK ####
 
 # Path to the list of current Nintendo Zones being used.
 NINTENDO_ZONES = "/var/www/assets/xml/current_zones.xml"
@@ -98,7 +103,7 @@ while "Waiting for Half-Life 3":
         currentDesc = currentZone.getElementsByTagName("DESCRIPTION")[0]
         currentDesc = currentDesc.childNodes[0].data
 
-        conf = "interface=wlan0\nbridge=br0\ndriver=nl80211\nssid=" + currentSSID + "\nbssid=" + currentMAC + "\nhw_mode=g\nchannel=6\nauth_algs=1\nwpa=0\nmacaddr_acl=1\naccept_mac_file=/etc/hostapd/mac_accept\nwmm_enabled=0\nignore_broadcast_ssid=0"
+        conf = "interface=wlan0\nbridge=br0\ndriver=" + HOSTAPD_DRIVER + "\nssid=" + currentSSID + "\nbssid=" + currentMAC + "\nhw_mode=g\nchannel=6\nauth_algs=1\nwpa=0\nmacaddr_acl=1\naccept_mac_file=/etc/hostapd/mac_accept\nwmm_enabled=0\nignore_broadcast_ssid=0"
 
         fo.write(conf)
         fo.close()
