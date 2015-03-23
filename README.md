@@ -52,11 +52,11 @@ Before you begin, there is a great guide that explains in detail on how to setup
 
 Here is a list of dependencies needed for PiPass, so install the following packages through these commands:
 
-    +   apt-get install python -y
-    +   apt-get install apache2 -y
-    +   apt-get install php5 -y
-    +   apt-get install hostapd -y
-    +   apt-get install bridge-utils -y
+    ->  sudo apt-get install python -y
+    ->  sudo apt-get install apache2 -y
+    ->  sudo apt-get install php5 -y
+    ->  sudo apt-get install hostapd -y
+    ->  sudo apt-get install bridge-utils -y
 
 Download PiPass from this main page as a zip file and extract the contents on your local machine. You will notice three directories inside PiPass-master: etc, opt, and var. These three directories are the locations where you want to install PiPass (e.g., Linux root locations would be /etc/, /opt/, and /var/). Go ahead and merge the directories and it will be safe to overwrite the files with PiPass' configuration files.
 
@@ -78,7 +78,7 @@ Now this part is a little more involved as we will need to grant the Dashboard s
     
 Now add the following line at the end of the file:
 
-    ->  www-data ALL=(ALL:ALL) NOPASSWD: ALL
+    +   www-data ALL=(ALL:ALL) NOPASSWD: ALL
     
 If you are experiencing WiFi driver problems, there might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to change the value of "driver=" in these two files down below:
 
