@@ -96,7 +96,7 @@ I've added a good chunk of Nintendo Zones from <a href="https://docs.google.com/
     
 By default, PiPass will be a particular Nintendo Zone for 15 minutes, before moving onto the next one. This should give you enough time to play all the mini-games before you get your next batch. If this time is too long or too short for you, you can edit the Python script here:
 
-    -> sudo nano /opt/PiPass/piPass.py
+    ->  sudo nano /opt/PiPass/piPass.py
     
 Be careful though and try to limit your changes to the STREETPASS_CYCLE_MINUTES variable.
 
