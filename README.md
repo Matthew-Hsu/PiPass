@@ -21,7 +21,7 @@ If you are not sure on how to install an image onto your SD card, the following 
 
 Once you have the PiPass image onto your SD card, you can now load PiPass into your Raspberry Pi. Depending on how you will be operating your Raspberry Pi, the following guide is good if you will be accessing your Raspberry Pi remotely through another computer:
 * <a href="http://www.raspberrypi.org/documentation/remote-access/ssh/README.md" target="_blank">Using SSH</a>.
-* <a href="http://www.raspberrypi.org/documentation/troubleshooting/hardware/networking/ip-address.md " target="_blank">Finding Your IP Address</a>.
+* <a href="http://www.raspberrypi.org/documentation/troubleshooting/hardware/networking/ip-address.md" target="_blank">Finding Your IP Address</a>.
 
 Root access is only configured and the password for root is:
 
