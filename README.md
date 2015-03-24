@@ -2,7 +2,7 @@
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can manage most of the features without the need of opening up any files manually. The dashboard is adaptive, so you will be able to control most of the features of PiPass using your Web browser and even your mobile device. Though there is some setting up to do that will require getting your hands 'dirty'.
 
 # Testing Environment
-Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A *new* Nintendo 3DS XL with the 9.5.0-22 U firmware was used to verify functionality of 'Homepass'.
+Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A *new* Nintendo 3DS XL with the 9.6.0-24 U firmware was used to verify functionality of 'Homepass'.
 
 # Installation
 PiPass can be installed by downloading a pre-made image for your Raspberry Pi or by downloading the source files here on GitHub and setting it up manually. Manual setup will be more work, but it has the advantage of being able to use PiPass on most Linux based operating systems that are not just limited to the Raspberry Pi.
