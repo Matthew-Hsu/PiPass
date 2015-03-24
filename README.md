@@ -88,7 +88,20 @@ If you are experiencing WiFi driver problems, there might be some changes that y
 Semperverus' guide is a excellent resource for troubleshooting. With luck, you should have PiPass working manually.
 
 # Using PiPass
-The PiPass Dashboard can be accessed by typing in your Raspberry Pi's IP address in your browser window or mobile device. Most of what you need can be accessed through the Dashboard. However, if you want to customize PiPass, you'll have to edit some files manually.
+
+<b>The PiPass Dashboard</b>
+
+The PiPass Dashboard can be accessed on a device on your network by typing in your Raspberry Pi's IP address on your computer's or mobile device's browser. Most of what you need can be accessed through the Dashboard. However, if you want to customize PiPass, you'll have to edit some files manually.
+
+<b>PiPass Command</b>
+
+If you prefer to run PiPass through the terminal, instead of the dashboard, PiPass Command has a basic functional command line interface. Run the following command to see a list of options:
+
+    ->  sudo python /opt/PiPass/piPassCommand.py
+
+Like the dashboard, if you want to customize PiPass, you'll have to edit some files manually.
+
+<b>PiPass Customization</b>
 
 I've added a good chunk of Nintendo Zones from <a href="https://docs.google.com/spreadsheet/ccc?key=0AvvH5W4E2lIwdEFCUkxrM085ZGp0UkZlenp6SkJablE#gid=0" target="_blank">FatMagic's list</a>. If you want to add more Nintendo Zones or remove some, you can edit the XML file by entering the following command:
 
