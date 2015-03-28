@@ -70,8 +70,13 @@
                           <span>Nintendo Zones</span>
                       </a>
                       <ul class="sub">
-                          <li class="active"><a  href="current_nzones.html">Show Current</a></li>
-                          <li><a  href="all_nzones.html">Show All</a></li>
+                          <li><a  href="show_custom.html">Show Custom</a></li>
+                          <li><a  href="show_nintendo_zones.html">Show Nintendo Zones</a></li>
+                          <li class="active"><a  href="show_prime.html">Show Prime MACS</a></li>
+                          <li><a  href="show_mii.html">Show Mii</a></li>
+                          <li><a  href="show_communities.html">Show Communites</a></li>
+                          <li><a  href="show_extended.html">Show Extended MACS</a></li>
+                          <li><a  href="show_fatmagic.html">FatMagic DB</a></li>
                       </ul>
                   </li>
 
@@ -94,53 +99,36 @@
       <!-- MAIN CONTENT START -->
       <section id="main-content">
         <section class="wrapper">
-          <h3><i class="fa fa-angle-right"></i> Show Current</h3>
+          <h3><i class="fa fa-angle-right"></i> Show Prime MACs</h3>
           <div class="row mt">
             <div class="col-lg-12">
               <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> Nintendo Zones</h4>
+                <h4><i class="fa fa-angle-right"></i> Homepass Zones</h4>
                 <section id="unseen">
-                  <table class="table table-bordered table-striped table-condensed">
-                    <thead>
-                      <tr>
-                        <th>MAC Address</th>
-                        <th>SSID</th>
-                        <th>Official Zone</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <script>
-                        xmlhttp=new XMLHttpRequest();
+                  <script> 
+                    function displayContent(json)
+                    {
+                      var pre_html = '<table class="table table-bordered table-striped table-condensed"><thead><tr><th>MAC Address</th><th>SSID</th><th>Description</th></thead><tbody>';
+                      var actual_html='';
+                      var post_html = '</tbody></table>'
+                      var len = json.feed.entry.length
 
-                        xmlhttp.open("GET","assets/xml/current_zones.xml",false);
-                        xmlhttp.send();
-                        xmlDoc=xmlhttp.responseXML; 
-                          
-                        var x=xmlDoc.getElementsByTagName("ZONE");
-                          
-                        for (i=0;i<x.length;i++)
-                        { 
-                          document.write("<tr>");
+                      for (var i=0; i<len; i++) 
+                      {
+                        actual_html += [
+                        '<tr><td>', 
+                        json.feed.entry[i].gsx$mac.$t, 
+                        '</td><td>',   
+                        json.feed.entry[i].gsx$ssid.$t, 
+                        '</td><td>',
+                        json.feed.entry[i].gsx$description.$t, 
+                        '</td></tr>',
+                        ].join('');  
+                      }
 
-                          document.write("<td>");
-                          document.write(x[i].getElementsByTagName("MAC")[0].childNodes[0].nodeValue);
-                          document.write("</td>");
-                          document.write("<td>");
-                          document.write(x[i].getElementsByTagName("SSID")[0].childNodes[0].nodeValue);
-                          document.write("</td>");
-                          document.write("<td>");
-                          document.write(x[i].getElementsByTagName("OFFICIAL_ZONE")[0].childNodes[0].nodeValue);
-                          document.write("</td>");
-                          document.write("<td>");
-                          document.write(x[i].getElementsByTagName("DESCRIPTION")[0].childNodes[0].nodeValue);
-                          document.write("</td>");
-
-                          document.write("</tr>");
-                        }
-                      </script>
-                    </tbody>
-                  </table>
+                      document.getElementById('unseen').innerHTML = pre_html + actual_html + post_html
+                    }   
+                  </script>
                 </section>
               </div><!-- /CONTENT-PANEL -->
             </div><!-- /COL-LG-4 -->     
@@ -153,7 +141,7 @@
       <footer class="site-footer">
           <div class="text-center">
               <b>"It's a me, Mario!"</b>
-              <a href="current_nzones.html#" class="go-top">
+              <a href="show_prime.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
@@ -173,13 +161,8 @@
   <!--COMMON SCRIPT FOR ALL PAGES-->
   <script src="assets/js/common-scripts.js"></script>
 
-  <!--SCRIPT FOR THIS PAGE-->
-  <script>
-    //CUSTOM SELECT BOX
-    $(function(){
-        $('select.styled').customSelect();
-    });
-  </script>
+  <!-- DATABASE SOURCE FOR PIPASS : REFER TO GITHUB FOR INFORMATION -->
+  <script src="https://spreadsheets.google.com/feeds/list/1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M/3/public/values?alt=json&amp;callback=displayContent"></script>
 
   </body>
 </html>

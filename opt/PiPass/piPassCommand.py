@@ -2,37 +2,22 @@
 
 #### Imported Libraries ####
 
-from xml.dom.minidom import Document
-import xml.dom.minidom
 import subprocess
+import json
 import sys
+import io
 
 #### PiPass Command Support - MODIFY AT YOUR OWN RISK ####
 
-# Path to the XML file where PiPass will write to for the PiPass Dashboard to display connection information.
-DASHBOARD_INFO = "/var/www/assets/xml/current_state.xml"
+# Path to the JSON file where PiPass will write to for the PiPass Dashboard to display connection information.
+DASHBOARD_INFO = "/var/www/assets/json/current_state.json"
 
 #### Support Functions ####
 
 # Write PiPass status to DASHBOARD_INFO.
 def updateStatus():
-    doc = Document()
-    root = doc.createElement("PI_PASS_STATUS")
-    stateXML = {'STATE':'Not running', 'MAC':'None', 'SSID':'None', 'DESCRIPTION':'None'}
-
-    doc.appendChild(root)
-
-    for value in stateXML:
-        # Create Element
-        tempChild = doc.createElement(value)
-        root.appendChild(tempChild)
-
-        # Write Text
-        nodeText = doc.createTextNode(stateXML[value].strip())
-        tempChild.appendChild(nodeText)
-
-    doc.writexml(open(DASHBOARD_INFO, 'w'), indent="  ", addindent="  ", newl='\n')
-    doc.unlink()
+    with io.open(DASHBOARD_INFO, 'w', encoding='utf-8') as f:
+        f.write(unicode('[{"gsx$ssid": {"$t": "Not Available."}, "gsx$mac": {"$t": "Not Available."}, "gsx$description": {"$t": "PiPass not running."}}]'))
 
     return None
 

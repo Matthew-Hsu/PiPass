@@ -20,6 +20,9 @@
     <!-- CUSTOM STYLES FOR THIS TEMPLATE -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   </head>
 
   <body>
@@ -70,8 +73,13 @@
                           <span>Nintendo Zones</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="current_nzones.html">Show Current</a></li>
-                          <li><a  href="all_nzones.html">Show All</a></li>
+                          <li><a  href="show_custom.html">Show Custom</a></li>
+                          <li><a  href="show_nintendo_zones.html">Show Nintendo Zones</a></li>
+                          <li><a  href="show_prime.html">Show Prime MACS</a></li>
+                          <li><a  href="show_mii.html">Show Mii</a></li>
+                          <li><a  href="show_communities.html">Show Communites</a></li>
+                          <li><a  href="show_extended.html">Show Extended MACS</a></li>
+                          <li><a  href="show_fatmagic.html">FatMagic DB</a></li>
                       </ul>
                   </li>
 
@@ -98,47 +106,42 @@
           <div class="row mt">
             <div class="col-lg-12">
               <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> PiPass Status</h4>
+                <h4><i class="fa fa-angle-right"></i> Spoofing Status</h4>
                 <section id="unseen">
                   <table class="table table-bordered table-striped table-condensed">
                     <thead>
                       <tr>
-                        <th>State</th>
                         <th>MAC Address</th>
                         <th>SSID</th>
                         <th>Description</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <script>
-                        xmlhttp=new XMLHttpRequest();
+                    <script>
+                      $.getJSON("assets/json/current_state.json",
+                      function displayContent(json)
+                      {
+                        var pre_html = '<table class="table table-bordered table-striped table-condensed"><thead><tr><th>MAC Address</th><th>SSID</th><th>Description</th></tr></thead><tbody>';
+                        var actual_html='';
+                        var post_html = '</tbody></table>'
+                        var len = json.length
 
-                        xmlhttp.open("GET","assets/xml/current_state.xml",false);
-                        xmlhttp.send();
-                        xmlDoc=xmlhttp.responseXML; 
-                          
-                        var x=xmlDoc.getElementsByTagName("PI_PASS_STATUS");
-                          
-                        for (i=0;i<x.length;i++)
-                        { 
-                          document.write("<tr>");
-
-                          document.write("<td>");
-                          document.write(x[i].getElementsByTagName("STATE")[0].childNodes[0].nodeValue);
-                          document.write("</td>");
-                          document.write("<td>");
-                          document.write(x[i].getElementsByTagName("MAC")[0].childNodes[0].nodeValue);
-                          document.write("</td>");
-                          document.write("<td>");
-                          document.write(x[i].getElementsByTagName("SSID")[0].childNodes[0].nodeValue);
-                          document.write("</td>");
-                          document.write("<td>");
-                          document.write(x[i].getElementsByTagName("DESCRIPTION")[0].childNodes[0].nodeValue);
-                          document.write("</td>");
-
-                          document.write("</tr>");
+                        for (var i=0; i<len; i++) 
+                        {
+                          actual_html += [
+                          '<tr><td>', 
+                          json[i].gsx$mac.$t, 
+                          '</td><td>',   
+                          json[i].gsx$ssid.$t, 
+                          '</td><td>',
+                          json[i].gsx$description.$t, 
+                          '</td></tr>',
+                          ].join('');  
                         }
-                      </script>
+
+                        document.getElementById('unseen').innerHTML = pre_html + actual_html + post_html
+                      });
+                    </script>
                     </tbody>
                   </table>
                 </section>
@@ -151,8 +154,9 @@
                 <h4><i class="fa fa-angle-right"></i> About</h4>
                 <p>
                   Thank you for using PiPass for the Raspberry Pi! PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass
-                  Dashboard can manage most of the features without the need of opening up any files manually. Though there are some setting up to do that
-                  will require getting your hands 'dirty'.
+                  Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually.
+                  However, fine tuning of the database source and network configuration will require getting your hands 'dirty'. Though the process is
+                  relatively fast and easy.
                 </p>
                 <p>
                   Updates to PiPass and references in configuring PiPass can be found on my <a href="https://github.com/Matthew-Hsu/PiPass" target="_blank">
@@ -191,14 +195,6 @@
 
   <!--COMMON SCRIPT FOR ALL PAGES-->
   <script src="assets/js/common-scripts.js"></script>
-
-  <!--SCRIPT FOR THIS PAGE-->
-  <script>
-    //CUSTOM SELECT BOX
-    $(function(){
-        $('select.styled').customSelect();
-    });
-  </script>
 
   </body>
 </html>

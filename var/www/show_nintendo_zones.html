@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="refresh" content="60">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="PiPass Dashboard for the Raspberry Pi">
     <meta name="author" content="Matthew Hsu">
@@ -46,11 +47,11 @@
                     
                   <li class="mt">
                       <a href="index.html">
-                          <i class="fa fa-th"></i>
+                          <i class="fa fa-dashboard"></i>
                           <span>Dashboard</span>
                       </a>
                   </li>
-
+                  
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-desktop"></i>
@@ -65,12 +66,17 @@
 
                   <li class="sub-menu">
                       <a class="active" href="javascript:;" >
-                          <i class="fa fa-desktop"></i>
+                          <i class="fa fa-th"></i>
                           <span>Nintendo Zones</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="current_nzones.html">Show Current</a></li>
-                          <li class="active"><a  href="all_nzones.html">Show All</a></li>
+                          <li><a  href="show_custom.html">Show Custom</a></li>
+                          <li class="active"><a  href="show_nintendo_zones.html">Show Nintendo Zones</a></li>
+                          <li><a  href="show_prime.html">Show Prime MACS</a></li>
+                          <li><a  href="show_mii.html">Show Mii</a></li>
+                          <li><a  href="show_communities.html">Show Communites</a></li>
+                          <li><a  href="show_extended.html">Show Extended MACS</a></li>
+                          <li><a  href="show_fatmagic.html">FatMagic DB</a></li>
                       </ul>
                   </li>
 
@@ -92,17 +98,41 @@
       
       <!-- MAIN CONTENT START -->
       <section id="main-content">
-        <section class="wrapper site-min-height">
-          <h3><i class="fa fa-angle-right"></i> Show All</h3>
-            <div class="row mt">
-              <div class="col-lg-12">
-                <div class="showback">
-                  <p>
-                    All of the Nintendo Zone information has been taken from this <a href="https://docs.google.com/spreadsheet/ccc?key=0AvvH5W4E2lIwdEFCUkxrM085ZGp0UkZlenp6SkJablE#gid=0" target="_blank">spreadsheet</a>. It's maintained by <a href="http://reddit.com/u/FatMagic" target="_blank">FatMagic</a>, so credits to FatMagic for putting the work into maintaining it.
-                  </p>
-                </div>
-              </div>
-            </div>
+        <section class="wrapper">
+          <h3><i class="fa fa-angle-right"></i> Show Nintendo Zones</h3>
+          <div class="row mt">
+            <div class="col-lg-12">
+              <div class="content-panel">
+                <h4><i class="fa fa-angle-right"></i> Homepass Zones</h4>
+                <section id="unseen">
+                  <script> 
+                    function displayContent(json)
+                    {
+                      var pre_html = '<table class="table table-bordered table-striped table-condensed"><thead><tr><th>MAC Address</th><th>SSID</th><th>Description</th></thead><tbody>';
+                      var actual_html='';
+                      var post_html = '</tbody></table>'
+                      var len = json.feed.entry.length
+
+                      for (var i=0; i<len; i++) 
+                      {
+                        actual_html += [
+                        '<tr><td>', 
+                        json.feed.entry[i].gsx$mac.$t, 
+                        '</td><td>',   
+                        json.feed.entry[i].gsx$ssid.$t, 
+                        '</td><td>',
+                        json.feed.entry[i].gsx$description.$t, 
+                        '</td></tr>',
+                        ].join('');  
+                      }
+
+                      document.getElementById('unseen').innerHTML = pre_html + actual_html + post_html
+                    }   
+                  </script>
+                </section>
+              </div><!-- /CONTENT-PANEL -->
+            </div><!-- /COL-LG-4 -->     
+          </div><!-- /ROW -->
         </section>
       </section>
       <!-- MAIN CONTENT END -->
@@ -111,7 +141,7 @@
       <footer class="site-footer">
           <div class="text-center">
               <b>"It's a me, Mario!"</b>
-              <a href="all_nzones.html#" class="go-top">
+              <a href="show_nintendo_zones.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
@@ -131,13 +161,8 @@
   <!--COMMON SCRIPT FOR ALL PAGES-->
   <script src="assets/js/common-scripts.js"></script>
 
-  <!--SCRIPT FOR THIS PAGE-->
-  <script>
-    //CUSTOM SELECT BOX
-    $(function(){
-        $('select.styled').customSelect();
-    });
-  </script>
+  <!-- DATABASE SOURCE FOR PIPASS : REFER TO GITHUB FOR INFORMATION -->
+  <script src="https://spreadsheets.google.com/feeds/list/1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M/2/public/values?alt=json&amp;callback=displayContent"></script>
 
   </body>
 </html>

@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="refresh" content="60">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="PiPass Dashboard for the Raspberry Pi">
     <meta name="author" content="Matthew Hsu">
@@ -19,19 +20,6 @@
     <!-- CUSTOM STYLES FOR THIS TEMPLATE -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
-
-    <!-- CALLS STOP.PHP TO EXECUTE SERVER SIDE COMMANDS -->
-    <script>
-      function stop()
-      {
-        var xmlHttp = new XMLHttpRequest();
-
-        xmlHttp.open("POST","assets/php/stop.php",true);
-        xmlHttp.send();
-
-        alert("Stopping PiPass! - To run PiPass again, please start PiPass through the PiPass Dashboard.");
-      }
-    </script>
   </head>
 
   <body>
@@ -63,26 +51,26 @@
                           <span>Dashboard</span>
                       </a>
                   </li>
-
+                  
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
+                      <a href="javascript:;" >
                           <i class="fa fa-desktop"></i>
                           <span>PiPass</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="refresh_pi_pass.html">Refresh</a></li>
-                          <li class="active"><a  href="stop_pi_pass.html">Stop</a></li>
+                          <li><a  href="stop_pi_pass.html">Stop</a></li>
                           <li><a  href="start_pi_pass.html">Start</a></li>
                       </ul>
                   </li>
 
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a class="active" href="javascript:;" >
                           <i class="fa fa-th"></i>
                           <span>Nintendo Zones</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="show_custom.html">Show Custom</a></li>
+                          <li class="active"><a  href="show_custom.html">Show Custom</a></li>
                           <li><a  href="show_nintendo_zones.html">Show Nintendo Zones</a></li>
                           <li><a  href="show_prime.html">Show Prime MACS</a></li>
                           <li><a  href="show_mii.html">Show Mii</a></li>
@@ -110,20 +98,41 @@
       
       <!-- MAIN CONTENT START -->
       <section id="main-content">
-        <section class="wrapper site-min-height">
-          <h3><i class="fa fa-angle-right"></i> Stop</h3>
+        <section class="wrapper">
+          <h3><i class="fa fa-angle-right"></i> Show Custom</h3>
           <div class="row mt">
             <div class="col-lg-12">
-              <div class="showback">
-                <p>
-                  This will stop PiPass from running. PiPass will terminate immediately.
-                </p>
-              </div>
-            </div>
-            <div class="wrapper">
-              <p class="centered"><button type="button" class="btn btn-primary btn-lg" onclick="stop()">Stop PiPass</button></p>
-            </div>
-          </div>
+              <div class="content-panel">
+                <h4><i class="fa fa-angle-right"></i> Homepass Zones</h4>
+                <section id="unseen">
+                  <script> 
+                    function displayContent(json)
+                    {
+                      var pre_html = '<table class="table table-bordered table-striped table-condensed"><thead><tr><th>MAC Address</th><th>SSID</th><th>Description</th></thead><tbody>';
+                      var actual_html='';
+                      var post_html = '</tbody></table>'
+                      var len = json.feed.entry.length
+
+                      for (var i=0; i<len; i++) 
+                      {
+                        actual_html += [
+                        '<tr><td>', 
+                        json.feed.entry[i].gsx$mac.$t, 
+                        '</td><td>',   
+                        json.feed.entry[i].gsx$ssid.$t, 
+                        '</td><td>',
+                        json.feed.entry[i].gsx$description.$t, 
+                        '</td></tr>',
+                        ].join('');  
+                      }
+
+                      document.getElementById('unseen').innerHTML = pre_html + actual_html + post_html
+                    }   
+                  </script>
+                </section>
+              </div><!-- /CONTENT-PANEL -->
+            </div><!-- /COL-LG-4 -->     
+          </div><!-- /ROW -->
         </section>
       </section>
       <!-- MAIN CONTENT END -->
@@ -132,7 +141,7 @@
       <footer class="site-footer">
           <div class="text-center">
               <b>"It's a me, Mario!"</b>
-              <a href="stop_pi_pass.html#" class="go-top">
+              <a href="show_custom.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
@@ -151,6 +160,9 @@
 
   <!--COMMON SCRIPT FOR ALL PAGES-->
   <script src="assets/js/common-scripts.js"></script>
+
+  <!-- DATABASE SOURCE FOR PIPASS : REFER TO GITHUB FOR INFORMATION -->
+  <script src="https://spreadsheets.google.com/feeds/list/1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M/1/public/values?alt=json&amp;callback=displayContent"></script>
 
   </body>
 </html>
