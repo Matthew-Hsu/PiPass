@@ -108,42 +108,31 @@
               <div class="content-panel">
                 <h4><i class="fa fa-angle-right"></i> Spoofing Status</h4>
                 <section id="unseen">
-                  <table class="table table-bordered table-striped table-condensed">
-                    <thead>
-                      <tr>
-                        <th>MAC Address</th>
-                        <th>SSID</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <script>
-                      $.getJSON("assets/json/current_state.json",
-                      function displayContent(json)
+                  <script>
+                    $.getJSON("assets/json/current_state.json",
+                    function displayContent(json)
+                    {
+                      var pre_html = '<table class="table table-bordered table-striped table-condensed"><thead><tr><th>MAC Address</th><th>SSID</th><th>Description</th></tr></thead><tbody>';
+                      var actual_html='';
+                      var post_html = '</tbody></table>'
+                      var len = json.length
+
+                      for (var i=0; i<len; i++) 
                       {
-                        var pre_html = '<table class="table table-bordered table-striped table-condensed"><thead><tr><th>MAC Address</th><th>SSID</th><th>Description</th></tr></thead><tbody>';
-                        var actual_html='';
-                        var post_html = '</tbody></table>'
-                        var len = json.length
+                        actual_html += [
+                        '<tr><td>', 
+                        json[i].gsx$mac.$t, 
+                        '</td><td>',   
+                        json[i].gsx$ssid.$t, 
+                        '</td><td>',
+                        json[i].gsx$description.$t, 
+                        '</td></tr>',
+                        ].join('');  
+                      }
 
-                        for (var i=0; i<len; i++) 
-                        {
-                          actual_html += [
-                          '<tr><td>', 
-                          json[i].gsx$mac.$t, 
-                          '</td><td>',   
-                          json[i].gsx$ssid.$t, 
-                          '</td><td>',
-                          json[i].gsx$description.$t, 
-                          '</td></tr>',
-                          ].join('');  
-                        }
-
-                        document.getElementById('unseen').innerHTML = pre_html + actual_html + post_html
-                      });
-                    </script>
-                    </tbody>
-                  </table>
+                      document.getElementById('unseen').innerHTML = pre_html + actual_html + post_html
+                    });
+                  </script>
                 </section>
               </div><!-- /CONTENT-PANEL -->
             </div><!-- /COL-LG-12 -->     
