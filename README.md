@@ -7,7 +7,8 @@ For example (On your Raspberry Pi):
 
     ->  sudo rm -rf /var/www/
     ->  sudo rm -rf /opt/PiPass/
-    +   Copy over the new /var/www/ and /opt/PiPass/ from your computer to your Raspberry Pi.
+    
+Copy over the new /var/www/ and /opt/PiPass/ from your computer to your Raspberry Pi.
     
 PiPass now pulls data from Google Spreadsheets. PiPass uses a custom Spreadsheet instead because the data on http://www.homepass.info is a little bit more difficult to parse with additional comments and formatting.
 
@@ -204,7 +205,8 @@ For example (On your Raspberry Pi):
 
     ->  sudo rm -rf /var/www/
     ->  sudo rm -rf /opt/PiPass/
-    +   Copy over the new /var/www/ and /opt/PiPass/ from your computer to your Raspberry Pi.
+
+Copy over the new /var/www/ and /opt/PiPass/ from your computer to your Raspberry Pi.
     
 # Hardware
 I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referal links should be helpful. The pricing on these items are exactly the same as a non-referal. As for WiFi adapters, any Ralink RT5370 based chipset should be compatible.
