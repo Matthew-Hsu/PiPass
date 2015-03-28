@@ -153,18 +153,59 @@ If you prefer to run PiPass through the terminal, instead of the dashboard, PiPa
 
 Like the dashboard, if you want to customize PiPass, you'll have to edit some files manually.
 
-<b>PiPass Customization</b>
+# PiPass Customization
+<b>Customizing Database Source</b>
 
-I've added a good chunk of Nintendo Zones from <a href="https://docs.google.com/spreadsheet/ccc?key=0AvvH5W4E2lIwdEFCUkxrM085ZGp0UkZlenp6SkJablE#gid=0" target="_blank">FatMagic's list</a>. If you want to add more Nintendo Zones or remove some, you can edit the XML file by entering the following command:
+The baseline database will use the extended MACs found on FatMagic's database. This section will show you how to set up a custom source where you can easily define multiple custom configurations and load them on demand.
 
-    ->  sudo nano /var/www/assets/xml/current_zones.xml
+    +   Use your own or create a Google account to store your database.
+
+Now, make a copy of this <a href="https://drive.google.com/open?id=1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M&authuser=0" target="_blank">spreadsheet</a> and save it on Google Drive. 
+
+    +   You can copy the spreadsheet easily by clicking "File" -> "Make a copy...".
     
+Publish your spreadsheet to the Web by clicking:
+
+    +   "File" -> "Publish to the web..."
+    +   "Publish"
+    
+Also, make sure to copy the URL link of that spreadsheet. Now, open up piPass.py on your Raspberry Pi:
+
+    ->  sudo nano /opt/PiPass/piPass.py
+
+Near the top, you will see the variable PIPASS_DB. Take your spreadsheet's KEY and replace the previous KEY value. For example, the URL you just copied would look something like this:
+
+    +   https://docs.google.com/spreadsheets/d/1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M/pubhtml
+
+The KEY would be the value 1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M between /d/ and /pubhtml. So copy that KEY value and replace it with the previous KEY value in piPass.py:
+
+    +   PIPASS_DB = "https://spreadsheets.google.com/feeds/list/KEY_VALUE_GOES_HERE/1/public/values?alt=json"
+
+Save piPass.py. PiPass will now use your custom database. If problems arise, ensure that you have published your spreadsheet to the Web. This is different from sharing your spreadsheet to others.
+
+You will also notice that in PIPASS_DB, there is a /1/ after KEY_VALUE_GOES_HERE. Changing that number, would control which worksheet you want to use. The default value of 1 selects the very first worksheet and the value of 2 selects the second worksheet. For example:
+
+    +   PIPASS_DB = "https://spreadsheets.google.com/feeds/list/KEY_VALUE_GOES_HERE/2/public/values?alt=json"
+
+Would use the "nintendo_zones" worksheet in the templated spreadsheet that you just copied.
+
+<b>PiPass Nintendo Zone Cycle Time</b>
+
 By default, PiPass will be a particular Nintendo Zone for 15 minutes, before moving onto the next one. This should give you enough time to play all the mini-games before you get your next batch. If this time is too long or too short for you, you can edit the Python script here:
 
     ->  sudo nano /opt/PiPass/piPass.py
     
 Be careful though and try to limit your changes to the STREETPASS_CYCLE_MINUTES variable.
 
+# Updating PiPass Manually
+Updating PiPass manually is easy as you just need to download the files from the Master branch and overwrite /var/www/ and /opt/PiPass/ with the new files.
+
+For example (On your Raspberry Pi):
+
+    ->  sudo rm -rf /var/www/
+    ->  sudo rm -rf /opt/PiPass/
+    +   Copy over the new /var/www/ and /opt/PiPass/ from your computer to your Raspberry Pi.
+    
 # Hardware
 I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referal links should be helpful. The pricing on these items are exactly the same as a non-referal. As for WiFi adapters, any Ralink RT5370 based chipset should be compatible.
 
@@ -183,7 +224,6 @@ Please let me know if any other hardware is compatible and I will add them to th
 # Future Features
 I want to expand the functionality of PiPass by adding the following:
 
-    +   Adding/Removing Nintendo Zones through the Dashboard.
     +   Adding/Removing Accepted MAC Addresses through the Dashboard.
     +   Configuration for piPass.py and piPassCommands.py and control of those settings through the Dashboard.
     +   Randomized Visiting of Nintendo Zones.
