@@ -1,5 +1,57 @@
+# Update - 03/28/2015 - Release Candidate 1.1
+Please select PiPass_1.0 branch for PiPass 1.0 source and documentation.
+
+Images will be updated upon official release. Updating PiPass manually is easy as you just need to download the files from the Master branch and overwrite /var/www/ and /opt/PiPass/ with the new files.
+
+For example (On your Raspberry Pi):
+
+    ->  sudo rm -rf /var/www/
+    ->  sudo rm -rf /opt/PiPass/
+    +   Copy over the new /var/www/ and /opt/PiPass/ from your computer to your Raspberry Pi.
+    
+PiPass now pulls data from Google Spreadsheets. PiPass uses a custom Spreadsheet instead because the data on http://www.homepass.info is a little bit more difficult to parse with additional comments and formatting.
+
+The base installation will default to using the extended MACs found on FatMagic's database. The custom spreadsheet that PiPass is using won't be updated regulary, unless it needs to be fixed. It is good for general purpose Homepass usage.
+
+Moving to Google Spreadsheets allows for the possilibty of viewing and pulling data from FatMagic's database when the data inputs follow a standard convention. The intention to move to Google Spreadsheets is to allow for easier maintenance of custom Nintendo Zone databases that is both user friendly and leverage online backups.
+
+<b>Customizing Database Source</b>
+
+As mentioned before, the baseline database will use the extended MACs found on FatMagic's database. This section will show you how to set up a custom source where you can easily define multiple custom configurations and load them on demand.
+
+    +   Use your own or create a Google account to store your database.
+
+Now, make a copy of this <a href="https://drive.google.com/open?id=1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M&authuser=0" target="_blank">spreadsheet</a> and save it on Google Drive. 
+
+    +   You can copy the spreadsheet easily by clicking "File" -> "Make a copy...".
+    
+Publish your spreadsheet to the Web by clicking:
+
+    +   "File" -> "Publish to the web..."
+    +   "Publish"
+    
+Also, make sure to copy the URL link of that spreadsheet. Now, open up piPass.py on your Raspberry Pi:
+
+    ->  sudo nano /opt/PiPass/piPass.py
+
+Near the top, you will see the variable PIPASS_DB. Take your spreadsheet's KEY and replace the previous KEY value. For example, the URL you just copied would look something like this:
+
+    +   https://docs.google.com/spreadsheets/d/1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M/pubhtml
+
+The KEY would be the value 1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M between /d/ and /pubhtml. So copy that KEY value and replace it with the previous KEY value in piPass.py:
+
+    +   PIPASS_DB = "https://spreadsheets.google.com/feeds/list/KEY_VALUE_GOES_HERE/1/public/values?alt=json"
+
+Save piPass.py. PiPass will now use your custom database. If problems arise, ensure that you have published your spreadsheet to the Web. This is different from sharing your spreadsheet to others.
+
+You will also notice that in PIPASS_DB, there is a /1/ after KEY_VALUE_GOES_HERE. Changing that number, would control which worksheet you want to use. The default value of 1 selects the very first worksheet and the value of 2 selects the second worksheet. For example:
+
+    +   PIPASS_DB = "https://spreadsheets.google.com/feeds/list/KEY_VALUE_GOES_HERE/2/public/values?alt=json"
+
+Would use the "nintendo_zones" worksheet in the templated spreadsheet that you just copied.
+
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
-PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can manage most of the features without the need of opening up any files manually. The dashboard is adaptive, so you will be able to control most of the features of PiPass using your Web browser and even your mobile device. Though there is some setting up to do that will require getting your hands 'dirty'.
+PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, fine tuning of the database source and network configuration will require getting your hands 'dirty'. Though the process is relatively fast and easy.
 
 # Testing Environment
 Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A *new* Nintendo 3DS XL with the 9.6.0-24 U firmware was used to verify functionality of 'Homepass'.
