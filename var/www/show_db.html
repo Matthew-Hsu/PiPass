@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="60">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="PiPass Dashboard for the Raspberry Pi">
     <meta name="author" content="Matthew Hsu">
@@ -51,7 +50,7 @@
                           <span>Dashboard</span>
                       </a>
                   </li>
-                  
+
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-desktop"></i>
@@ -70,13 +69,8 @@
                           <span>Nintendo Zones</span>
                       </a>
                       <ul class="sub">
-                          <li class="active"><a  href="show_custom.html">Show Custom</a></li>
-                          <li><a  href="show_nintendo_zones.html">Show Nintendo Zones</a></li>
-                          <li><a  href="show_prime.html">Show Prime MACS</a></li>
-                          <li><a  href="show_mii.html">Show Mii</a></li>
-                          <li><a  href="show_communities.html">Show Communites</a></li>
-                          <li><a  href="show_extended.html">Show Extended MACS</a></li>
-                          <li><a  href="show_fatmagic.html">FatMagic DB</a></li>
+                          <li><a  href="show_current.html">Show Current</a></li>
+                          <li class="active"><a  href="show_db.html">Database Sources</a></li>
                       </ul>
                   </li>
 
@@ -98,41 +92,20 @@
       
       <!-- MAIN CONTENT START -->
       <section id="main-content">
-        <section class="wrapper">
-          <h3><i class="fa fa-angle-right"></i> Show Custom</h3>
-          <div class="row mt">
-            <div class="col-lg-12">
-              <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> Homepass Zones</h4>
-                <section id="unseen">
-                  <script> 
-                    function displayContent(json)
-                    {
-                      var pre_html = '<table class="table table-bordered table-striped table-condensed"><thead><tr><th>MAC Address</th><th>SSID</th><th>Description</th></tr></thead><tbody>';
-                      var actual_html='';
-                      var post_html = '</tbody></table>'
-                      var len = json.feed.entry.length
-
-                      for (var i=0; i<len; i++) 
-                      {
-                        actual_html += [
-                        '<tr><td>', 
-                        json.feed.entry[i].gsx$mac.$t, 
-                        '</td><td>',   
-                        json.feed.entry[i].gsx$ssid.$t, 
-                        '</td><td>',
-                        json.feed.entry[i].gsx$description.$t, 
-                        '</td></tr>',
-                        ].join('');  
-                      }
-
-                      document.getElementById('unseen').innerHTML = pre_html + actual_html + post_html
-                    }   
-                  </script>
-                </section>
-              </div><!-- /CONTENT-PANEL -->
-            </div><!-- /COL-LG-4 -->     
-          </div><!-- /ROW -->
+        <section class="wrapper site-min-height">
+          <h3><i class="fa fa-angle-right"></i> Database Sources</h3>
+            <div class="row mt">
+              <div class="col-lg-12">
+                <div class="showback">
+                  <p>
+                    By default, PiPass uses its own <a href="https://docs.google.com/spreadsheets/d/1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M/pubhtml" target="_blank">Google Spreadsheet</a> for data parsing and consistency reasons. Refer to the README on <a href="https://github.com/Matthew-Hsu/PiPass" target="_blank">GitHub</a> to learn more about customization. The default worksheet being used is the Nintendo Zone list and will be good enough for most people who just want to StreetPass.
+                  </p>
+                  <p>
+                    All of the Nintendo Zone information has been taken from this <a href="http://homepass.info" target="_blank">spreadsheet</a>. It's maintained by <a href="http://reddit.com/u/FatMagic" target="_blank">FatMagic</a>, so credits to FatMagic for putting the work into maintaining it.
+                  </p>
+                </div>
+              </div>
+            </div>
         </section>
       </section>
       <!-- MAIN CONTENT END -->
@@ -141,7 +114,7 @@
       <footer class="site-footer">
           <div class="text-center">
               <b>"It's a me, Mario!"</b>
-              <a href="show_custom.html#" class="go-top">
+              <a href="show_db.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
@@ -160,9 +133,6 @@
 
   <!--COMMON SCRIPT FOR ALL PAGES-->
   <script src="assets/js/common-scripts.js"></script>
-
-  <!-- DATABASE SOURCE FOR PIPASS : REFER TO GITHUB FOR INFORMATION -->
-  <script src="https://spreadsheets.google.com/feeds/list/1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M/1/public/values?alt=json&amp;callback=displayContent"></script>
 
   </body>
 </html>

@@ -15,7 +15,7 @@ STREETPASS_CYCLE_MINUTES = 15
 
 # URL where the Google Spreadsheet is located for the Nintendo Zone information. Refer to README at
 # https://github.com/Matthew-Hsu/PiPass/blob/master/README.md
-PIPASS_DB = "https://spreadsheets.google.com/feeds/list/1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M/6/public/values?alt=json"
+PIPASS_DB = "https://spreadsheets.google.com/feeds/list/1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M/2/public/values?alt=json"
 
 # Hostapd driver for your USB WiFi dongle. If the default value does not work for
 # you, you may need to research which driver is compatible. Refer to README at
@@ -29,6 +29,9 @@ NETWORK_CONFIGURATION = "/etc/hostapd/hostapd.conf"
 
 # Path to the JSON file where PiPass will write to for the PiPass Dashboard to display connection information.
 DASHBOARD_INFO = "/var/www/assets/json/current_state.json"
+
+# Path to the JSON file where PiPass will write to for the 'Show Current' page on the PiPass Dashboard.
+CURRENT_LIST = "/var/www/assets/json/current_list.json"
 
 # Flag that informs PiPass that updates have been made to PIPASS_DB and to use those updates. Default value is "execute".
 piPassStatus = "execute"
@@ -64,6 +67,10 @@ while "Waiting for Half-Life 3":
     response = urllib.urlopen(PIPASS_DB)
     results = json.loads(response.read())
     
+    # Write the current list being used to CURRENT_LIST.
+    with io.open(CURRENT_LIST, 'w', encoding='utf-8') as f:
+        f.write(unicode(json.dumps(results, ensure_ascii=False)))
+
     # The index of the current Nintendo Zone we are visting.
     currentZoneIndex = 0
 
