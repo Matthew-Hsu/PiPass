@@ -6,7 +6,7 @@ PiPass now pulls data from Google Spreadsheets. PiPass uses a custom Spreadsheet
 
 The base installation will default to using the extended MACs found on FatMagic's database. The custom spreadsheet that PiPass is using won't be updated regulary, unless it needs to be fixed. It is good for general purpose Homepass usage.
 
-Moving to Google Spreadsheets allows for the possilibty of viewing and pulling data from FatMagic's database when the data inputs follow a standard convention. The intention to move to Google Spreadsheets is to allow for easier maintenance of custom Nintendo Zone databases that is both user friendly and leverage online backups.
+Moving to Google Spreadsheets allows for the possilibty of viewing and pulling data from FatMagic's database when the data inputs follow a standard convention. The intention to move to Google Spreadsheets is to allow for easier maintenance of custom Nintendo Zone databases that is both user friendly and to leverage online backups.
 
 # Testing Environment
 Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A -=new=- Nintendo 3DS XL with the 9.6.0-24 U firmware was used to verify functionality of 'Homepass'.
