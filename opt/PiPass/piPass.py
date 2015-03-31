@@ -2,6 +2,7 @@
 
 #### Imported Libraries ####
 
+from random import shuffle
 import subprocess
 import urllib
 import json
@@ -67,6 +68,9 @@ while "Waiting for Half-Life 3":
     response = urllib.urlopen(PIPASS_DB)
     results = json.loads(response.read())
     
+    # Shuffle results, so each list pass through is different each time.
+    shuffle(results['feed']['entry'])
+
     # Write the current list being used to CURRENT_LIST.
     with io.open(CURRENT_LIST, 'w', encoding='utf-8') as f:
         f.write(unicode(json.dumps(results, ensure_ascii=False)))
