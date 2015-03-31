@@ -1,3 +1,6 @@
+# Status Update - 03/30/2015
+There is a small unecessary update to PiPass 1.1. PiPass will traverse the current list being used in random order now. If this feature is useful to you, you can download piPass.py from the master branch and overwrite it with piPass.py that exists in PiPass 1.1. This feature does not warrant a version change yet and will be included PiPass 1.2. Right now, I want the Dashboard to provide a grapical interface for those who want to fine tune some configurations. (e.g., StreetPass Cycle Time, Google SpreadSheets URL). Refer to 'Updating PiPass Manually' if you want more information on how to update PiPass to currently in developed features.
+
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, fine tuning of the database source and network configuration will require getting your hands 'dirty'. Though the process is relatively fast and easy.
 
