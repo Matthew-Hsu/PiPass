@@ -188,7 +188,7 @@ I want to expand the functionality of PiPass by adding the following:
 
     +   Adding/Removing Accepted MAC Addresses through the Dashboard.
     +   Configuration for piPass.py and piPassCommands.py and control of those settings through the Dashboard.
-    +   Randomized Visiting of Nintendo Zones.
+    +   (Done on Master Branch) Randomized Visiting of Nintendo Zones.
 
 # Support
 If you have any problems with PiPass, please let me know through my GitHub. I will do my best to help you out. Thanks for trying out PiPass!
