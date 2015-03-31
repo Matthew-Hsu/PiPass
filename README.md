@@ -1,5 +1,5 @@
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
-PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, fine tuning of the database source and network configuration will require getting your hands 'dirty'. Though the process is relatively fast and easy.
+PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, fine tuning of the database source and network configuration will require getting your hands 'dirty'. Though the process is relatively fast and easy..
 
 # What's New in Version 1.1
 PiPass now pulls data from Google Spreadsheets. PiPass uses a custom Spreadsheet instead because the data on http://www.homepass.info is a little bit more difficult to parse with additional comments and formatting.
