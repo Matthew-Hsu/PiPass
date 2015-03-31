@@ -1,5 +1,5 @@
 # Status Update - 03/30/2015
-There is a small unecessary update to PiPass 1.1. PiPass will traverse the current list being used in random order now. If this feature is useful to you, you can download piPass.py from the master branch and overwrite it with piPass.py that exists in PiPass 1.1. This feature does not warrant a version change yet and will be included PiPass 1.2. Right now, I want the Dashboard to provide a grapical interface for those who want to fine tune some configurations. (e.g., StreetPass Cycle Time, Google SpreadSheets URL). Refer to 'Updating PiPass Manually' if you want more information on how to update PiPass to currently in developed features.
+There is a small unnecessary update to PiPass 1.1. PiPass will traverse the current list being used in random order now. If this feature is useful to you, you can download piPass.py from the master branch and overwrite it with piPass.py that exists in PiPass 1.1. This feature does not warrant a version change yet and will be included PiPass 1.2. Right now, I want the Dashboard to provide a graphical interface for those who want to fine tune some configurations. (e.g., StreetPass Cycle Time, Google SpreadSheets URL). Refer to 'Updating PiPass Manually' if you want more information on how to update PiPass to currently in developed features.
 
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, fine tuning of the database source and network configuration will require getting your hands 'dirty'. Though the process is relatively fast and easy.
@@ -7,14 +7,14 @@ PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The P
 # What's New in Version 1.1
 PiPass now pulls data from Google Spreadsheets. PiPass uses a custom Spreadsheet instead because the data on http://www.homepass.info is a little bit more difficult to parse with additional comments and formatting.
 
-The base installation will default to using the extended MACs found on FatMagic's database. The custom spreadsheet that PiPass is using won't be updated regulary, unless it needs to be fixed. It is good for general purpose Homepass usage.
+The base installation will default to using the extended MACs found on FatMagic's database. The custom spreadsheet that PiPass is using won't be updated regularly, unless it needs to be fixed. It is good for general purpose Homepass usage.
 
-Moving to Google Spreadsheets allows for the possilibty of viewing and pulling data from FatMagic's database when the data inputs follow a standard convention. The intention to move to Google Spreadsheets is to allow for easier maintenance of custom Nintendo Zone databases that is both user friendly and to leverage online backups.
+Moving to Google Spreadsheets allows for the possibility of viewing and pulling data from FatMagic's database when the data inputs follow a standard convention. The intention to move to Google Spreadsheets is to allow for easier maintenance of custom Nintendo Zone databases that is both user friendly and to leverage online backups.
 
 # Testing Environment
 Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A -=new=- Nintendo 3DS XL with the 9.6.0-24 U firmware was used to verify functionality of 'Homepass'.
 
-PiPass has drivers preinstalled for Ralink, ZyDAS ZD1211/1211B, and Atheros AR5007UG chipsets. The WiFi chipset that I tested on was the Ralink RT5370. These chipsets were tested to be working for 'Homepass', so I've loaded the drivers for these other chipsets as well.
+PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, and Atheros AR5007UG chipsets. The WiFi chipset that I tested on was the Ralink RT5370. These chipsets were tested to be working for 'Homepass', so I've loaded the drivers for these other chipsets as well.
 
 # Installation
 PiPass can be installed by downloading a pre-made image for your Raspberry Pi or by downloading the source files here on GitHub and setting it up manually. Manual setup will be more work, but it has the advantage of being able to use PiPass on most Linux based operating systems that are not just limited to the Raspberry Pi.
@@ -44,7 +44,7 @@ For security sake, PiPass will only work on the Nintendo 3DS that you authorize.
 
     ->  nano /etc/hostapd/mac_accept
 
-This file will contain the list of all devices that are authorized to work with PiPass. Go to your Nintendo 3DS and open up your connection settings to find out your 3DS' MAC address. Once you have your MAC address, you can add it to the file. Each MAC address should be on its own seperate line.
+This file will contain the list of all devices that are authorized to work with PiPass. Go to your Nintendo 3DS and open up your connection settings to find out your 3DS' MAC address. Once you have your MAC address, you can add it to the file. Each MAC address should be on its own separate line.
 
 The PiPass image uses your router's DHCP to handle the networking aspect. Type in the following command:
 
@@ -52,7 +52,7 @@ The PiPass image uses your router's DHCP to handle the networking aspect. Type i
 
 Generally speaking, if hostapd services are running, you should be OK. If you have a mobile device or a computer with WiFi, check to see any available networks. If the SSID of "attwifi" or "NZ@McD1" show up, you are in luck. If both these things look good, your 3DS could have some Streetpasses already. To connect to the PiPass Dashboard, type in your Raspberry Pi's IP address in your browser or mobile device to begin.
 
-If things don't look good, there could be some issues with your WiFi driver. PiPass has drivers preinstalled for Ralink, ZyDAS ZD1211/1211B, and Atheros AR5007UG chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point".
+If things don't look good, there could be some issues with your WiFi driver. PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, and Atheros AR5007UG chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point".
 
 If problems persist, refer to the manual guide down below for some extra help. If it is a driver problem, there might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to change the value of "driver=" in these two files down below:
 
@@ -169,7 +169,7 @@ For example (On your Raspberry Pi):
 Copy over the new /var/www/ and /opt/PiPass/ from your computer to your Raspberry Pi.
     
 # Hardware
-I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referal links should be helpful. The pricing on these items are exactly the same as a non-referal.
+I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referral links should be helpful. The pricing on these items are exactly the same as a non-referral.
 
 Please let me know if any other hardware is compatible and I will add them to this list.
 
