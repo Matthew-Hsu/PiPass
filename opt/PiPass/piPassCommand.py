@@ -56,6 +56,7 @@ elif command == "stop":
     print("PiPass stopped.\n")
 elif command == "start":
     # Web GUI: PiPass -> Start
+    updateStatus()
     subprocess.Popen('sudo pkill -f piPass.py', shell=True, stdout=subprocess.PIPE)
     subprocess.Popen('sudo python /opt/PiPass/piPass.py', shell=True, stdout=subprocess.PIPE)
     print("PiPass started.\n")

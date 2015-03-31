@@ -43,17 +43,9 @@ FLAG_PATH = "/tmp/pipass_flag.txt"
 # Converting STREETPASS_CYCLE_MINUTES to seconds.
 STREETPASS_CYCLE_SECONDS = STREETPASS_CYCLE_MINUTES * 60
 
-# Constructing hostapd command string.
-COMMAND = "timeout " + str(STREETPASS_CYCLE_SECONDS) + " hostapd " + NETWORK_CONFIGURATION
-
 #### PiPass Main #####
 
 print("[ PiPass - Homepass for the Nintendo 3DS ]\n")
-
-# Ensure that hostapd is running.
-subprocess.Popen("sudo service hostapd start", shell=True, stdout=subprocess.PIPE)
-print("> Starting up hostapd services...")
-time.sleep(5)
 
 # Create/Overwrite flag file for piPassStatus.
 fo = open(FLAG_PATH, "w")
@@ -128,6 +120,7 @@ while "Waiting for Half-Life 3":
 
         currentZoneIndex = currentZoneIndex + 1
 
-        # Run current Nintendo Zone and pause for STREETPASS_CYCLE_MINUTES until moving onto the next Nintendo Zone.
-        subprocess.Popen(COMMAND, shell=True, stdout=subprocess.PIPE)
+        # Restart hostapd to ensure NETWORK_CONFIGURATION is used and pause for STREETPASS_CYCLE_MINUTES until moving onto the next Nintendo Zone.
+        # Restarting hostapd will also ensure that it is running if it is currently off.
+        subprocess.Popen('sudo service hostapd restart', shell=True, stdout=subprocess.PIPE)
         time.sleep(STREETPASS_CYCLE_SECONDS)
