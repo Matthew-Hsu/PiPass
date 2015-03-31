@@ -31,7 +31,7 @@ I've used common configurations, so the installation of PiPass could be finished
 
     ->  nano /etc/hostapd/mac_accept
 
-This file will contain the list of all devices that are authorized to work with PiPass. Go to your Nintendo 3DS and open up your connection settings to find out your 3DS' MAC address. Once you have your MAC address, you can either replace the MAC address in the file or add yours right underneath it. Each MAC address should be on its own seperate line.
+This file will contain the list of all devices that are authorized to work with PiPass. Go to your Nintendo 3DS and open up your connection settings to find out your 3DS' MAC address. Once you have your MAC address, you can either replace the MAC address in the file or add yours right underneath it. Each MAC address should be on its own separate line.
 
 The PiPass image uses your router's DHCP to handle the networking aspect. Type in the following command:
 
@@ -39,7 +39,7 @@ The PiPass image uses your router's DHCP to handle the networking aspect. Type i
 
 Generally speaking, if hostapd services are running, you should be OK. If you have a mobile device or a computer with WiFi, check to see any available networks. If the SSID of "attwifi" or "NZ@McD1" show up, you are in luck. If both these things look good, your 3DS could have some Streetpasses already. To connect to the PiPass Dashboard, type in your Raspberry Pi's IP address in your browser or mobile device to begin.
 
-If things don't look good, there could be some issues with your WiFi driver. PiPass has drivers preinstalled for Ralink, ZyDAS ZD1211/1211B, and Atheros AR5007UG chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point".
+If things don't look good, there could be some issues with your WiFi driver. PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, and Atheros AR5007UG chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point".
 
 If problems persist, refer to the manual guide down below for some extra help. If it is a driver problem, there might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to change the value of "driver=" in these two files down below:
 
@@ -114,7 +114,7 @@ By default, PiPass will be a particular Nintendo Zone for 15 minutes, before mov
 Be careful though and try to limit your changes to the STREETPASS_CYCLE_MINUTES variable.
 
 # Hardware
-I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referal links should be helpful. The pricing on these items are exactly the same as a non-referal. As for WiFi adapters, any Ralink RT5370 based chipset should be compatible.
+I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referral links should be helpful. The pricing on these items are exactly the same as a non-referral. As for WiFi adapters, any Ralink RT5370 based chipset should be compatible.
 
 Please let me know if any other hardware is compatible and I will add them to this list.
 
