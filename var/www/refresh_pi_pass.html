@@ -29,7 +29,7 @@
         xmlHttp.open("POST","assets/php/refresh.php",true);
         xmlHttp.send();
 
-        alert("Refresh complete! - The current list of Nintendo Zones is being used.");
+        alert("Refresh complete! - The current PiPass configuration is now being used.");
       }
     </script>
   </head>
@@ -70,9 +70,10 @@
                           <span>PiPass</span>
                       </a>
                       <ul class="sub">
-                          <li class="active"><a  href="refresh_pi_pass.html">Refresh</a></li>
-                          <li><a  href="stop_pi_pass.html">Stop</a></li>
                           <li><a  href="start_pi_pass.html">Start</a></li>
+                          <li><a  href="stop_pi_pass.html">Stop</a></li>
+                          <li class="active"><a  href="refresh_pi_pass.html">Refresh</a></li>
+                          <li><a  href="settings.html">Settings</a></li>
                       </ul>
                   </li>
 
@@ -111,13 +112,12 @@
             <div class="col-lg-12">
               <div class="showback">
                 <p>
-                  When making changes to the Nintendo Zone list to use, you'll need to refresh the configuration for those changes to take effect. These
-                  changes will occur after the current Nintendo Zone is finished.
+                  When making changes to the Nintendo Zone list to use or to the PiPass settings, you'll need to refresh PiPass for those changes to take effect. These changes will occur after the current Nintendo Zone is finished.
                 </p>
+                <div class="wrapper">
+                  <p class="centered"><button type="button" class="btn btn-lg btn-theme" onclick="refresh()">Refresh PiPass</button></p>
+                </div>
               </div>
-            </div>
-            <div class="wrapper">
-              <p class="centered"><button type="button" class="btn btn-primary btn-lg" onclick="refresh()">Refresh PiPass</button></p>
             </div>
           </div>
         </section>

@@ -70,9 +70,10 @@
                           <span>PiPass</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="refresh_pi_pass.html">Refresh</a></li>
-                          <li><a  href="stop_pi_pass.html">Stop</a></li>
                           <li class="active"><a  href="start_pi_pass.html">Start</a></li>
+                          <li><a  href="stop_pi_pass.html">Stop</a></li>
+                          <li><a  href="refresh_pi_pass.html">Refresh</a></li>
+                          <li><a  href="settings.html">Settings</a></li>
                       </ul>
                   </li>
 
@@ -113,10 +114,10 @@
                 <p>
                   This will start PiPass. Starting PiPass will immediately terminate any prior instance of PiPass before starting up.
                 </p>
+                <div class="wrapper">
+                  <p class="centered"><button type="button" class="btn btn-lg btn-theme" onclick="start()">Start PiPass</button></p>
+                </div>
               </div>
-            </div>
-            <div class="wrapper">
-              <p class="centered"><button type="button" class="btn btn-primary btn-lg" onclick="start()">Start PiPass</button></p>
             </div>
           </div>
         </section>
