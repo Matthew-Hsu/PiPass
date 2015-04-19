@@ -1,15 +1,10 @@
-# Status Update - 03/31/2015
-There is a small update to PiPass 1.1. One person has reported that upon switching MAC addresses for a new Nintendo Zone, that their WiFi adapter does not broadcast the new Access Point. I have not seen this personally, but I have issued a suggested fix for it. In addition, PiPass will traverse the current list being used in random order now. If these features are useful to you, you can download piPass.py and piPassCommand.py from the master branch and overwrite the files in /opt/PiPass/ that exists in PiPass 1.1. Refer to 'Updating PiPass Manually' if you want more information on how to update PiPass to currently in developed features.
-
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
-PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, fine tuning of the database source and network configuration will require getting your hands 'dirty'. Though the process is relatively fast and easy.
+PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
 
-# What's New in Version 1.1
-PiPass now pulls data from Google Spreadsheets. PiPass uses a custom Spreadsheet instead because the data on http://www.homepass.info is a little bit more difficult to parse with additional comments and formatting.
+# What's New in Version 1.2
+PiPass can now be configured through the dashboard. It is no longer required to manually edit piPass.py to fine tune settings. However, the adding/editing of accepted 3DS MAC addresses still requires a manual edit through the Raspberry Pi console.
 
-The base installation will default to using the extended MACs found on FatMagic's database. The custom spreadsheet that PiPass is using won't be updated regularly, unless it needs to be fixed. It is good for general purpose Homepass usage.
-
-Moving to Google Spreadsheets allows for the possibility of viewing and pulling data from FatMagic's database when the data inputs follow a standard convention. The intention to move to Google Spreadsheets is to allow for easier maintenance of custom Nintendo Zone databases that is both user friendly and to leverage online backups.
+Also included is the ability to enable the random visiting of Nintendo Zones. Much like every release, there are some bug fixes and some interface changes with the dashboard.
 
 # Testing Environment
 Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A -=new=- Nintendo 3DS XL with the 9.6.0-24 U firmware was used to verify functionality of 'Homepass'.
@@ -54,10 +49,12 @@ Generally speaking, if hostapd services are running, you should be OK. If you ha
 
 If things don't look good, there could be some issues with your WiFi driver. PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, and Atheros AR5007UG chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point".
 
-If problems persist, refer to the manual guide down below for some extra help. If it is a driver problem, there might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to change the value of "driver=" in these two files down below:
+If problems persist, refer to the manual guide down below for some extra help. If it is a driver problem, there might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to use the PiPass Dashboard to configure the correct driver:
 
-    +   /etc/hostapd/hostapd.conf
-    +   /opt/PiPass/piPass.py
+    +   Navigate to the PiPass Dashboard with your web browser.
+    +   Click "PiPass".
+    +   Click "Settings".
+    +   Enter the correct driver name for "Hostapd Driver".
 
 <b>Manually Installing PiPass</b>
 
@@ -71,7 +68,7 @@ Here is a list of dependencies needed for PiPass, so install the following packa
     ->  sudo apt-get install hostapd -y
     ->  sudo apt-get install bridge-utils -y
 
-Download PiPass from the 1.1 branch as a zip file and extract the contents on your local machine. You will notice three directories inside PiPass: etc, opt, and var. These three directories are the locations where you want to install PiPass (e.g., Linux root locations would be /etc/, /opt/, and /var/). Go ahead and merge the directories and it will be safe to overwrite the files with PiPass' configuration files.
+Download PiPass from the 1.2 branch as a zip file and extract the contents on your local machine. You will notice three directories inside PiPass: etc, opt, and var. These three directories are the locations where you want to install PiPass (e.g., Linux root locations would be /etc/, /opt/, and /var/). Go ahead and merge the directories and it will be safe to overwrite the files with PiPass' configuration files.
 
 As a security measure, add the MAC address of your Nintendo 3DS by entering the following command:
 
@@ -93,10 +90,12 @@ Now add the following line at the end of the file:
 
     +   www-data ALL=(ALL:ALL) NOPASSWD: ALL
     
-If you are experiencing WiFi driver problems, there might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to change the value of "driver=" in these two files down below:
+If you are experiencing WiFi driver problems, there might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to use the PiPass Dashboard to configure the correct driver:
 
-    +   /etc/hostapd/hostapd.conf
-    +   /opt/PiPass/piPass.py
+    +   Navigate to the PiPass Dashboard with your web browser.
+    +   Click "PiPass".
+    +   Click "Settings".
+    +   Enter the correct driver name for "Hostapd Driver".
 
 Semperverus' guide is a excellent resource for troubleshooting. With luck, you should have PiPass working manually.
 
@@ -104,7 +103,7 @@ Semperverus' guide is a excellent resource for troubleshooting. With luck, you s
 
 <b>The PiPass Dashboard</b>
 
-The PiPass Dashboard can be accessed on a device on your network by typing in your Raspberry Pi's IP address on your computer's or mobile device's browser. Most of what you need can be accessed through the Dashboard. However, if you want to customize PiPass, you'll have to edit some files manually.
+The PiPass Dashboard can be accessed on a device on your network by typing in your Raspberry Pi's IP address on your computer's or mobile device's browser. Most of what you need can be accessed through the Dashboard, including the ability to configure PiPass. However, the adding/editing of accepted 3DS MAC addresses still requires a manual edit through the Raspberry Pi console.
 
 <b>PiPass Command</b>
 
@@ -112,7 +111,7 @@ If you prefer to run PiPass through the terminal, instead of the dashboard, PiPa
 
     ->  sudo python /opt/PiPass/piPassCommand.py
 
-Like the dashboard, if you want to customize PiPass, you'll have to edit some files manually.
+If you want to customize PiPass, you'll have to edit some files manually.
 
 # PiPass Customization
 <b>Customizing Database Source</b>
@@ -130,33 +129,27 @@ Publish your spreadsheet to the Web by clicking:
     +   "File" -> "Publish to the web..."
     +   "Publish"
     
-Also, make sure to copy the URL link of that spreadsheet. Now, open up piPass.py on your Raspberry Pi:
+Also, make sure to copy the URL link of that spreadsheet. Now, open up the PiPass Dashboard:
 
-    ->  sudo nano /opt/PiPass/piPass.py
+    +   Navigate to the PiPass Dashboard with your web browser.
+    +   Click "PiPass".
+    +   Click "Settings".
 
-Near the top, you will see the variable PIPASS_DB. Take your spreadsheet's KEY and replace the previous KEY value. For example, the URL you just copied would look something like this:
+"PiPass DB Key" will be of interest. Take your spreadsheet's KEY and replace the previous KEY value. For example, the URL you just copied would look something like this:
 
     +   https://docs.google.com/spreadsheets/d/1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M/pubhtml
 
-The KEY would be the value 1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M between /d/ and /pubhtml. So copy that KEY value and replace it with the previous KEY value in piPass.py:
+The KEY would be the value 1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M between /d/ and /pubhtml. So copy that KEY value and replace it with the previous KEY value.
 
-    +   PIPASS_DB = "https://spreadsheets.google.com/feeds/list/KEY_VALUE_GOES_HERE/1/public/values?alt=json"
-
-Save piPass.py. PiPass will now use your custom database. If problems arise, ensure that you have published your spreadsheet to the Web. This is different from sharing your spreadsheet to others.
-
-You will also notice that in PIPASS_DB, there is a /1/ after KEY_VALUE_GOES_HERE. Changing that number, would control which worksheet you want to use. The default value of 1 selects the very first worksheet and the value of 2 selects the second worksheet. For example:
-
-    +   PIPASS_DB = "https://spreadsheets.google.com/feeds/list/KEY_VALUE_GOES_HERE/2/public/values?alt=json"
-
-This would use the "nintendo_zones" worksheet in the templated spreadsheet that you just copied.
+Now you will need to enter the worksheet you want to use. "PiPass DB Worksheet" controls which worksheet to use. The default value of 1 selects the very first worksheet and the value of 2 selects the second worksheet. For example, setting PiPass DB Worksheet to the value of 2 would use the "nintendo_zones" worksheet in the templated spreadsheet that you just copied.
 
 <b>PiPass Nintendo Zone Cycle Time</b>
 
-By default, PiPass will be a particular Nintendo Zone for 15 minutes, before moving onto the next one. This should give you enough time to play all the mini-games before you get your next batch. If this time is too long or too short for you, you can edit the Python script here:
+By default, PiPass will be a particular Nintendo Zone for 15 minutes, before moving onto the next one. This should give you enough time to play all the mini-games before you get your next batch. If this time is too long or too short for you, you can edit this setting through the PiPass Dashboard.
 
-    ->  sudo nano /opt/PiPass/piPass.py
-    
-Be careful though and try to limit your changes to the STREETPASS_CYCLE_MINUTES variable.
+<b>Shuffle Nintendo Zones</b>
+
+Like most of the settings, this feature can be enabled or disabled through the PiPass Dashboard. Enabling shuffling will visit Nintendo Zones in your current list in random order, ensuring that each pass-through is different.
 
 # Updating PiPass Manually
 Updating PiPass manually is easy as you just need to download the files from the Master branch and overwrite /var/www/ and /opt/PiPass/ with the new files.
@@ -187,8 +180,6 @@ Please let me know if any other hardware is compatible and I will add them to th
 I want to expand the functionality of PiPass by adding the following:
 
     +   Adding/Removing Accepted MAC Addresses through the Dashboard.
-    +   Configuration for piPass.py and piPassCommands.py and control of those settings through the Dashboard.
-    +   (Done on Master Branch) Randomized Visiting of Nintendo Zones.
 
 # Support
 If you have any problems with PiPass, please let me know through my GitHub. I will do my best to help you out. Thanks for trying out PiPass!
