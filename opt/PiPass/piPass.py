@@ -49,6 +49,12 @@ def loadSettings():
     except KeyError:
         GSX_WORKSHEET = "2"
 
+    # Contructs the URL where the Google Spreadsheet is located for the
+    # Nintendo Zone information. Refer to README at
+    # https://github.com/Matthew-Hsu/PiPass/blob/master/README.md
+    global PIPASS_DB
+    PIPASS_DB = "https://spreadsheets.google.com/feeds/list/" + GSX_KEY + "/" + GSX_WORKSHEET + "/public/values?alt=json"
+
     # Hostapd driver for your USB WiFi dongle. If the default value does not work for
     # you, you may need to research which driver is compatible. Refer to README at
     # https://github.com/Matthew-Hsu/PiPass/blob/master/README.md
@@ -68,15 +74,12 @@ STREETPASS_CYCLE_MINUTES = None
 PIPASS_SHUFFLE = None
 GSX_KEY = None
 GSX_WORKSHEET = None
+PIPASS_DB = None
 HOSTAPD_DRIVER = None
 
 loadSettings()
 
 #### PiPass Support - MODIFY AT YOUR OWN RISK ####
-
-# Contructs the URL where the Google Spreadsheet is located for the Nintendo Zone information. Refer to README at
-# https://github.com/Matthew-Hsu/PiPass/blob/master/README.md
-PIPASS_DB = "https://spreadsheets.google.com/feeds/list/" + GSX_KEY + "/" + GSX_WORKSHEET + "/public/values?alt=json"
 
 # Network configuration file path for PiPass to spoof as a Nintendo Zone.
 NETWORK_CONFIGURATION = "/etc/hostapd/hostapd.conf"
