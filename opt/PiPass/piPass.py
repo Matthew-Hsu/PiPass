@@ -110,7 +110,19 @@ def sigUsr1(signum, stack):
     loadSettings()
     print("\n< Update Detected! - Using new updated Nintendo Zones. >\n")
 
+def sigUsr2(signum, stack):
+    '''
+    Handles SIGUSR1, which is interpreted as a request to advance the zone.
+    '''
+    global start
+    # The time elapsed loop records its start time in "start". By setting to 0,
+    # this forces the elapsed time to a huge number which results in advancing
+    # to the next zone.
+    start = 0
+    print("\n< Advance Detected! - Advancing to next Zone. >\n")
+
 signal.signal(signal.SIGUSR1, sigUsr1)
+signal.signal(signal.SIGUSR2, sigUsr2)
 
 print("> PiPass is currently running...")
 
