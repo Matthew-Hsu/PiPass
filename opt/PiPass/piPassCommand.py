@@ -24,6 +24,7 @@ def updateStatus():
 # Print out command interface.
 def printCommandInterface():
     print("\nupdate : PiPass will use updated Nintendo Zone list.")
+    print("advance : Advances PiPass to next entry in list.")
     print("stop : Stops PiPass.")
     print("start : Starts PiPass.")
     print("piRestart : Restarts the Raspberry Pi.")
@@ -45,8 +46,11 @@ command = sys.argv[1]
 # Command switchboard for PiPass commands.
 if command == "update":
     # Web GUI: PiPass -> Refresh
-    subprocess.Popen('sudo echo "update" > /tmp/pipass_flag.txt', shell=True, stdout=subprocess.PIPE)
+    subprocess.Popen('sudo pkill --signal SIGUSR1 -f piPass.py', shell=True, stdout=subprocess.PIPE)
     print("Using updated Nintendo Zone list.\n")
+elif command == "advance":
+    subprocess.Popen('sudo pkill --signal SIGUSR2 -f piPass.py', shell=True, stdout=subprocess.PIPE)
+    print("PiPass advanced to next entry.\n")
 elif command == "stop":
     # Web GUI: PiPass -> Stop
     updateStatus()

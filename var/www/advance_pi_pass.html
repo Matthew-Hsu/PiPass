@@ -2,9 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="PiPass Dashboard for the Raspberry Pi">
     <meta name="author" content="Matthew Hsu">
@@ -23,9 +20,18 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
 
-    <!-- JQUERY -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="assets/js/jquery.loadJSON.js"></script>
+    <!-- CALLS REFRESH.PHP TO EXECUTE SERVER SIDE COMMANDS -->
+    <script>
+      function advance()
+      {
+        var xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.open("POST","assets/php/advance.php",true);
+        xmlHttp.send();
+
+        alert("Advance complete! - The next Zone should be available momentarily.");
+      }
+    </script>
   </head>
 
   <body>
@@ -67,8 +73,8 @@
                           <li><a  href="start_pi_pass.html">Start</a></li>
                           <li><a  href="stop_pi_pass.html">Stop</a></li>
                           <li><a  href="refresh_pi_pass.html">Refresh</a></li>
-                          <li><a  href="advance_pi_pass.html">Advance</a></li>
-                          <li class="active"><a  href="settings.html">Settings</a></li>
+                          <li class="active"><a  href="advance_pi_pass.html">Advance</a></li>
+                          <li><a  href="settings.html">Settings</a></li>
                       </ul>
                   </li>
 
@@ -102,50 +108,16 @@
       <!-- MAIN CONTENT START -->
       <section id="main-content">
         <section class="wrapper site-min-height">
-          <h3><i class="fa fa-angle-right"></i> Settings</h3>
-          <!-- BASIC FORM ELELEMNTS -->
+          <h3><i class="fa fa-angle-right"></i> Advance</h3>
           <div class="row mt">
             <div class="col-lg-12">
-              <div class="form-panel">
-                <h4 class="mb"><i class="fa fa-angle-right"></i> Configure PiPass</h4>
-                <form class="form-horizontal style-form" onsubmit="return alert('Settings Saved! - Please refresh or restart PiPass for the settings to take effect.');" action="assets/php/settings.php" method="post">
-                  <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">StreetPass Cycle Time (Minutes)</label>
-                    <div class="col-sm-1">
-                        <input type="text" class="form-control round-form" id="STREETPASS_CYCLE_MINUTES" name="STREETPASS_CYCLE_MINUTES" required>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">Shuffle Zones</label>
-                    <div class="col-sm-1">
-                        <input type="checkbox" id="PIPASS_SHUFFLE" name="PIPASS_SHUFFLE">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">PiPass DB Key</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control round-form" id="GSX_KEY" name="GSX_KEY" required>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">PiPass DB Worksheet</label>
-                    <div class="col-sm-1">
-                        <input type="text" class="form-control round-form" id="GSX_WORKSHEET" name="GSX_WORKSHEET" required>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">Hostapd Driver</label>
-                    <div class="col-sm-2">
-                        <input type="text" class="form-control round-form" id="HOSTAPD_DRIVER" name="HOSTAPD_DRIVER" required>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <p class="centered"><button type="submit" class="btn btn-lg btn-theme">Save</button></p>
-                  </div>
-                </form>
-                <script>
-                  $('form').loadJSON('assets/json/pipass_config.json');
-                </script>
+              <div class="showback">
+                <p>
+                  This causes PiPass to immediately advance to the next zone, even if enough time hasn't elapsed.
+                </p>
+                <div class="wrapper">
+                  <p class="centered"><button type="button" class="btn btn-lg btn-theme" onclick="advance()">Advance PiPass</button></p>
+                </div>
               </div>
             </div>
           </div>
@@ -157,7 +129,7 @@
       <footer class="site-footer">
           <div class="text-center">
               <b>"It's a me, Mario!"</b>
-              <a href="settings.html#" class="go-top">
+              <a href="advance_pi_pass.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>

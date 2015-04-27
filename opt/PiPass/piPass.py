@@ -8,6 +8,7 @@ import urllib
 import json
 import time
 import io
+import signal
 
 #### Support Functions ####
 
@@ -93,9 +94,6 @@ CURRENT_LIST = "/var/www/assets/json/current_list.json"
 # Flag that informs PiPass that updates have been made to PIPASS_DB and to use those updates. Default value is "execute".
 piPassStatus = "execute"
 
-# Temporary flag file path for piPassStatus.
-FLAG_PATH = "/tmp/pipass_flag.txt"
-
 # Converting STREETPASS_CYCLE_MINUTES to seconds.
 STREETPASS_CYCLE_SECONDS = STREETPASS_CYCLE_MINUTES * 60
 
@@ -103,10 +101,28 @@ STREETPASS_CYCLE_SECONDS = STREETPASS_CYCLE_MINUTES * 60
 
 print("[ PiPass - Homepass for the Nintendo 3DS ]\n")
 
-# Create/Overwrite flag file for piPassStatus.
-fo = open(FLAG_PATH, "w")
-fo.write(piPassStatus)
-fo.close()
+def sigUsr1(signum, stack):
+    '''
+    Handles SIGUSR1, which is interpreted as a request to update settings.
+    '''
+    global piPassStatus
+    piPassStatus = "update"
+    loadSettings()
+    print("\n< Update Detected! - Using new updated Nintendo Zones. >\n")
+
+def sigUsr2(signum, stack):
+    '''
+    Handles SIGUSR1, which is interpreted as a request to advance the zone.
+    '''
+    global start
+    # The time elapsed loop records its start time in "start". By setting to 0,
+    # this forces the elapsed time to a huge number which results in advancing
+    # to the next zone.
+    start = 0
+    print("\n< Advance Detected! - Advancing to next Zone. >\n")
+
+signal.signal(signal.SIGUSR1, sigUsr1)
+signal.signal(signal.SIGUSR2, sigUsr2)
 
 print("> PiPass is currently running...")
 
@@ -130,26 +146,9 @@ while "Waiting for Half-Life 3":
 
     # Begin looping through all the Nintendo Zones in the collection.
     for data in results['feed']['entry']:
-        # Open the flag file and read in the value.
-        fo = open(FLAG_PATH)
-        piPassStatus = fo.read()
-        fo.close()
-
-        # If the user has issued an update, then reload PIPASS_DB for the updated Nintendo Zones.
-        if piPassStatus == "update\n":
-            # We want PiPass to keep running.
+        # If the user has issued an update, then restart with the updated Nintendo Zones.
+        if piPassStatus == "update":
             piPassStatus = "execute"
-
-            # Overwrite flag file for piPassStatus.
-            fo = open(FLAG_PATH, "w")
-            fo.write(piPassStatus)
-            fo.close()
-
-            # Refresh settings.
-            loadSettings()
-
-            print("\n< Update Detected! - Using new updated Nintendo Zones. >\n")
-
             break
 
         # Write the current zone information to NETWORK_CONFIGURATION.
@@ -184,4 +183,9 @@ while "Waiting for Half-Life 3":
         # Restart hostapd to ensure NETWORK_CONFIGURATION is used and pause for STREETPASS_CYCLE_MINUTES until moving onto the next Nintendo Zone.
         # Restarting hostapd will also ensure that it is running if it is currently off.
         subprocess.Popen('sudo service hostapd restart', shell=True, stdout=subprocess.PIPE)
-        time.sleep(STREETPASS_CYCLE_SECONDS)
+
+	# Receiving SIGUSR1 will interrupt the time.sleep call. The loop allows
+	# for sleep to be resumed up to the current cycle setting.
+        start = time.time()
+        while time.time() - start < STREETPASS_CYCLE_SECONDS:
+            time.sleep(5)
