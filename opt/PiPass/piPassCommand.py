@@ -23,9 +23,10 @@ def updateStatus():
 
 # Print out command interface.
 def printCommandInterface():
-    print("\nupdate : PiPass will use updated Nintendo Zone list.")
+    print("\nstart : Starts PiPass.")
     print("stop : Stops PiPass.")
-    print("start : Starts PiPass.")
+    print("update : PiPass will use the updated configuration.")
+    print("advance : Advances PiPass to the next Nintendo Zone in the list.")
     print("piRestart : Restarts the Raspberry Pi.")
     print("piOff : Shutdown the Raspberry Pi.")
     print("e.g., python piPassCommand.py start\n")
@@ -43,10 +44,12 @@ if len(sys.argv) < 2:
 command = sys.argv[1]
 
 # Command switchboard for PiPass commands.
-if command == "update":
-    # Web GUI: PiPass -> Refresh
-    subprocess.Popen('sudo echo "update" > /tmp/pipass_flag.txt', shell=True, stdout=subprocess.PIPE)
-    print("Using updated Nintendo Zone list.\n")
+if command == "start":
+    # Web GUI: PiPass -> Start
+    updateStatus()
+    subprocess.Popen('sudo pkill -f piPass.py', shell=True, stdout=subprocess.PIPE)
+    subprocess.Popen('sudo python /opt/PiPass/piPass.py', shell=True, stdout=subprocess.PIPE)
+    print("PiPass started.\n")
 elif command == "stop":
     # Web GUI: PiPass -> Stop
     updateStatus()
@@ -54,12 +57,14 @@ elif command == "stop":
     subprocess.Popen('sudo service hostapd stop', shell=True, stdout=subprocess.PIPE)
     subprocess.Popen('sudo killall hostapd', shell=True, stdout=subprocess.PIPE)
     print("PiPass stopped.\n")
-elif command == "start":
-    # Web GUI: PiPass -> Start
-    updateStatus()
-    subprocess.Popen('sudo pkill -f piPass.py', shell=True, stdout=subprocess.PIPE)
-    subprocess.Popen('sudo python /opt/PiPass/piPass.py', shell=True, stdout=subprocess.PIPE)
-    print("PiPass started.\n")
+elif command == "update":
+    # Web GUI: PiPass -> Refresh
+    subprocess.Popen('sudo pkill --signal SIGUSR1 -f piPass.py', shell=True, stdout=subprocess.PIPE)
+    print("Using the updated configuration.\n")
+elif command == "advance":
+    # Web GUI: PiPass -> Advance Zone
+    subprocess.Popen('sudo pkill --signal SIGUSR2 -f piPass.py', shell=True, stdout=subprocess.PIPE)
+    print("Advancing to the next Nintendo Zone in the list.\n")
 elif command == "piRestart":
     # Web GUI: Raspberry Pi -> Restart
     updateStatus()

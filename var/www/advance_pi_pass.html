@@ -19,6 +19,19 @@
     <!-- CUSTOM STYLES FOR THIS TEMPLATE -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <!-- CALLS ADVANCE.PHP TO EXECUTE SERVER SIDE COMMANDS -->
+    <script>
+      function advance()
+      {
+        var xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.open("POST","assets/php/advance.php",true);
+        xmlHttp.send();
+
+        alert("Advancing Complete! - The next Nintendo Zone should be available momentarily.");
+      }
+    </script>
   </head>
 
   <body>
@@ -52,7 +65,7 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a class="active" href="javascript:;" >
                           <i class="fa fa-desktop"></i>
                           <span>PiPass</span>
                       </a>
@@ -60,19 +73,19 @@
                           <li><a  href="start_pi_pass.html">Start</a></li>
                           <li><a  href="stop_pi_pass.html">Stop</a></li>
                           <li><a  href="refresh_pi_pass.html">Refresh</a></li>
-                          <li><a  href="advance_pi_pass.html">Advance</a></li>
+                          <li class="active"><a  href="advance_pi_pass.html">Advance</a></li>
                           <li><a  href="settings.html">Settings</a></li>
                       </ul>
                   </li>
 
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
+                      <a href="javascript:;" >
                           <i class="fa fa-th"></i>
                           <span>Nintendo Zones</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="show_current.html">Show Current</a></li>
-                          <li class="active"><a  href="show_db.html">Database Sources</a></li>
+                          <li><a  href="show_db.html">Database Sources</a></li>
                       </ul>
                   </li>
 
@@ -95,19 +108,19 @@
       <!-- MAIN CONTENT START -->
       <section id="main-content">
         <section class="wrapper site-min-height">
-          <h3><i class="fa fa-angle-right"></i> Database Sources</h3>
-            <div class="row mt">
-              <div class="col-lg-12">
-                <div class="showback">
-                  <p>
-                    By default, PiPass uses its own <a href="https://docs.google.com/spreadsheets/d/1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M/pubhtml" target="_blank">Google Spreadsheet</a> for data parsing and consistency reasons. Refer to the README on <a href="https://github.com/Matthew-Hsu/PiPass" target="_blank">GitHub</a> to learn more about customization. The default worksheet being used is the Nintendo Zone list and will be good enough for most people who just want to StreetPass.
-                  </p>
-                  <p>
-                    All of the Nintendo Zone information has been taken from this <a href="http://homepass.info" target="_blank">spreadsheet</a>. It's maintained by <a href="http://reddit.com/u/FatMagic" target="_blank">FatMagic</a>, so credits to FatMagic for putting the work into maintaining it.
-                  </p>
+          <h3><i class="fa fa-angle-right"></i> Advance</h3>
+          <div class="row mt">
+            <div class="col-lg-12">
+              <div class="showback">
+                <p>
+                  Advances PiPass to the next Nintendo Zone in the list, even if the current Nintendo Zone has reminaing time left.
+                </p>
+                <div class="wrapper">
+                  <p class="centered"><button type="button" class="btn btn-lg btn-theme" onclick="advance()">Advance PiPass</button></p>
                 </div>
               </div>
             </div>
+          </div>
         </section>
       </section>
       <!-- MAIN CONTENT END -->
@@ -116,7 +129,7 @@
       <footer class="site-footer">
           <div class="text-center">
               <b>"It's a me, Mario!"</b>
-              <a href="show_db.html#" class="go-top">
+              <a href="advance_pi_pass.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
