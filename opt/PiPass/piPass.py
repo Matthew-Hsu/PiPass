@@ -25,6 +25,10 @@ def loadSettings():
     except (KeyError, ValueError):
         STREETPASS_CYCLE_MINUTES = 15
 
+    # Converting STREETPASS_CYCLE_MINUTES to seconds.
+    global STREETPASS_CYCLE_SECONDS
+    STREETPASS_CYCLE_SECONDS = STREETPASS_CYCLE_MINUTES * 60
+
     # Controls whether PiPass should shuffle the Nintendo Zone list or not.
     global PIPASS_SHUFFLE
 
@@ -71,6 +75,7 @@ def loadSettings():
 
 # PiPass configuration variables. They will be overidded with correct values from loadSettings().
 STREETPASS_CYCLE_MINUTES = None
+STREETPASS_CYCLE_SECONDS = None
 PIPASS_SHUFFLE = None
 GSX_KEY = None
 GSX_WORKSHEET = None
@@ -95,9 +100,6 @@ piPassStatus = "execute"
 
 # Temporary flag file path for piPassStatus.
 FLAG_PATH = "/tmp/pipass_flag.txt"
-
-# Converting STREETPASS_CYCLE_MINUTES to seconds.
-STREETPASS_CYCLE_SECONDS = STREETPASS_CYCLE_MINUTES * 60
 
 #### PiPass Main #####
 
