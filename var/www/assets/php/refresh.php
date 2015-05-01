@@ -1,3 +1,3 @@
 <?php
-exec('sudo python /opt/PiPass/piPassCommand.py update');
+exec('sudo pkill --signal SIGUSR1 -f piPass.py');
 ?>

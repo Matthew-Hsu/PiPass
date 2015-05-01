@@ -1,3 +1,8 @@
 <?php
-exec('sudo python /opt/PiPass/piPassCommand.py piOff');
+exec('sudo pkill --signal SIGQUIT -f piPass.py');
+
+exec('sudo service hostapd stop');
+exec('sudo killall hostapd');
+
+exec('sudo /sbin/shutdown -h now');
 ?>

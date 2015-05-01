@@ -72,6 +72,33 @@ def loadSettings():
 
     return None
 
+# Write PiPass status to DASHBOARD_INFO.
+def updateStatus():
+    with io.open(DASHBOARD_INFO, 'w', encoding='utf-8') as f:
+        f.write(unicode('[{"gsx$ssid": {"$t": "Not Available."}, "gsx$mac": {"$t": "Not Available."}, "gsx$description": {"$t": "PiPass not running."}}]'))
+
+    return None
+
+# Handles SIGQUIT, which is interpreted as a request to terminate PiPass.
+def sigQuit(signum, stack):
+    updateStatus()
+
+    # The time elapsed loop records its start time in "start". By setting to 0,
+    # this forces the elapsed time to a huge number which results in advancing
+    # to the next Nintendo Zone.
+    global start
+    start = 0
+
+    global piPassStatus
+    piPassStatus = "update"
+
+    global doExecute
+    doExecute = False
+
+    print("\n< Stop Detected! - PiPass is shutting down. >\n")
+
+    return None
+
 # Handles SIGUSR1, which is interpreted as a request to update settings.
 def sigUsr1(signum, stack):
     global piPassStatus
@@ -119,21 +146,32 @@ DASHBOARD_INFO = "/var/www/assets/json/current_state.json"
 # Path to the JSON file where PiPass will write to for the 'Show Current' page on the PiPass Dashboard.
 CURRENT_LIST = "/var/www/assets/json/current_list.json"
 
+# Time interval in seconds that StreetPass requires between successive visits to a Nintendo Zone.
+STREETPASS_VISIT_INTERVAL = (8 * 60) * 60
+
+# Flag that informs PiPass whether to keep runnning or not.
+doExecute = True
+
 # Flag that informs PiPass that updates have been made to PIPASS_DB and to use those updates. Default value is "execute".
 piPassStatus = "execute"
+
+# Indicates whether the Nintendo Zone visit records need to be cleared. It is set to
+# True initially so that it initializes on the first pass.
+clearVisits = True
 
 #### PiPass Main #####
 
 print("[ PiPass - Homepass for the Nintendo 3DS ]\n")
 
 # Lighting the beacons...
+signal.signal(signal.SIGQUIT, sigQuit)
 signal.signal(signal.SIGUSR1, sigUsr1)
 signal.signal(signal.SIGUSR2, sigUsr2)
 
 print("> PiPass is currently running...")
 
-# This loop does not feel pity or remorse or fear and it cannot be stopped unless Half-Life 3 is released.
-while "Waiting for Half-Life 3":
+# PiPass will keep running until it is requested to stop.
+while doExecute:
     # Load the Nintendo Zone information from PIPASS_DB.
     response = urllib.urlopen(PIPASS_DB)
     results = json.loads(response.read())
@@ -149,6 +187,13 @@ while "Waiting for Half-Life 3":
 
     # The index of the current Nintendo Zone we are visting.
     currentZoneIndex = 0
+
+    # Clears the Nintendo Zone visits, if needed, by redefining to an empty dictionary.
+    if clearVisits:
+        zoneVisits = {}
+
+    # Indicates that the visits should be cleared on the next loop. This will be overridden if a usable Nintendo Zone is found.
+    clearVisits = True
 
     # Begin looping through all the Nintendo Zones in the collection.
     for data in results['feed']['entry']:
@@ -170,6 +215,24 @@ while "Waiting for Half-Life 3":
             if label[:3]=='gsx':
                 zoneValues[zoneValueIndex] = str(data[label]['$t'].encode('utf-8'))
                 zoneValueIndex = zoneValueIndex + 1
+
+        # Nintendo Zone visits use a key based on the SSID and the MAC address. The MAC
+        # address is forced to uppercase to detect duplicates that might vary
+        # by case.
+        visit = (zoneValues[0], zoneValues[1].upper())
+
+        # If the Nintendo Zone was visited too recently, skip it.
+        try:
+            if time.time() - zoneVisits[visit] < STREETPASS_VISIT_INTERVAL:
+                continue
+        except KeyError:
+            pass
+
+        # A usable Nintendo Zone was found, so visits should not get cleared on the next pass.
+        clearVisits = False
+
+        # Note the current time for the current visit to the Nintendo Zone.
+        zoneVisits[visit] = time.time()
 
         conf = "interface=wlan0\nbridge=br0\ndriver=" + HOSTAPD_DRIVER + "\nssid=" + zoneValues[0] + "\nbssid=" + zoneValues[1] + "\nhw_mode=g\nchannel=6\nauth_algs=1\nwpa=0\nmacaddr_acl=1\naccept_mac_file=/etc/hostapd/mac_accept\nwmm_enabled=0\nignore_broadcast_ssid=0"
 
@@ -196,3 +259,7 @@ while "Waiting for Half-Life 3":
         start = time.time()
         while time.time() - start < STREETPASS_CYCLE_SECONDS:
             time.sleep(5)
+
+print("> PiPass has been shutdown successfully.")
+
+exit(0)
