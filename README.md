@@ -1,13 +1,23 @@
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
-PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
+PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine-tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
 
-# What's New in Version 1.2
-PiPass can now be configured through the dashboard. It is no longer required to manually edit piPass.py to fine tune settings. However, the adding/editing of accepted 3DS MAC addresses still requires a manual edit through the Raspberry Pi console.
+# What's New in Version 1.3
+PiPass 1.3 has many great features and fixes. I would like to personally thank @nagledb for the contributions that he has made for PiPass 1.3. With his contributions, we were able to add a lot of exciting features into this version. Without further adieu, here are the new changes with PiPass 1.3:
 
-Also included is the ability to enable the random visiting of Nintendo Zones. Much like every release, there are some bug fixes and some interface changes with the dashboard.
+    +   PiPass can now be updated through the dashboard. Updates are taken from the master branch and settings are preserved.
+    +   Can now 'force' advance to the next Nintendo Zone in the list. You don't have to wait for the cycle time to finish if you want to advance to the next zone.
+    +   Keeps track of recently visited Nintendo Zones and will automatically skip those zones to avoid 'used' zones until they are 'fresh' again. However, if all the zones are 'used', PiPass will traverse through the list as if it was doing it for the first time.
+    +   Prevents caching on most web browsers. Up-to-date settings should now be shown without manual refresh of browser. Though Chrome is finicky at times.
+    +   Fixes the 'MAC address will not change' bug that is seen over extended periods of time. Often 6+ hours of continued use.
+    +   Miscellaneous UI changes, performance optimizations, and small bug fixes.
+    +   NOTE: For those updating to 1.3 manually, there is a new dependency. Install 7z (sudo apt-get install p7zip-full -y).
+    +   NOTE: piPassCommand.py has been removed and is longer needed.
+
+# Known Behaviours
+PiPass sometimes does not display expected or up-to-date values. Chrome is known to be finicky with this and will not cause issues with PiPass. When in doubt, manually refresh your browser. This is related to browser caching and users have not reported any caching issues with Safari and Internet Explorer.
 
 # Testing Environment
-Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A -=new=- Nintendo 3DS XL with the 9.6.0-24 U firmware was used to verify functionality of 'Homepass'.
+Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A -=new=- Nintendo 3DS XL with the 9.7.0-25U firmware was used to verify functionality of 'Homepass'.
 
 PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, and Atheros AR5007UG chipsets. The WiFi chipset that I tested on was the Ralink RT5370. These chipsets were tested to be working for 'Homepass', so I've loaded the drivers for these other chipsets as well.
 
@@ -45,7 +55,7 @@ The PiPass image uses your router's DHCP to handle the networking aspect. Type i
 
     ->  service hostapd status
 
-Generally speaking, if hostapd services are running, you should be OK. If you have a mobile device or a computer with WiFi, check to see any available networks. If the SSID of "attwifi" or "NZ@McD1" show up, you are in luck. If both these things look good, your 3DS could have some Streetpasses already. To connect to the PiPass Dashboard, type in your Raspberry Pi's IP address in your browser or mobile device to begin.
+Generally speaking, if hostapd services are running, you should be OK. If you have a mobile device or a computer with WiFi, check to see any available networks. If the SSID of "attwifi" or "NZ@McD1" show up, you are in luck. If both these things look good, your 3DS could have some StreetPasses already. To connect to the PiPass Dashboard, type in your Raspberry Pi's IP address in your browser or mobile device to begin.
 
 If things don't look good, there could be some issues with your WiFi driver. PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, and Atheros AR5007UG chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point".
 
@@ -67,8 +77,9 @@ Here is a list of dependencies needed for PiPass, so install the following packa
     ->  sudo apt-get install php5 -y
     ->  sudo apt-get install hostapd -y
     ->  sudo apt-get install bridge-utils -y
+    ->  sudo apt-get install p7zip-full -y
 
-Download PiPass from the 1.2 branch as a zip file and extract the contents on your local machine. You will notice three directories inside PiPass: etc, opt, and var. These three directories are the locations where you want to install PiPass (e.g., Linux root locations would be /etc/, /opt/, and /var/). Go ahead and merge the directories and it will be safe to overwrite the files with PiPass' configuration files.
+Download PiPass from the 1.3 branch as a zip file and extract the contents on your local machine. You will notice three directories inside PiPass: etc, opt, and var. These three directories are the locations where you want to install PiPass (e.g., Linux root locations would be /etc/, /opt/, and /var/). Go ahead and merge the directories and it will be safe to overwrite the files with PiPass' configuration files.
 
 As a security measure, add the MAC address of your Nintendo 3DS by entering the following command:
 
@@ -105,14 +116,6 @@ Semperverus' guide is a excellent resource for troubleshooting. With luck, you s
 
 The PiPass Dashboard can be accessed on a device on your network by typing in your Raspberry Pi's IP address on your computer's or mobile device's browser. Most of what you need can be accessed through the Dashboard, including the ability to configure PiPass. However, the adding/editing of accepted 3DS MAC addresses still requires a manual edit through the Raspberry Pi console.
 
-<b>PiPass Command</b>
-
-If you prefer to run PiPass through the terminal, instead of the dashboard, PiPass Command has a basic functional command line interface. Run the following command to see a list of options:
-
-    ->  sudo python /opt/PiPass/piPassCommand.py
-
-If you want to customize PiPass, you'll have to edit some files manually.
-
 # PiPass Customization
 <b>Customizing Database Source</b>
 
@@ -147,39 +150,56 @@ Now you will need to enter the worksheet you want to use. "PiPass DB Worksheet" 
 
 By default, PiPass will be a particular Nintendo Zone for 15 minutes, before moving onto the next one. This should give you enough time to play all the mini-games before you get your next batch. If this time is too long or too short for you, you can edit this setting through the PiPass Dashboard.
 
+<b>Advance PiPass</b>
+
+If you want to manually advance PiPass to the next Nintendo Zone in the list, you can now. This gives greater control in how you Homepass.
+
+    ->  Click 'PiPass' in the dashboard.
+    ->  Click 'Advance'.
+
 <b>Shuffle Nintendo Zones</b>
 
 Like most of the settings, this feature can be enabled or disabled through the PiPass Dashboard. Enabling shuffling will visit Nintendo Zones in your current list in random order, ensuring that each pass-through is different.
 
-# Updating PiPass Manually
-Updating PiPass manually is easy as you just need to download the files from the Master branch and overwrite /var/www/ and /opt/PiPass/ with the new files.
+<b>Updating PiPass</b>
 
-For example (On your Raspberry Pi):
+PiPass can be updated through the dashboard. This will pull updates from the master branch and provide PiPass with 'bleeding edge' updates. Especially useful for those who are unfamiliar with Linux. Updating can be done by:
 
-    ->  sudo rm -rf /var/www/
-    ->  sudo rm -rf /opt/PiPass/
+    ->  Click 'PiPass' in the dashboard.
+    ->  Click 'Update'.
 
-Copy over the new /var/www/ and /opt/PiPass/ from your computer to your Raspberry Pi.
-    
+Please allow for 30 seconds for all the updates to complete.
+
 # Hardware
-I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referral links should be helpful. The pricing on these items are exactly the same as a non-referral.
+I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referral links would be helpful. The pricing on these items are exactly the same as a non-referral.
 
 Please let me know if any other hardware is compatible and I will add them to this list.
 
 <b>Canadian Links</b>
 
+<a href="http://www.amazon.ca/gp/product/B00T2U7R7I/ref=as_li_ss_tl?ie=UTF8&camp=15121&creative=390961&creativeASIN=B00T2U7R7I&linkCode=as2&tag=matthew084-20">Raspberry Pi 2 Model B 1GB</a><img src="http://ir-ca.amazon-adsystem.com/e/ir?t=matthew084-20&l=as2&o=15&a=B00T2U7R7I" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
 <a href="http://www.amazon.ca/gp/product/B00GWTNYJW/ref=as_li_ss_tl?ie=UTF8&camp=15121&creative=390961&creativeASIN=B00GWTNYJW&linkCode=as2&tag=matthew084-20">CanaKit Raspberry Pi 2 (1GB) Ultimate Starter Kit (Over 40 Components: New Raspberry Pi 2 + WiFi Dongle + 8GB SD Card + Case + Power Supply and many more)</a><img src="http://ir-ca.amazon-adsystem.com/e/ir?t=matthew084-20&l=as2&o=15&a=B00GWTNYJW" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
+<a href="http://www.amazon.ca/gp/product/B00OL8JSIM/ref=as_li_ss_tl?ie=UTF8&camp=15121&creative=390961&creativeASIN=B00OL8JSIM&linkCode=as2&tag=matthew084-20">Mini RT5370 150Mbps USB Wifi Wireless LAN Card 802.11 N/g/b Adapter with Antenna</a><img src="http://ir-ca.amazon-adsystem.com/e/ir?t=matthew084-20&l=as2&o=15&a=B00OL8JSIM" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
 <b>United States of America Links</b>
+
+<a href="http://www.amazon.com/gp/product/B00T2U7R7I/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00T2U7R7I&linkCode=as2&tag=matthew08b-20&linkId=W2HA4PU55DSRWDWA">Raspberry Pi 2 Model B Project Board - 1GB RAM - 900 MHz Quad-Core CPU</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=matthew08b-20&l=as2&o=1&a=B00T2U7R7I" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
 <a href="http://www.amazon.com/gp/product/B008XVAVAW/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B008XVAVAW&linkCode=as2&tag=matthew08b-20&linkId=IN557BBG3PJEAU7M">CanaKit Raspberry Pi 2 Complete Starter Kit with WiFi (Latest Version Raspberry Pi 2 + WiFi + Original Preloaded 8GB SD Card + Case + Power Supply + HDMI Cable)</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=matthew08b-20&l=as2&o=1&a=B008XVAVAW" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
 <a href="http://www.amazon.com/gp/product/B008OF9Z54/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B008OF9Z54&linkCode=as2&tag=matthew08b-20&linkId=B56OIMZL6L43DVYE">Mini USB 2.0 WiFi Wireless Adapter with Antenna, 802.11 n/g/b, 150M LAN Adapter</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=matthew08b-20&l=as2&o=1&a=B008OF9Z54" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
+<a href="http://www.amazon.com/gp/product/B0067NFSE2/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B0067NFSE2&linkCode=as2&tag=matthew08b-20&linkId=K7P7YF4R4Z3DFFQO">Protronix 150Mbps USB Wireless Network WIFI Adapter for Laptop Notebook 802.11N/G</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=matthew08b-20&l=as2&o=1&a=B0067NFSE2" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+<a href="http://www.amazon.com/gp/product/B00H95C0A2/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00H95C0A2&linkCode=as2&tag=matthew08b-20&linkId=W6TR3BCW32NGSPW7">Wifi With Antenna For Raspberry Pi - Instructions Included - PLUG and PLAY</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=matthew08b-20&l=as2&o=1&a=B00H95C0A2" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
 # Future Features
 I want to expand the functionality of PiPass by adding the following:
 
     +   Adding/Removing Accepted MAC Addresses through the Dashboard.
+    +   Complete logging for debugging and historical analysis.
 
 # Support
 If you have any problems with PiPass, please let me know through my GitHub. I will do my best to help you out. Thanks for trying out PiPass!
