@@ -20,16 +20,16 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
 
-    <!-- CALLS RESTART_PI.PHP TO EXECUTE SERVER SIDE COMMANDS -->
+    <!-- CALLS UPDATE.PHP TO EXECUTE SERVER SIDE COMMANDS -->
     <script>
-      function restart()
+      function update()
       {
         var xmlHttp = new XMLHttpRequest();
 
-        xmlHttp.open("POST","assets/php/restart_pi.php",true);
+        xmlHttp.open("POST","assets/php/update.php",true);
         xmlHttp.send();
 
-        alert("Restarting Raspberry Pi! - Please wait a minute.");
+        alert("Updating! - PiPass is now being upgraded to the latest version. Please wait 30 seconds for the process to complete.");
       }
     </script>
   </head>
@@ -65,7 +65,7 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a class="active" href="javascript:;" >
                           <i class="fa fa-desktop"></i>
                           <span>PiPass</span>
                       </a>
@@ -75,7 +75,7 @@
                           <li><a  href="advance_pi_pass.html">Advance</a></li>
                           <li><a  href="refresh_pi_pass.html">Refresh</a></li>
                           <li><a  href="settings.html">Settings</a></li>
-                          <li><a  href="update_pi_pass.html">Update</a></li>
+                          <li class="active"><a  href="update_pi_pass.html">Update</a></li>
                       </ul>
                   </li>
 
@@ -91,12 +91,12 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
+                      <a href="javascript:;" >
                           <i class="fa fa-cogs"></i>
                           <span>Raspberry Pi</span>
                       </a>
                       <ul class="sub">
-                          <li class="active"><a  href="restart_pi.html">Restart</a></li>
+                          <li><a  href="restart_pi.html">Restart</a></li>
                           <li><a  href="shutdown_pi.html">Shutdown</a></li>
                       </ul>
                   </li>
@@ -109,15 +109,16 @@
       <!-- MAIN CONTENT START -->
       <section id="main-content">
         <section class="wrapper site-min-height">
-          <h3><i class="fa fa-angle-right"></i> Restart</h3>
+          <h3><i class="fa fa-angle-right"></i> Update</h3>
           <div class="row mt">
             <div class="col-lg-12">
               <div class="showback">
                 <p>
-                  This will restart your Raspberry Pi. Any unsaved changes will be lost.
+                  This will update PiPass to the latest version on GitHub. These are "bleeding edge" updates and will contain features and bug fixes before
+                  an official release. Upgrading will stop PiPass, so please start PiPass again after the update has been completed.
                 </p>
                 <div class="wrapper">
-                  <p class="centered"><button type="button" class="btn btn-lg btn-theme" onclick="restart()">Restart Raspberry Pi</button></p>
+                  <p class="centered"><button type="button" class="btn btn-lg btn-theme" onclick="update()">Update PiPass</button></p>
                 </div>
               </div>
             </div>
@@ -130,7 +131,7 @@
       <footer class="site-footer">
           <div class="text-center">
               <b>"It's a me, Mario!"</b>
-              <a href="restart_pi.html#" class="go-top">
+              <a href="update_pi_pass.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
