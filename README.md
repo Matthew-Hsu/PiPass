@@ -12,8 +12,8 @@ PiPass 1.3 has many great features and fixes. I would like to personally thank @
   * Prevents caching on most web browsers. Up-to-date settings should now be shown without manual refresh of browser. Though Chrome is finicky at times.
   * Fixes the 'MAC address will not change' bug that is seen over extended periods of time. Often 6+ hours of continued use.
   * Miscellaneous UI changes, performance optimizations, and small bug fixes.
-  * NOTE: For those updating to 1.3 manually, there is a new dependency. Install 7z (sudo apt-get install p7zip-full -y).
-  * NOTE: piPassCommand.py has been removed and is longer needed.
+  * <b>NOTE:</b> For those updating to 1.3 manually, there is a new dependency. Install 7z (sudo apt-get install p7zip-full -y).
+  * <b>NOTE:</b> piPassCommand.py has been removed and is longer needed.
 
 # Known Behaviours
 PiPass sometimes does not display expected or up-to-date values. Chrome is known to be finicky with this and will not cause issues with PiPass. When in doubt, manually refresh your browser. This is related to browser caching and users have not reported any caching issues with Safari and Internet Explorer.
