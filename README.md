@@ -6,14 +6,14 @@ This does not showcase a complete list of features, but it gives a sense in what
 # What's New in Version 1.3
 PiPass 1.3 has many great features and fixes. I would like to personally thank @nagledb for the contributions that he has made for PiPass 1.3. With his contributions, we were able to add a lot of exciting features into this version. Without further adieu, here are the new changes with PiPass 1.3:
 
-    +   PiPass can now be updated through the dashboard. Updates are taken from the master branch and settings are preserved.
-    +   Can now 'force' advance to the next Nintendo Zone in the list. You don't have to wait for the cycle time to finish if you want to advance to the next zone.
-    +   Keeps track of recently visited Nintendo Zones and will automatically skip those zones to avoid 'used' zones until they are 'fresh' again. However, if all the zones are 'used', PiPass will traverse through the list as if it was doing it for the first time.
-    +   Prevents caching on most web browsers. Up-to-date settings should now be shown without manual refresh of browser. Though Chrome is finicky at times.
-    +   Fixes the 'MAC address will not change' bug that is seen over extended periods of time. Often 6+ hours of continued use.
-    +   Miscellaneous UI changes, performance optimizations, and small bug fixes.
-    +   NOTE: For those updating to 1.3 manually, there is a new dependency. Install 7z (sudo apt-get install p7zip-full -y).
-    +   NOTE: piPassCommand.py has been removed and is longer needed.
+  * PiPass can now be updated through the dashboard. Updates are taken from the master branch and settings are preserved.
+  * Can now 'force' advance to the next Nintendo Zone in the list. You don't have to wait for the cycle time to finish if you want to advance to the next zone.
+  * Keeps track of recently visited Nintendo Zones and will automatically skip those zones to avoid 'used' zones until they are 'fresh' again. However, if all the zones are 'used', PiPass will traverse through the list as if it was doing it for the first time.
+  * Prevents caching on most web browsers. Up-to-date settings should now be shown without manual refresh of browser. Though Chrome is finicky at times.
+  * Fixes the 'MAC address will not change' bug that is seen over extended periods of time. Often 6+ hours of continued use.
+  * Miscellaneous UI changes, performance optimizations, and small bug fixes.
+  * NOTE: For those updating to 1.3 manually, there is a new dependency. Install 7z (sudo apt-get install p7zip-full -y).
+  * NOTE: piPassCommand.py has been removed and is longer needed.
 
 # Known Behaviours
 PiPass sometimes does not display expected or up-to-date values. Chrome is known to be finicky with this and will not cause issues with PiPass. When in doubt, manually refresh your browser. This is related to browser caching and users have not reported any caching issues with Safari and Internet Explorer.
