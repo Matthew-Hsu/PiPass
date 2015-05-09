@@ -113,7 +113,7 @@
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">StreetPass Cycle Time (Minutes)</label>
                     <div class="col-sm-1">
-                        <input type="text" class="form-control round-form" id="STREETPASS_CYCLE_MINUTES" name="STREETPASS_CYCLE_MINUTES" required>
+                        <input type="text" class="form-control" id="STREETPASS_CYCLE_MINUTES" name="STREETPASS_CYCLE_MINUTES" required>
                     </div>
                   </div>
                   <div class="form-group">
@@ -125,25 +125,31 @@
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">PiPass DB Key</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control round-form" id="GSX_KEY" name="GSX_KEY" required>
+                        <input type="text" class="form-control" id="GSX_KEY" name="GSX_KEY" required>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">PiPass DB Worksheet</label>
                     <div class="col-sm-1">
-                        <input type="text" class="form-control round-form" id="GSX_WORKSHEET" name="GSX_WORKSHEET" required>
+                        <input type="text" class="form-control" id="GSX_WORKSHEET" name="GSX_WORKSHEET" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label">3DS Authentication</label>
+                    <div class="col-sm-5">
+                        <textarea class="form-control" id="AUTHENTICATION" name="AUTHENTICATION" placeholder="Enter each 3DS MAC address on a separate line..."></textarea>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Hostapd Driver<br />[ Default: nl80211 ]</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control round-form" id="HOSTAPD_DRIVER" name="HOSTAPD_DRIVER" required>
+                        <input type="text" class="form-control" id="HOSTAPD_DRIVER" name="HOSTAPD_DRIVER" required>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Dashboard Path<br />[ Default: /var/www/ ]</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control round-form" id="DASHBOARD" name="DASHBOARD" required>
+                        <input type="text" class="form-control" id="DASHBOARD" name="DASHBOARD" placeholder="Enter the PiPass Dashboard install path..." required>
                     </div>
                   </div>
                   <div class="form-group">

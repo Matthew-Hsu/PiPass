@@ -3,13 +3,13 @@
 if ($_POST)
 {
   // Ensure that the dashboard path ends with the approperiate ' / '.
-  if (strcmp(substr($_POST['DASHBOARD'], -1), "/") != 0) 
+  if (strcmp(substr($_POST['DASHBOARD'], -1), "/") != 0)
   {
     $_POST['DASHBOARD'] .= "/";
   }
 
   // Determine if the specified installation path is valid.
-  if (!file_exists($_POST['DASHBOARD'])) 
+  if (!file_exists($_POST['DASHBOARD']))
   {
     echo "Error! - The dashboard path of [ " . $_POST['DASHBOARD'] . " ] could not be found. Please verify that the PiPass Dashboard is installed there.";
     echo "<br /><br />";
@@ -32,6 +32,10 @@ if ($_POST)
   // Save the JSON formatted setting that tells PiPass where the dashboard is installed.
   file_put_contents('/tmp/pipass_dashboard.json', json_encode($dashboard));
   exec('sudo cp /tmp/pipass_dashboard.json /opt/PiPass/config/');
+
+  // Save the list of authenticated Nintendo 3DS systems to /etc/hostapd/mac_accept.
+  file_put_contents('/tmp/mac_accept', $_POST['AUTHENTICATION']);
+  exec('sudo cp /tmp/mac_accept /etc/hostapd/mac_accept');
 
   // Convert the form data into a JSON format.
   $json = json_encode($_POST);

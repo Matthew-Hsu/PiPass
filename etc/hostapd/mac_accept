@@ -1,10 +1,10 @@
 # List of 3DS MAC addresses that are allowed to authenticate with PiPass.
 # Since Nintendo Zones only work as a open network, we can use this file
-# to keep the network techncally open, but only allow an approved list of
+# to keep the network technically open, but only allow an approved list of
 # devices to connect. This provides some security to your network and prevents
 # others from connecting.
 #
-# Type in each 3DS MAC address on a seperate line, like the following.
+# Type in each 3DS MAC address on a separate line, like the following.
 #
 # 00:11:22:33:44:55
 # 00:66:77:88:99:aa
