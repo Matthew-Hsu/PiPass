@@ -24,12 +24,9 @@
     <script>
       function update()
       {
-        var xmlHttp = new XMLHttpRequest();
-
-        xmlHttp.open("POST","assets/php/update.php",true);
-        xmlHttp.send();
-
         alert("Updating! - PiPass is now being upgraded to the latest version. Please wait 30 seconds for the process to complete.");
+
+        window.location.href = "assets/php/update.php";
       }
     </script>
   </head>
