@@ -1,6 +1,6 @@
 # Status Update - May 9th, 2015
 Those who have installed PiPass 1.3, if you use the PiPass Update through the dashboard, you can get the following new features that do not have an official release yet:
-  * The PiPass Dashboard can now be used to add authenticated Nintendo 3DS systems. Please note that you should enter each MAC address on a separate line.
+  * The PiPass Dashboard can now be used to add authenticated Nintendo 3DS systems through PiPass Settings. Please note that you should enter each MAC address on a separate line.
   * Re-work of some logic with updating PiPass and saving settings.
   * Minor UI changes.
   * <b>ADVANCED USERS:</b> The PiPass Dashboard can now be configured to use a different installation path in case there are those who use a different directory structure or another web server.
