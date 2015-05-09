@@ -1,3 +1,10 @@
+# Status Update - May 9th, 2015
+Those who have installed PiPass 1.3, if you use the PiPass Update through the dashboard, you can get the following new features that do not have an official release yet:
+  * The PiPass Dashboard can now be used to add authenticated Nintendo 3DS systems. Please note that you should enter each MAC address on a separate line.
+  * Re-work of some logic with updating PiPass and saving settings.
+  * Minor UI changes.
+  * ADVANCED USERS: The PiPass Dashboard can now be configured to use a different installation path in case there are those who use a different directory structure or another web server.
+
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine-tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
 
