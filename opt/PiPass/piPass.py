@@ -70,7 +70,7 @@ def loadSettings():
     except KeyError:
         GSX_WORKSHEET = "2"
 
-    # Contructs the URL where the Google Spreadsheet is located for the
+    # Constructs the URL where the Google Spreadsheet is located for the
     # Nintendo Zone information. Refer to README at
     # https://github.com/Matthew-Hsu/PiPass/blob/master/README.md
     global PIPASS_DB
@@ -141,7 +141,7 @@ def sigUsr2(signum, stack):
 
 #### Load PiPass Settings ####
 
-# PiPass configuration variables. They will be overidded with correct values from loadDashboard() and loadSettings().
+# PiPass configuration variables. They will be overridden with correct values from loadDashboard() and loadSettings().
 STREETPASS_CYCLE_MINUTES = None
 STREETPASS_CYCLE_SECONDS = None
 PIPASS_SHUFFLE = None
@@ -168,7 +168,7 @@ CURRENT_LIST = DASHBOARD + "assets/json/current_list.json"
 # Time interval in seconds that StreetPass requires between successive visits to a Nintendo Zone.
 STREETPASS_VISIT_INTERVAL = (8 * 60) * 60
 
-# Flag that informs PiPass whether to keep runnning or not.
+# Flag that informs PiPass whether to keep running or not.
 doExecute = True
 
 # Flag that informs PiPass that updates have been made to PIPASS_DB and to use those updates. Default value is "execute".
@@ -204,7 +204,7 @@ while doExecute:
     with io.open(CURRENT_LIST, 'w', encoding='utf-8') as f:
         f.write(unicode(json.dumps(results, ensure_ascii=False)))
 
-    # The index of the current Nintendo Zone we are visting.
+    # The index of the current Nintendo Zone we are visiting.
     currentZoneIndex = 0
 
     # Clears the Nintendo Zone visits, if needed, by redefining to an empty dictionary.

@@ -138,18 +138,21 @@
                     <label class="col-sm-2 col-sm-2 control-label">3DS Authentication</label>
                     <div class="col-sm-5">
                         <textarea class="form-control" id="AUTHENTICATION" name="AUTHENTICATION" placeholder="Enter each 3DS MAC address on a separate line..."></textarea>
+                        <p class="help-block">Format: XX:XX:XX:XX:XX:XX</p>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">Hostapd Driver<br />[ Default: nl80211 ]</label>
+                    <label class="col-sm-2 col-sm-2 control-label">Hostapd Driver</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control" id="HOSTAPD_DRIVER" name="HOSTAPD_DRIVER" required>
+                        <p class="help-block">Default: nl80211</p>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">Dashboard Path<br />[ Default: /var/www/ ]</label>
+                    <label class="col-sm-2 col-sm-2 control-label">Dashboard Path</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" id="DASHBOARD" name="DASHBOARD" placeholder="Enter the PiPass Dashboard install path..." required>
+                        <p class="help-block">Default: /var/www/</p>
                     </div>
                   </div>
                   <div class="form-group">

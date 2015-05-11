@@ -2,7 +2,7 @@
 // Double check to see if we actually got the form data from settings.html.
 if ($_POST)
 {
-  // Ensure that the dashboard path ends with the approperiate ' / '.
+  // Ensure that the dashboard path ends with the appropriate ' / '.
   if (strcmp(substr($_POST['DASHBOARD'], -1), "/") != 0)
   {
     $_POST['DASHBOARD'] .= "/";
@@ -32,6 +32,9 @@ if ($_POST)
   // Save the JSON formatted setting that tells PiPass where the dashboard is installed.
   file_put_contents('/tmp/pipass_dashboard.json', json_encode($dashboard));
   exec('sudo cp /tmp/pipass_dashboard.json /opt/PiPass/config/');
+
+  // Convert the list of authenticated Nintendo 3DS MAC addresses to uppercase.
+  $_POST['AUTHENTICATION'] = strtoupper($_POST['AUTHENTICATION']);
 
   // Save the list of authenticated Nintendo 3DS systems to /etc/hostapd/mac_accept.
   file_put_contents('/tmp/mac_accept', $_POST['AUTHENTICATION']);
