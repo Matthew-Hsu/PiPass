@@ -29,8 +29,6 @@
 
         xmlHttp.open("POST","assets/php/stop.php",true);
         xmlHttp.send();
-
-        alert("Stopping PiPass! - To run PiPass again, please start PiPass through the PiPass Dashboard.");
       }
     </script>
   </head>
@@ -118,8 +116,26 @@
                   This will stop PiPass from running. PiPass will terminate immediately.
                 </p>
                 <div class="wrapper">
-                  <p class="centered"><button type="button" class="btn btn-lg btn-theme" onclick="stop()">Stop PiPass</button></p>
+                  <p class="centered">
+                    <button type="button" class="btn btn-lg btn-theme" data-toggle="modal" data-target="#stop" onclick="stop()">Stop PiPass</button>
+                  </p>
                 </div>
+                <div class="modal fade" id="stop" tabindex="-1" role="dialog" aria-labelledby="Stop PiPass" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="Stop PiPass">Stop PiPass</h4>
+                      </div>
+                      <div class="modal-body">
+                        PiPass is shutting down. To get more StreetPasses, please start PiPass again.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- END MODAL -->
               </div>
             </div>
           </div>

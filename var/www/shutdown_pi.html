@@ -29,8 +29,6 @@
 
         xmlHttp.open("POST","assets/php/shutdown_pi.php",true);
         xmlHttp.send();
-
-        alert("Shutting Down Raspberry Pi! - Please manually power on your Raspberry Pi to start again.");
       }
     </script>
   </head>
@@ -118,8 +116,26 @@
                   This will shutdown your Raspberry Pi. Any unsaved changes will be lost.
                 </p>
                 <div class="wrapper">
-                  <p class="centered"><button type="button" class="btn btn-lg btn-theme" onclick="shutdown()">Shutdown Raspberry Pi</button></p>
+                  <p class="centered">
+                    <button type="button" class="btn btn-lg btn-theme" data-toggle="modal" data-target="#shutdown" onclick="shutdown()">Shutdown Raspberry Pi</button>
+                  </p>
                 </div>
+                <div class="modal fade" id="shutdown" tabindex="-1" role="dialog" aria-labelledby="Shutdown Raspberry Pi" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="Shutdown Raspberry Pi">Shutdown Raspberry Pi</h4>
+                      </div>
+                      <div class="modal-body">
+                        The Raspberry Pi is now shutting down. Please manually power on your Raspberry Pi to start again.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- END MODAL -->
               </div>
             </div>
           </div>

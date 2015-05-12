@@ -29,8 +29,6 @@
 
         xmlHttp.open("POST","assets/php/restart_pi.php",true);
         xmlHttp.send();
-
-        alert("Restarting Raspberry Pi! - Please wait a minute.");
       }
     </script>
   </head>
@@ -118,8 +116,26 @@
                   This will restart your Raspberry Pi. Any unsaved changes will be lost.
                 </p>
                 <div class="wrapper">
-                  <p class="centered"><button type="button" class="btn btn-lg btn-theme" onclick="restart()">Restart Raspberry Pi</button></p>
+                  <p class="centered">
+                    <button type="button" class="btn btn-lg btn-theme" data-toggle="modal" data-target="#restart" onclick="restart()">Restart Raspberry Pi</button>
+                  </p>
                 </div>
+                <div class="modal fade" id="restart" tabindex="-1" role="dialog" aria-labelledby="Restart Raspberry Pi" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="Restart Raspberry Pi">Restart Raspberry Pi</h4>
+                      </div>
+                      <div class="modal-body">
+                        The Raspberry Pi is now restarting.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- END MODAL -->
               </div>
             </div>
           </div>

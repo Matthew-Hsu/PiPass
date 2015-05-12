@@ -110,7 +110,7 @@
             <div class="col-lg-12">
               <div class="form-panel">
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Configure PiPass</h4>
-                <form class="form-horizontal style-form" onsubmit="return alert('Settings Saved! - Please refresh or restart PiPass for the settings to take effect.');" action="assets/php/settings.php" method="post">
+                <form class="form-horizontal style-form" action="assets/php/settings.php" method="post">
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">StreetPass Cycle Time (Minutes)</label>
                     <div class="col-sm-1">
@@ -157,8 +157,25 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <p class="centered"><button type="submit" class="btn btn-lg btn-theme">Save</button></p>
+                    <p class="centered"><button type="button" class="btn btn-lg btn-theme" data-toggle="modal" data-target="#settings">Save</button></p>
                   </div>
+                  <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="PiPass Settings" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="PiPass Settings">PiPass Settings</h4>
+                      </div>
+                      <div class="modal-body">
+                        In order for the PiPass settings to take effect, refreshing or restarting PiPass will be required. Are you sure you want to save the settings?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- END MODAL -->
                 </form>
                 <script>
                   $('form').loadJSON('assets/json/pipass_config.json');

@@ -29,8 +29,6 @@
 
         xmlHttp.open("POST","assets/php/advance.php",true);
         xmlHttp.send();
-
-        alert("Advancing Complete! - The next Nintendo Zone should be available momentarily.");
       }
     </script>
   </head>
@@ -118,8 +116,26 @@
                   Advances PiPass to the next Nintendo Zone in the list, even if the current Nintendo Zone has remaining time left.
                 </p>
                 <div class="wrapper">
-                  <p class="centered"><button type="button" class="btn btn-lg btn-theme" onclick="advance()">Advance PiPass</button></p>
+                  <p class="centered">
+                    <button type="button" class="btn btn-lg btn-theme" data-toggle="modal" data-target="#advance" onclick="advance()">Advance PiPass</button>
+                  </p>
                 </div>
+                <div class="modal fade" id="advance" tabindex="-1" role="dialog" aria-labelledby="Advance PiPass" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="Advance PiPass">Advance PiPass</h4>
+                      </div>
+                      <div class="modal-body">
+                        PiPass is now advancing to the next Nintendo Zone in the list.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- END MODAL -->
               </div>
             </div>
           </div>

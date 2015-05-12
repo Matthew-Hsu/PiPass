@@ -25,8 +25,6 @@
     <script>
       function update()
       {
-        alert("Updating! - PiPass is now being upgraded to the latest version. Please wait 30 seconds for the process to complete.");
-
         window.location.href = "assets/php/update.php";
       }
     </script>
@@ -113,11 +111,30 @@
               <div class="showback">
                 <p>
                   This will update PiPass to the latest version on GitHub. These are "bleeding edge" updates and will contain features and bug fixes before
-                  an official release. Upgrading will stop PiPass, so please start PiPass again after the update has been completed.
+                  an official release.
                 </p>
                 <div class="wrapper">
-                  <p class="centered"><button type="button" class="btn btn-lg btn-theme" onclick="update()">Update PiPass</button></p>
+                  <p class="centered">
+                    <button type="button" class="btn btn-lg btn-theme" data-toggle="modal" data-target="#update">Update PiPass</button>
+                  </p>
                 </div>
+                <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="Update PiPass" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="Update PiPass">Update PiPass</h4>
+                      </div>
+                      <div class="modal-body">
+                        Upgrading will stop PiPass and will require PiPass to be started again. Please allow for about 30 seconds for the upgrade process to complete. Are you sure you want to upgrade?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="update()">Update</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- END MODAL -->
               </div>
             </div>
           </div>

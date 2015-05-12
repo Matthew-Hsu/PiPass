@@ -29,8 +29,6 @@
 
         xmlHttp.open("POST","assets/php/refresh.php",true);
         xmlHttp.send();
-
-        alert("Refresh complete! - The current PiPass configuration is now being used.");
       }
     </script>
   </head>
@@ -118,8 +116,26 @@
                   When making changes to the Nintendo Zone list to use or to the PiPass settings, you'll need to refresh PiPass for those changes to take effect.
                 </p>
                 <div class="wrapper">
-                  <p class="centered"><button type="button" class="btn btn-lg btn-theme" onclick="refresh()">Refresh PiPass</button></p>
+                  <p class="centered">
+                    <button type="button" class="btn btn-lg btn-theme" data-toggle="modal" data-target="#refresh" onclick="refresh()">Refresh PiPass</button>
+                  </p>
                 </div>
+                <div class="modal fade" id="refresh" tabindex="-1" role="dialog" aria-labelledby="Refresh PiPass" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="Refresh PiPass">Refresh PiPass</h4>
+                      </div>
+                      <div class="modal-body">
+                        The current PiPass configuration is now being used.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- END MODAL -->
               </div>
             </div>
           </div>

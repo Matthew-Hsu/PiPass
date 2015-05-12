@@ -29,8 +29,6 @@
 
         xmlHttp.open("POST","assets/php/start.php",true);
         xmlHttp.send();
-
-        alert("Starting PiPass! - Please wait a few seconds for the services to fully start.");
       }
     </script>
   </head>
@@ -118,8 +116,26 @@
                   This will start PiPass. Starting PiPass will immediately terminate any prior instance of PiPass before starting up.
                 </p>
                 <div class="wrapper">
-                  <p class="centered"><button type="button" class="btn btn-lg btn-theme" onclick="start()">Start PiPass</button></p>
+                  <p class="centered">
+                    <button type="button" class="btn btn-lg btn-theme" data-toggle="modal" data-target="#start" onclick="start()">Start PiPass</button>
+                  </p>
                 </div>
+                <div class="modal fade" id="start" tabindex="-1" role="dialog" aria-labelledby="Start PiPass" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="Start PiPass">Start PiPass</h4>
+                      </div>
+                      <div class="modal-body">
+                        PiPass is starting up. Please wait a few seconds for the services to fully start up.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- END MODAL -->
               </div>
             </div>
           </div>
