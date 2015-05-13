@@ -17,6 +17,7 @@ PiPass sometimes does not display expected or up-to-date values. Chrome is known
 
 # Helpful Information
 <b>Switching WiFi Dongles</b>
+
 For those who like switching between different WiFi dongles, PiPass assumes that your main WiFi dongle is wlan0. I thought about making this name configurable, but I believe the Raspberry Pi should have a relatively clean list of WiFi dongles that are actually being used. If you will be switching between different WiFi dongles on the same installation of PiPass, it is recommended that you run the following command on your Raspberry Pi:
 
   ->  rm /etc/udev/rules.d/70-persistent-net.rules
@@ -24,6 +25,7 @@ For those who like switching between different WiFi dongles, PiPass assumes that
 I could make PiPass do this automatically, but it is a command that should not be ran consistently and to be only used when troubleshooting. A good use case for this would be that you tried using a incompatible WiFi dongle and then moved onto a WiFi dongle that was compatible. Between this transition, it would be good to run this command and restart your Raspberry Pi with your new WiFi dongle plugged in.
 
 <b>RTL8188CUS Chipset</b>
+
 Many people have been trying to get the RTL8188CUS chipset to work with PiPass. To my understanding, RTL8188CUS is problematic with Homepass in general. That means that the RTL8188CUS chipset has problems with other Homepass solutions. There are guides that help you make a RTL8188CUS chipset into an access point, but it just fails short in getting Homepass to work. 
 
 If others have successfully gotten the RTL8188CUS chipset to work, please let me know because I do not own this chipset to help others troubleshoot.
