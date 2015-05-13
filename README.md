@@ -26,7 +26,7 @@ I could make PiPass do this automatically, but it is a command that should not b
 
 <b>RTL8188CUS Chipset</b>
 
-Many people have been trying to get the RTL8188CUS chipset to work with PiPass. To my understanding, RTL8188CUS is problematic with Homepass in general. That means that the RTL8188CUS chipset has problems with other Homepass solutions. There are guides that help you make a RTL8188CUS chipset into an access point, but it just fails short in getting Homepass to work. 
+Many people have been trying to get the RTL8188CUS chipset to work with PiPass. To my understanding, RTL8188CUS is problematic with Homepass in general. That means that the RTL8188CUS chipset has problems with other Homepass solutions. There are guides that help you make a RTL8188CUS chipset into an access point, but it just falls short in getting Homepass to work. 
 
 If others have successfully gotten the RTL8188CUS chipset to work, please let me know because I do not own this chipset to help others troubleshoot.
 
