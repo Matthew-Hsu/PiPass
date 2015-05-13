@@ -177,8 +177,8 @@ By default, PiPass will be a particular Nintendo Zone for 15 minutes, before mov
 
 If you want to manually advance PiPass to the next Nintendo Zone in the list, you can now. This gives greater control in how you Homepass.
 
-    ->  Click 'PiPass' in the dashboard.
-    ->  Click 'Advance'.
+    +  Click 'PiPass' in the dashboard.
+    +  Click 'Advance'.
 
 <b>Shuffle Nintendo Zones</b>
 
@@ -188,8 +188,8 @@ Like most of the settings, this feature can be enabled or disabled through the P
 
 PiPass can be updated through the dashboard. This will pull updates from the master branch and provide PiPass with 'bleeding edge' updates. Especially useful for those who are unfamiliar with Linux. Updating can be done by:
 
-    ->  Click 'PiPass' in the dashboard.
-    ->  Click 'Update'.
+    +  Click 'PiPass' in the dashboard.
+    +  Click 'Update'.
 
 Please allow for 30 seconds for all the updates to complete.
 
