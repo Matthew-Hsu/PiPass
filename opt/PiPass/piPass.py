@@ -91,7 +91,7 @@ def loadSettings():
 # Write PiPass status to DASHBOARD_INFO.
 def updateStatus():
     with io.open(DASHBOARD_INFO, 'w', encoding='utf-8') as f:
-        f.write(unicode('[{"gsx$ssid": {"$t": "Not Available."}, "gsx$mac": {"$t": "Not Available."}, "gsx$description": {"$t": "PiPass not running."}}]'))
+        f.write(unicode('[{"gsx$ssid": {"$t": "Not Available."}, "gsx$mac": {"$t": "Not Available."}, "gsx$description": {"$t": "PiPass is not running."}}]'))
 
     return None
 

@@ -6,7 +6,6 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta http-equiv="refresh" content="60">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="PiPass Dashboard for the Raspberry Pi">
     <meta name="author" content="Matthew Hsu">
@@ -111,61 +110,67 @@
                 <h4><i class="fa fa-angle-right"></i> Spoofing Status</h4>
                 <section id="unseen">
                   <script>
-                    $.getJSON("assets/json/current_state.json",
-                    function displayContent(json)
+                    setInterval(function refresh()
                     {
-                      var pre_html = '<table class="table table-bordered table-striped table-condensed"><thead><tr><th>MAC Address</th><th>SSID</th><th>Description</th></tr></thead><tbody>';
-                      var actual_html='';
-                      var post_html = '</tbody></table>'
-                      var len = json.length
-
-                      for (var i=0; i<len; i++) 
+                      $.getJSON("assets/json/current_state.json",
+                      function displayContent(json)
                       {
-                        actual_html += [
-                        '<tr><td>', 
-                        json[i].gsx$mac.$t, 
-                        '</td><td>',   
-                        json[i].gsx$ssid.$t, 
-                        '</td><td>',
-                        json[i].gsx$description.$t, 
-                        '</td></tr>',
-                        ].join('');  
-                      }
+                        var pre_html = '<table class="table table-bordered table-striped table-condensed"><thead><tr><th>MAC Address</th><th>SSID</th><th>Description</th></tr></thead><tbody>';
+                        var actual_html='';
+                        var post_html = '</tbody></table>';
+                        var len = json.length;
 
-                      document.getElementById('unseen').innerHTML = pre_html + actual_html + post_html
-                    });
+                        for (var i=0; i<len; i++) 
+                        {
+                          actual_html += [
+                          '<tr><td>', 
+                          json[i].gsx$mac.$t, 
+                          '</td><td>',   
+                          json[i].gsx$ssid.$t, 
+                          '</td><td>',
+                          json[i].gsx$description.$t, 
+                          '</td></tr>',
+                          ].join('');  
+                        }
+
+                        document.getElementById('unseen').innerHTML = pre_html + actual_html + post_html;
+                      });
+
+                      return refresh;
+
+                    }(), 10000);
                   </script>
                 </section>
               </div><!-- /CONTENT-PANEL -->
             </div><!-- /COL-LG-12 -->     
           </div><!-- /ROW -->
           <div class="row mt">
-            <div class="col-lg-16">
-              <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="col-lg-13">
+              <div class="col-lg-3 col-md-3 col-sm-13">
                 <div class="dmbox">
                   <div class="service-icon">
                     <a class="" href="https://github.com/Matthew-Hsu/PiPass" target="_blank"><i class="dm-icon fa fa-github fa-5x"></i></a>
                   </div>
-                  <h4>About PiPass</h4>
+                  <h4>PiPass Home</h4>
                   <p>
-                    Visit the PiPass GitHub page for an in-depth guide and keep on top of the latest developmental news and updates.
+                    Visit the PiPass GitHub page for an in-depth guide and to keep up-to-date with the latest developmental news and updates.
                   </p>
                 </div>
               </div><!-- END DMBOX -->
 
-              <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="col-lg-3 col-md-3 col-sm-13">
                 <div class="dmbox">
                   <div class="service-icon">
                     <a class="" href="https://www.reddit.com/r/3DS/comments/303uxd/pipass_homepass_for_the_raspberry_pi/" target="_blank"><i class="dm-icon fa fa-comments fa-5x"></i></a>
                   </div>
                   <h4>Discuss PiPass</h4>
                   <p>
-                    Want to discuss your experience with PiPass with others? Discuss possible new features? Talk in the PiPass Reddit thread.
+                    Want to discuss your experience with PiPass with others? Talk about new features? Check out the PiPass Reddit thread.
                   </p>
                 </div>
               </div><!-- END DMBOX -->
 
-              <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="col-lg-3 col-md-3 col-sm-13">
                 <div class="dmbox">
                   <div class="service-icon">
                     <a class="" href="https://github.com/Matthew-Hsu/PiPass/issues" target="_blank"><i class="dm-icon fa fa-bug fa-5x"></i></a>
@@ -176,7 +181,42 @@
                   </p>
                 </div>
               </div><!-- END DMBOX -->
-            </div><!-- /COL-LG-16 -->
+
+              <div class="col-lg-3 col-md-3 col-sm-13">
+                <div class="dmbox">
+                  <div class="service-icon">
+                    <a class="" data-toggle="modal" data-target="#info"><i class="dm-icon fa fa-question fa-5x"></i></a>
+                  </div>
+                  <h4>About PiPass</h4>
+                  <p>
+                    This version of PiPass is based on PiPass 1.4 with the lovable additions and fixes from the PiPass master branch on GitHub.
+                  </p>
+                </div>
+                <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="About PiPass" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="About PiPass">About PiPass</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>Changelog 05/14/2015:</p>
+                        <ul>
+                          <li>[+] The PiPass version can now be viewed through the dashboard.</li>
+                          <li>[+] Changelogs are accessible through 'About PiPass' in the dashboard.</li>
+                          <li>[+] The dashboard only refreshes the 'Spoofing Status' table, instead of the entire page.</li>
+                          <li>[+] Removed automatic refresh of the 'Show Current' page. Not really necessary.</li>
+                          <li>[+] Minor rewording.</li>
+                        </ul>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- END MODAL -->
+              </div><!-- END DMBOX -->
+            </div><!-- /COL-LG-13 -->
           </div><!-- /ROW -->
         </section>
       </section>
