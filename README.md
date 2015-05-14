@@ -1,3 +1,14 @@
+# Master Branch Updates for 05/14/2015
+For those using PiPass 1.3 or PiPass 1.4, please use PiPass Update to receive the following updates:
+
+ * The PiPass version can now be viewed through the dashboard.
+ * Changelogs are accessible through 'About PiPass' in the dashboard.
+ * The dashboard only refreshes the 'Spoofing Status' table, instead of the entire page.
+ * Removed automatic refresh of the 'Show Current' page. Not really necessary.
+ * Minor rewording.
+
+Those who are on older versions can either manually update or use the pre-made PiPass 1.4 image and run PiPass Update after installation.
+
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine-tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
 
