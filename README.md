@@ -1,6 +1,10 @@
-# Master Branch Updates for 05/14/2015
+# Master Branch Updates for 05/16/2015
 For those using PiPass 1.3 or PiPass 1.4, please use PiPass Update to receive the following updates:
 
+ * PiPass now features a logging system that is accessible through the dashboard.
+ * piPass.py works with the logging system to diagnose issues. e.g., hostapd WiFi drivers.
+ * Scrollable modals.
+ * PiPass form validation PHP messages now conforms to responsive design and the user interface.
  * The PiPass version can now be viewed through the dashboard.
  * Changelogs are accessible through 'About PiPass' in the dashboard.
  * The dashboard only refreshes the 'Spoofing Status' table, instead of the entire page.
