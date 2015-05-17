@@ -49,7 +49,7 @@
               <!-- SIDEBAR MENU START -->
               <ul class="sidebar-menu" id="nav-accordion">
               
-                  <p class="centered"><img src="assets/img/mario.png" class="img-circle" width="60"></a></p>
+                  <p class="centered"><img src="assets/img/mario.png" class="img-circle" width="60"></p>
                   <h5 class="centered">Mario</h5>
                     
                   <li class="mt">
@@ -114,7 +114,7 @@
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">StreetPass Cycle Time (Minutes)</label>
                     <div class="col-sm-1">
-                        <input type="text" class="form-control" id="STREETPASS_CYCLE_MINUTES" name="STREETPASS_CYCLE_MINUTES" required>
+                        <input type="text" pattern="^0*[1-9]\d*$" title="StreetPass Cycle Time must be greater than 0 and a whole number." class="form-control" id="STREETPASS_CYCLE_MINUTES" name="STREETPASS_CYCLE_MINUTES" required>
                     </div>
                   </div>
                   <div class="form-group">
@@ -126,13 +126,14 @@
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">PiPass DB Key</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="GSX_KEY" name="GSX_KEY" required>
+                        <input type="text" title="PiPass DB Key is required." class="form-control" id="GSX_KEY" name="GSX_KEY" required>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">PiPass DB Worksheet</label>
                     <div class="col-sm-1">
-                        <input type="text" class="form-control" id="GSX_WORKSHEET" name="GSX_WORKSHEET" required>
+                        <input type="text" pattern="^0*[1-9]\d*$" title="PiPass DB Worksheet must be greater than 0 and a whole number."
+                        class="form-control" id="GSX_WORKSHEET" name="GSX_WORKSHEET" required>
                     </div>
                   </div>
                   <div class="form-group">
@@ -145,14 +146,14 @@
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Hostapd Driver</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" id="HOSTAPD_DRIVER" name="HOSTAPD_DRIVER" required>
+                        <input type="text" title="Hostapd Driver is required." class="form-control" id="HOSTAPD_DRIVER" name="HOSTAPD_DRIVER" required>
                         <p class="help-block">Default: nl80211</p>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Dashboard Path</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="DASHBOARD" name="DASHBOARD" placeholder="Enter the PiPass Dashboard install path..." required>
+                        <input type="text" title="Dashboard Path is required." class="form-control" id="DASHBOARD" name="DASHBOARD" placeholder="Enter the PiPass Dashboard install path..." required>
                         <p class="help-block">Default: /var/www/</p>
                     </div>
                   </div>
