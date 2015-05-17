@@ -161,11 +161,11 @@
               <div class="col-lg-3 col-md-3 col-sm-13">
                 <div class="dmbox">
                   <div class="service-icon">
-                    <a class="" href="https://www.reddit.com/r/3DS/comments/303uxd/pipass_homepass_for_the_raspberry_pi/" target="_blank"><i class="dm-icon fa fa-comments fa-5x"></i></a>
+                    <a class="" href="assets/php/pipass_logs.php"><i class="dm-icon fa fa-book fa-5x"></i></a>
                   </div>
-                  <h4>Discuss PiPass</h4>
+                  <h4>PiPass Logs</h4>
                   <p>
-                    Want to discuss your experience with PiPass with others? Talk about new features? Check out the PiPass Reddit thread.
+                    Want to check under the hood of PiPass? Trying to debug something? If so, check out the PiPass logs for a console view.
                   </p>
                 </div>
               </div><!-- END DMBOX -->
@@ -189,7 +189,7 @@
                   </div>
                   <h4>About PiPass</h4>
                   <p>
-                    This version of PiPass is based on PiPass 1.4 with the lovable additions and fixes from the PiPass master branch on GitHub.
+                    This version of PiPass is based on a potential PiPass 1.5 build. Design flow may change, but functionality is tested.
                   </p>
                 </div>
                 <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="About PiPass" aria-hidden="true">
@@ -200,6 +200,13 @@
                         <h4 class="modal-title" id="About PiPass">About PiPass</h4>
                       </div>
                       <div class="modal-body">
+                        <p>Changelog 05/16/2015:</p>
+                        <ul>
+                          <li>[+] PiPass now features a logging system that is accessible through the dashboard.</li>
+                          <li>[+] piPass.py works with the logging system to diagnose issues. e.g., hostapd WiFi drivers.</li>
+                          <li>[+] Scrollable modals.</li>
+                          <li>[+] PiPass form validation PHP messages now conforms to responsive design and the user interface.</li>
+                        </ul>
                         <p>Changelog 05/14/2015:</p>
                         <ul>
                           <li>[+] The PiPass version can now be viewed through the dashboard.</li>

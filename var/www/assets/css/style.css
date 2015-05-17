@@ -43,6 +43,14 @@ a, a:hover, a:focus {
 	color: white;
 }
 
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 150px;
+    overflow-y: auto;
+}
+
 .btn-round {
 	border-radius: 20px;
 	-webkit-border-radius: 20px;

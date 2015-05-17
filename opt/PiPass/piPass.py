@@ -2,21 +2,52 @@
 
 #### Imported Libraries ####
 
-from random import shuffle
-import subprocess
-import signal
-import urllib
-import json
-import time
+import os
 import io
+import time
+import json
+import urllib
+import signal
+import os.path
+import logging
+import subprocess
+import logging.handlers
+
+from random import shuffle
+
+#### Logging Support ####
+
+LOG_FILENAME = '/opt/PiPass/logs/piPass.log'
+
+# We only want to keep the log file of the current execution of PiPass.
+if os.path.isfile(LOG_FILENAME):
+    subprocess.call('sudo rm ' + LOG_FILENAME, stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
+
+# Set up a specific logger with the desired output level.
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# Add the log message handler to the logger.
+handler = logging.handlers.RotatingFileHandler(LOG_FILENAME, maxBytes=1048576, backupCount=0)
+
+# Create a logging format.
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+
+logger.addHandler(handler)
 
 #### Support Functions ####
 
 # Read and load the path to where the PiPass Dashboard is installed.
 def loadDashboard():
     # Read the settings.
-    with open('/opt/PiPass/config/pipass_dashboard.json', 'r') as f:
-        pipass_dashboard = json.load(f)
+    try:
+        with open('/opt/PiPass/config/pipass_dashboard.json', 'r') as f:
+            pipass_dashboard = json.load(f)
+    except IOError:
+        logger.error('Unable to read the file: /opt/PiPass/config/pipass_dashboard.json.')
+        updateStatus()
+        exit(1)
 
     # Controls the location to where the PiPass Dashboard is installed.
     global DASHBOARD
@@ -25,23 +56,33 @@ def loadDashboard():
         DASHBOARD = pipass_dashboard['DASHBOARD']
     except KeyError:
         DASHBOARD = "/var/www/"
+        logger.warning('Missing the DASHBOARD key in: /opt/PiPass/config/pipass_dashboard.json. Defaulting to: ' + DASHBOARD + '.')
 
     return None
 
 # Read and load settings stored in {DASHBOARD}assets/json/pipass_config.json.
 def loadSettings():
     # Read the settings.
-    with open(DASHBOARD + 'assets/json/pipass_config.json', 'r') as f:
-        pipass_config = json.load(f)
-        
+    try:
+        with open(DASHBOARD + 'assets/json/pipass_config.json', 'r') as f:
+            pipass_config = json.load(f)
+    except IOError:
+        logger.error('Unable to read the file: ' + DASHBOARD + 'assets/json/pipass_config.json.')
+        updateStatus()
+        exit(1)
+
     # Controls the minutes between each Nintendo Zone cycle.
     global STREETPASS_CYCLE_MINUTES
 
     try:
         STREETPASS_CYCLE_MINUTES = int(pipass_config['STREETPASS_CYCLE_MINUTES'])
-    except (KeyError, ValueError):
+    except KeyError:
         STREETPASS_CYCLE_MINUTES = 15
-
+        logger.warning('Missing the STREETPASS_CYCLE_MINUTES key in: ' + DASHBOARD + 'assets/json/pipass_config.json. Defaulting to: ' + str(STREETPASS_CYCLE_MINUTES) + '.')
+    except ValueError:
+        STREETPASS_CYCLE_MINUTES = 15
+        logger.warning('Invalid value for the STREETPASS_CYCLE_MINUTES key in: ' + DASHBOARD + 'assets/json/pipass_config.json. Defaulting to: ' + str(STREETPASS_CYCLE_MINUTES) + '.')
+    
     # Converting STREETPASS_CYCLE_MINUTES to seconds.
     global STREETPASS_CYCLE_SECONDS
     STREETPASS_CYCLE_SECONDS = STREETPASS_CYCLE_MINUTES * 60
@@ -53,6 +94,7 @@ def loadSettings():
         PIPASS_SHUFFLE = pipass_config['PIPASS_SHUFFLE']
     except KeyError:
         PIPASS_SHUFFLE = "off"
+        logger.warning('Missing the PIPASS_SHUFFLE key in: ' + DASHBOARD + 'assets/json/pipass_config.json. Defaulting to: ' + PIPASS_SHUFFLE + '.')
 
     # The Google Spreadsheet's KEY that is used for PIPASS_DB.
     global GSX_KEY
@@ -61,6 +103,7 @@ def loadSettings():
         GSX_KEY = pipass_config['GSX_KEY']
     except KeyError:
         GSX_KEY = "1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M"
+        logger.warning('Missing the GSX_KEY key in: ' + DASHBOARD + 'assets/json/pipass_config.json. Defaulting to: ' + GSX_KEY + '.')
 
     # The Google Spreadsheet's WORKSHEET that is used for PIPASS_DB.
     global GSX_WORKSHEET
@@ -69,6 +112,7 @@ def loadSettings():
         GSX_WORKSHEET = pipass_config['GSX_WORKSHEET']
     except KeyError:
         GSX_WORKSHEET = "2"
+        logger.warning('Missing the GSX_WORKSHEET key in: ' + DASHBOARD + 'assets/json/pipass_config.json. Defaulting to: ' + GSX_WORKSHEET + '.')
 
     # Constructs the URL where the Google Spreadsheet is located for the
     # Nintendo Zone information. Refer to README at
@@ -85,13 +129,18 @@ def loadSettings():
         HOSTAPD_DRIVER = pipass_config['HOSTAPD_DRIVER']
     except KeyError:
         HOSTAPD_DRIVER = "nl80211"
+        logger.warning('Missing the HOSTAPD_DRIVER key in: ' + DASHBOARD + 'assets/json/pipass_config.json. Defaulting to: ' + HOSTAPD_DRIVER + '.')
 
     return None
 
 # Write PiPass status to DASHBOARD_INFO.
 def updateStatus():
-    with io.open(DASHBOARD_INFO, 'w', encoding='utf-8') as f:
-        f.write(unicode('[{"gsx$ssid": {"$t": "Not Available."}, "gsx$mac": {"$t": "Not Available."}, "gsx$description": {"$t": "PiPass is not running."}}]'))
+    try:
+        with io.open(DASHBOARD_INFO, 'w', encoding='utf-8') as f:
+            f.write(unicode('[{"gsx$ssid": {"$t": "Not Available."}, "gsx$mac": {"$t": "Not Available."}, "gsx$description": {"$t": "PiPass is not running."}}]'))
+    except IOError:
+        logger.error('Unable to write the file: ' + DASHBOARD_INFO + '.')
+        exit(1)
 
     return None
 
@@ -111,7 +160,7 @@ def sigQuit(signum, stack):
     global doExecute
     doExecute = False
 
-    print("\n< Stop Detected! - PiPass is shutting down. >\n")
+    logger.info('Stop Detected - PiPass is shutting down.')
 
     return None
 
@@ -123,7 +172,7 @@ def sigUsr1(signum, stack):
     loadDashboard()
     loadSettings()
 
-    print("\n< Update Detected! - Using the updated configuration. >\n")
+    logger.info('Refresh Detected - Using the updated PiPass configuration.')
 
     return None
 
@@ -135,7 +184,7 @@ def sigUsr2(signum, stack):
     global start
     start = 0
 
-    print("\n< Advance Detected! - Advancing to the next Nintendo Zone. >\n")
+    logger.info('Advance Detected - Advancing to the next Nintendo Zone.')
 
     return None
 
@@ -180,20 +229,29 @@ clearVisits = True
 
 #### PiPass Main #####
 
-print("[ PiPass - Homepass for the Nintendo 3DS ]\n")
-
 # Lighting the beacons...
 signal.signal(signal.SIGQUIT, sigQuit)
 signal.signal(signal.SIGUSR1, sigUsr1)
 signal.signal(signal.SIGUSR2, sigUsr2)
 
-print("> PiPass is currently running...")
+logger.info('PiPass is now running.')
 
 # PiPass will keep running until it is requested to stop.
 while doExecute:
     # Load the Nintendo Zone information from PIPASS_DB.
-    response = urllib.urlopen(PIPASS_DB)
-    results = json.loads(response.read())
+    try:
+        response = urllib.urlopen(PIPASS_DB)
+    except Exception:
+        logger.error('Unable to read the URL: ' + PIPASS_DB + '.')
+        updateStatus()
+        exit(1)
+
+    try:
+        results = json.loads(response.read())
+    except ValueError:
+        logger.error('Unable to parse the JSON in: ' + PIPASS_DB + '.')
+        updateStatus()
+        exit(1)
     
     # Shall we shuffle the Nintendo Zone list?
     if PIPASS_SHUFFLE == "on":
@@ -201,8 +259,13 @@ while doExecute:
         shuffle(results['feed']['entry'])
 
     # Write the current list being used to CURRENT_LIST.
-    with io.open(CURRENT_LIST, 'w', encoding='utf-8') as f:
-        f.write(unicode(json.dumps(results, ensure_ascii=False)))
+    try:
+        with io.open(CURRENT_LIST, 'w', encoding='utf-8') as f:
+            f.write(unicode(json.dumps(results, ensure_ascii=False)))
+    except IOError:
+        logger.error('Unable to write the file: ' + CURRENT_LIST + '.')
+        updateStatus()
+        exit(1)
 
     # The index of the current Nintendo Zone we are visiting.
     currentZoneIndex = 0
@@ -222,9 +285,6 @@ while doExecute:
 
             break
 
-        # Write the current zone information to NETWORK_CONFIGURATION.
-        fo = open(NETWORK_CONFIGURATION, "w")
-
         # Loop variables to store Nintendo Zone information.
         zoneValues = [' ',' ',' ']
         zoneValueIndex = 0
@@ -243,6 +303,7 @@ while doExecute:
         # If the Nintendo Zone was visited too recently, skip it.
         try:
             if time.time() - zoneVisits[visit] < STREETPASS_VISIT_INTERVAL:
+                logger.info('Recent Zone Detected - Trying the next Nintendo Zone.')
                 continue
         except KeyError:
             pass
@@ -250,28 +311,49 @@ while doExecute:
         # A usable Nintendo Zone was found, so visits should not get cleared on the next pass.
         clearVisits = False
 
-        # Note the current time for the current visit to the Nintendo Zone.
-        zoneVisits[visit] = time.time()
-
+        # Write the current zone information to NETWORK_CONFIGURATION.
+        try:
+            fo = open(NETWORK_CONFIGURATION, "w")
+        except IOError:
+            logger.error('Unable to write the file: ' + NETWORK_CONFIGURATION + '.')
+            updateStatus()
+            exit(1)
+        
         conf = "interface=wlan0\nbridge=br0\ndriver=" + HOSTAPD_DRIVER + "\nssid=" + zoneValues[0] + "\nbssid=" + zoneValues[1] + "\nhw_mode=g\nchannel=6\nauth_algs=1\nwpa=0\nmacaddr_acl=1\naccept_mac_file=/etc/hostapd/mac_accept\nwmm_enabled=0\nignore_broadcast_ssid=0"
 
         fo.write(conf)
         fo.close()
 
+        # Restart hostapd to ensure NETWORK_CONFIGURATION is used. Restarting hostapd will also ensure that it is running if it is currently off.
+        # subprocess.call() will wait for the service command to finish before moving on.
+        subprocess.call('sudo service hostapd restart', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
+
+        # Verify that hostapd is running. If it is not, there is possibly a WiFi driver issue.
+        hostapdState = subprocess.check_output(['ps', '-A'])
+
+        if 'hostapd' not in hostapdState:
+            logger.critical('Unable to start hostapd.')
+            updateStatus()
+            exit(1)
+
+        # Note the current time for the current visit to the Nintendo Zone.
+        zoneVisits[visit] = time.time()
+
         # Nintendo Zone identity acquired for PiPass spoofing.
-        print("> Spoofing as " + zoneValues[1] + " on " + zoneValues[0] + " ( " + zoneValues[2] + " ) for " + str(STREETPASS_CYCLE_MINUTES) + " minute(s).")
+        logger.info('Spoofing as ' + zoneValues[1] + ' on ' + zoneValues[0] + ' ( ' + zoneValues[2] + ' ) for ' + str(STREETPASS_CYCLE_MINUTES) + ' minute(s).')
 
         # Write PiPass status to DASHBOARD_INFO.
-        with io.open(DASHBOARD_INFO, 'w', encoding='utf-8') as f:
-            f.write(unicode('['))
-            f.write(unicode(json.dumps(results['feed']['entry'][currentZoneIndex], ensure_ascii=False)))
-            f.write(unicode(']'))
+        try:
+            with io.open(DASHBOARD_INFO, 'w', encoding='utf-8') as f:
+                f.write(unicode('['))
+                f.write(unicode(json.dumps(results['feed']['entry'][currentZoneIndex], ensure_ascii=False)))
+                f.write(unicode(']'))
+        except IOError:
+            logger.error('Unable to write the file: ' + DASHBOARD_INFO + '.')
+            updateStatus()
+            exit(1)
 
         currentZoneIndex = currentZoneIndex + 1
-
-        # Restart hostapd to ensure NETWORK_CONFIGURATION is used and pause for STREETPASS_CYCLE_MINUTES until moving onto the next Nintendo Zone.
-        # Restarting hostapd will also ensure that it is running if it is currently off.
-        subprocess.Popen('sudo service hostapd restart', shell=True, stdout=subprocess.PIPE)
 
         # Receiving SIGUSR1 or SIGUSR2 will interrupt the time.sleep call. The loop allows
         # for sleep to be resumed up to the current cycle setting.
@@ -279,6 +361,6 @@ while doExecute:
         while time.time() - start < STREETPASS_CYCLE_SECONDS:
             time.sleep(5)
 
-print("> PiPass has been shutdown successfully.")
+logger.info('PiPass has been shutdown successfully.')
 
 exit(0)
