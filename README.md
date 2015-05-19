@@ -1,4 +1,6 @@
-# Master Branch Updates for 05/16/2015
+# Status Updates for 05/18/2015
+<b>PiPass Master Branch Changes</b>
+
 For those using PiPass 1.3 or PiPass 1.4, please use PiPass Update to receive the following updates:
 
  * PiPass now features a logging system that is accessible through the dashboard.
@@ -12,6 +14,10 @@ For those using PiPass 1.3 or PiPass 1.4, please use PiPass Update to receive th
  * Minor rewording.
 
 Those who are on older versions can either manually update or use the pre-made PiPass 1.4 image and run PiPass Update after installation.
+
+<b>Miscellaneous</b>
+
+ * The RTL8188CUS chipset may have a working solution now. Please refer to the 'Helpful Information' section down below.
 
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine-tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
@@ -41,9 +47,9 @@ I could make PiPass do this automatically, but it is a command that should not b
 
 <b>RTL8188CUS Chipset</b>
 
-Many people have been trying to get the RTL8188CUS chipset to work with PiPass. To my understanding, RTL8188CUS is problematic with Homepass in general. That means that the RTL8188CUS chipset has problems with other Homepass solutions. There are guides that help you make a RTL8188CUS chipset into an access point, but it just falls short in getting Homepass to work. 
+Many people have been trying to get the RTL8188CUS chipset to work with PiPass. There is a thread found in my issue list that has a discussion where someone was able to get the RTL8188CUS working with PiPass.
 
-If others have successfully gotten the RTL8188CUS chipset to work, please let me know because I do not own this chipset to help others troubleshoot.
+Please refer here for more information: <a href="https://github.com/Matthew-Hsu/PiPass/issues/20" target="_blank">Issue #20</a>. I haven't tried this method yet, but I will see what I can do to integrate it with the pre-made images and also provide a guide on how to get it working.
 
 # Testing Environment
 Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A -=new=- Nintendo 3DS XL with the 9.7.0-25U firmware was used to verify functionality of 'Homepass'.
