@@ -21,11 +21,14 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
 
-    <!-- CALLS UPDATE.PHP TO EXECUTE SERVER SIDE COMMANDS -->
+    <!-- CALLS RESET_NETWORK.PHP TO EXECUTE SERVER SIDE COMMANDS -->
     <script>
-      function update()
+      function reset()
       {
-        window.location.href = "assets/php/update.php";
+        var xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.open("POST","assets/php/reset_network.php",true);
+        xmlHttp.send();
       }
     </script>
   </head>
@@ -61,7 +64,7 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
+                      <a href="javascript:;" >
                           <i class="fa fa-desktop"></i>
                           <span>PiPass</span>
                       </a>
@@ -71,7 +74,7 @@
                           <li><a  href="advance_pi_pass.html">Advance</a></li>
                           <li><a  href="refresh_pi_pass.html">Refresh</a></li>
                           <li><a  href="settings.html">Settings</a></li>
-                          <li class="active"><a  href="update_pi_pass.html">Update</a></li>
+                          <li><a  href="update_pi_pass.html">Update</a></li>
                       </ul>
                   </li>
 
@@ -87,12 +90,12 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a class="active" href="javascript:;" >
                           <i class="fa fa-cogs"></i>
                           <span>Raspberry Pi</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="reset_network.html">Reset Network</a></li>
+                          <li class="active"><a  href="reset_network.html">Reset Network</a></li>
                           <li><a  href="restart_pi.html">Restart</a></li>
                           <li><a  href="shutdown_pi.html">Shutdown</a></li>
                       </ul>
@@ -106,32 +109,35 @@
       <!-- MAIN CONTENT START -->
       <section id="main-content">
         <section class="wrapper site-min-height">
-          <h3><i class="fa fa-angle-right"></i> Update</h3>
+          <h3><i class="fa fa-angle-right"></i> Reset Network</h3>
           <div class="row mt">
             <div class="col-lg-12">
               <div class="showback">
                 <p>
-                  This will update PiPass to the latest version on GitHub. These are "bleeding edge" updates and will contain features and bug fixes before
-                  an official release.
+                  This will force your Raspberry Pi to re-detect and reconfigure all Ethernet and Wifi devices. If you will be switching to
+                  different WiFi dongles on the same installation of PiPass, please ensure that you reset the network beforehand. PiPass
+                  uses your very first installed WiFi dongle, so if you want PiPass to use another one instead, please remove all WiFi
+                  dongles connected to your Raspberry Pi and ensure that the one you want to use is currently connected.
                 </p>
                 <div class="wrapper">
                   <p class="centered">
-                    <button type="button" class="btn btn-lg btn-theme" data-toggle="modal" data-target="#update">Update PiPass</button>
+                    <button type="button" class="btn btn-lg btn-theme" data-toggle="modal" data-target="#reset">Reset Network</button>
                   </p>
                 </div>
-                <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="Update PiPass" aria-hidden="true">
+                <div class="modal fade" id="reset" tabindex="-1" role="dialog" aria-labelledby="Reset Network" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="Update PiPass">Update PiPass</h4>
+                        <h4 class="modal-title" id="Reset Network">Reset Network</h4>
                       </div>
                       <div class="modal-body">
-                        Upgrading will stop PiPass and will require PiPass to be started again. Please allow for about 30 seconds for the upgrade process to complete. Are you sure you want to upgrade?
+                        Reseting the network will stop PiPass and restart your Raspberry Pi. Any unsaved changes will be lost. Are you sure
+                        you want to reset the network?
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" onclick="update()">Update</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="reset()">Reset</button>
                       </div>
                     </div>
                   </div>
@@ -147,7 +153,7 @@
       <footer class="site-footer">
           <div class="text-center">
               <b>"It's a me, Mario!"</b>
-              <a href="update_pi_pass.html#" class="go-top">
+              <a href="reset_network.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
