@@ -110,30 +110,36 @@
               <div class="content-panel">
                 <h4><i class="fa fa-angle-right"></i> Homepass Zones</h4>
                 <section id="unseen">
-                  <script> 
-                    $.getJSON("assets/json/current_list.json",
-                    function displayContent(json)
+                  <script>
+                    setInterval(function refresh()
                     {
-                      var pre_html = '<table class="table table-bordered table-striped table-condensed"><thead><tr><th>MAC Address</th><th>SSID</th><th>Description</th></tr></thead><tbody>';
-                      var actual_html='';
-                      var post_html = '</tbody></table>'
-                      var len = json.feed.entry.length
-
-                      for (var i=0; i<len; i++) 
+                      $.getJSON("assets/json/current_list.json",
+                      function displayContent(json)
                       {
-                        actual_html += [
-                        '<tr><td>', 
-                        json.feed.entry[i].gsx$mac.$t, 
-                        '</td><td>',   
-                        json.feed.entry[i].gsx$ssid.$t, 
-                        '</td><td>',
-                        json.feed.entry[i].gsx$description.$t, 
-                        '</td></tr>',
-                        ].join('');  
-                      }
+                        var pre_html = '<table class="table table-bordered table-striped table-condensed"><thead><tr><th>MAC Address</th><th>SSID</th><th>Description</th></tr></thead><tbody>';
+                        var actual_html='';
+                        var post_html = '</tbody></table>';
+                        var len = json.feed.entry.length;
 
-                      document.getElementById('unseen').innerHTML = pre_html + actual_html + post_html
-                    });   
+                        for (var i=0; i<len; i++) 
+                        {
+                          actual_html += [
+                          '<tr><td>', 
+                          json.feed.entry[i].gsx$mac.$t, 
+                          '</td><td>',   
+                          json.feed.entry[i].gsx$ssid.$t, 
+                          '</td><td>',
+                          json.feed.entry[i].gsx$description.$t, 
+                          '</td></tr>',
+                          ].join('');  
+                        }
+
+                        document.getElementById('unseen').innerHTML = pre_html + actual_html + post_html;
+                      });
+
+                      return refresh;
+
+                    }(), 60000);
                   </script>
                 </section>
               </div><!-- /CONTENT-PANEL -->
