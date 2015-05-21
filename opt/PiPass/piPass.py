@@ -76,6 +76,10 @@ def loadSettings():
 
     try:
         STREETPASS_CYCLE_MINUTES = int(pipass_config['STREETPASS_CYCLE_MINUTES'])
+
+        if STREETPASS_CYCLE_MINUTES < 1:
+            STREETPASS_CYCLE_MINUTES = 30
+            logger.warning('The value for the STREETPASS_CYCLE_MINUTES key in: ' + DASHBOARD + 'assets/json/pipass_config.json is less than one. Defaulting to: ' + str(STREETPASS_CYCLE_MINUTES) + '.')
     except KeyError:
         STREETPASS_CYCLE_MINUTES = 30
         logger.warning('Missing the STREETPASS_CYCLE_MINUTES key in: ' + DASHBOARD + 'assets/json/pipass_config.json. Defaulting to: ' + str(STREETPASS_CYCLE_MINUTES) + '.')
