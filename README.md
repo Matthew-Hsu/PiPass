@@ -1,63 +1,35 @@
-# Status Updates for 05/19/2015
-<b>PiPass Master Branch Changes</b>
-
-For those using PiPass 1.3 or PiPass 1.4, please use PiPass Update to receive the following updates:
-
- * PiPass can now reset the network through the dashboard.
- * PiPass now features a logging system that is accessible through the dashboard.
- * piPass.py works with the logging system to diagnose issues. e.g., hostapd WiFi drivers.
- * Scrollable modals.
- * PiPass form validation PHP messages now conforms to responsive design and the user interface.
- * The PiPass version can now be viewed through the dashboard.
- * Changelogs are accessible through 'About PiPass' in the dashboard.
- * The dashboard only refreshes the 'Spoofing Status' table, instead of the entire page.
- * Removed automatic refresh of the 'Show Current' page. Not really necessary.
- * Minor rewording.
-
-Those who are on older versions can either manually update or use the pre-made PiPass 1.4 image and run PiPass Update after installation.
-
-<b>Miscellaneous</b>
-
- * The RTL8188CUS chipset may have a working solution now. Please refer to the 'Helpful Information' section down below.
-
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine-tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
 
-This does not showcase a complete list of features, but it gives a sense in what PiPass looks like: <a href="https://www.youtube.com/watch?v=ttoDlpEBqBU" target="_blank">PiPass Video Overview</a>.
+This does not showcase a complete list of features, but it gives a sense in what PiPass looks like: <a href="https://www.youtube.com/watch?v=ttoDlpEBqBU" target="_blank">PiPass Video Overview</a>. The video shown is based on PiPass 1.4, however the general work-flow is relatively the same as in PiPass 1.5 with some minor differences.
     
-# What's New in Version 1.4
-PiPass 1.4 focuses on customization by empowering the dashboard with methods to do so. The goal was to minimize or completely remove the need to remote in your Raspberry Pi. This version also includes polish to the user interface and generally tightens up the dashboard into a visually appealing and smooth user interaction. The following changes were implemented in this version:
+# What's New in Version 1.5
+PiPass 1.5 focuses on overall polish and being informative about what is exactly going on "behind the scenes". The biggest feature addition is the logging system that provides extra information regarding status and it also aids in troubleshooting. The changelog for this version of PiPass is as follows:
 
-  * The PiPass Dashboard can now be used to add authenticated Nintendo 3DS systems. A wireless access point should have some form of security and by implementing an interface for this, performing this step is very easy. Please note that you should enter each MAC address on a separate line and in the format of XX:XX:XX:XX:XX:XX.
-  * The PiPass Dashboard went all modals. Prompt boxes now conform to the general theme of PiPass and just makes using PiPass more pleasant and seamless.
-  * General user interface improvements to descriptions and more helpful information regarding the project.
-  * PiPass Settings and PiPass Update have been improved to be smarter and more helpful in case of incorrect actions.
-  * <b>ADVANCED USERS:</b> The PiPass Dashboard can now be configured to use a different installation path in case there are those who use a different directory structure or another web server.
+* PiPass now features a logging system that is accessible through the dashboard.
+* piPass.py works with the logging system to diagnose issues. e.g., hostapd WiFi drivers.
+* PiPass can now reset the network through the dashboard.
+* PiPass PHP form validation messages now conforms to responsive design and the user interface.
+* The PiPass version can now be viewed through the dashboard.
+* Changelogs are accessible through 'About PiPass' in the dashboard.
+* The dashboard only refreshes the 'Spoofing Status' and the 'Show Current' table, instead of the entire page.
+* Scrollable modals.
+* Minor rewording.
+* Minor tweaks.
 
 # Known Behaviours
 PiPass sometimes does not display expected or up-to-date values. Chrome is known to be finicky with this and will NOT cause issues with PiPass. When in doubt, manually refresh your browser. This is related to browser caching and users have not reported any caching issues with Safari and Internet Explorer.
 
 # Helpful Information
-<b>Switching WiFi Dongles</b>
-
-For those who like switching between different WiFi dongles, PiPass assumes that your main WiFi dongle is wlan0. I thought about making this name configurable, but I believe the Raspberry Pi should have a relatively clean list of WiFi dongles that are actually being used. If you will be switching between different WiFi dongles on the same installation of PiPass, it is recommended that you run the following command on your Raspberry Pi:
-
-    ->  rm /etc/udev/rules.d/70-persistent-net.rules
-    
-Likewise, if you run PiPass Update, you will get a new version of PiPass that is able to do this through the dashboard. This feature can be found under "Raspberry Pi" and is called "Reset Network".
-
-I could make PiPass do this automatically, but it is a command that should not be ran consistently and to be only used when troubleshooting. A good use case for this would be that you tried using a incompatible WiFi dongle and then moved onto a WiFi dongle that was compatible. Between this transition, it would be good to run this command and restart your Raspberry Pi with your new WiFi dongle plugged in.
 
 <b>RTL8188CUS Chipset</b>
 
-Many people have been trying to get the RTL8188CUS chipset to work with PiPass. There is a thread found in my issue list that has a discussion where someone was able to get the RTL8188CUS working with PiPass.
-
-Please refer here for more information: <a href="https://github.com/Matthew-Hsu/PiPass/issues/20" target="_blank">Issue #20</a>. I haven't tried this method yet, but I will see what I can do to integrate it with the pre-made images and also provide a guide on how to get it working.
+Many people have been trying to get the RTL8188CUS chipset to work with PiPass and with other Homepass solutions as well. There is a <a href="https://github.com/Matthew-Hsu/PiPass/issues/20" target="_blank">thread</a> found in my issue list that has a discussion where someone was able to get the RTL8188CUS working with PiPass. It will require a bit of Linux knowledge to follow and so far many others have not been able to reproduce the workaround. Due to this, it is still recommended to purchase a compatible WiFi dongle that is known to work.
 
 # Testing Environment
 Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A -=new=- Nintendo 3DS XL with the 9.7.0-25U firmware was used to verify functionality of 'Homepass'.
 
-PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, and Atheros AR5007UG chipsets. The WiFi chipset that I tested on was the Ralink RT5370. These chipsets were tested to be working for 'Homepass', so I've loaded the drivers for these other chipsets as well.
+PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, Atheros AR5007UG, and Realtek chipsets. The WiFi chipset that I tested on was the Ralink RT5370.
 
 # Installation
 PiPass can be installed by downloading a pre-made image for your Raspberry Pi 2 or by downloading the source files here on GitHub and setting it up manually. Manual setup will be more work, but it has the advantage of being able to use PiPass on most Linux based operating systems that are not just limited to the Raspberry Pi.
@@ -96,7 +68,7 @@ The PiPass image uses your router's DHCP to handle the networking aspect. If you
 
 Generally speaking, if hostapd services are running, you should be OK. If you have a mobile device or a computer with WiFi, check to see any available networks. If the SSID of "attwifi" or "NZ@McD1" show up, you are in luck. If both these things look good, your 3DS could have some StreetPasses already.
 
-If things don't look good, there could be some issues with your WiFi driver. PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, and Atheros AR5007UG chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point".
+If things don't look good, there could be some issues with your WiFi driver. PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, Atheros AR5007UG, and Realtek chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point".
 
 If problems persist, refer to the manual guide down below for some extra help. If it is a driver problem, there might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to use the PiPass Dashboard to configure the correct driver:
 
@@ -119,7 +91,7 @@ Here is a list of dependencies needed for PiPass, so install the following packa
     ->  sudo apt-get install bridge-utils -y
     ->  sudo apt-get install p7zip-full -y
 
-Download PiPass from the 1.4 branch as a zip file and extract the contents on your local machine. You will notice three directories inside PiPass: etc, opt, and var. These three directories are the locations where you want to install PiPass (e.g., Linux root locations would be /etc/, /opt/, and /var/). Go ahead and merge the directories and it will be safe to overwrite the files with PiPass' configuration files.
+Download PiPass from the 1.5 branch as a zip file and extract the contents on your local machine. You will notice three directories inside PiPass: etc, opt, and var. These three directories are the locations where you want to install PiPass (e.g., Linux root locations would be /etc/, /opt/, and /var/). Go ahead and merge the directories and it will be safe to overwrite the files with PiPass' configuration files.
 
 For security sake, PiPass will only work on the Nintendo 3DS systems that you authorize. Access the PiPass Dashboard by opening up a web browser on a device of your choice and enter your Raspberry Pi's IP address into the address bar. The PiPass Dashboard should be displayed. Go to your Nintendo 3DS and open up your connection settings to find out your 3DS' MAC address. Once you have your MAC address, you can add it to the authenticated list by doing the following:
 
@@ -164,7 +136,16 @@ Semperverus' guide is a excellent resource for troubleshooting. With luck, you s
 The PiPass Dashboard can be accessed on a device on your network by typing in your Raspberry Pi's IP address on your computer's or mobile device's browser. Most of what you need can be accessed through the Dashboard, including the ability to configure PiPass.
 
 # PiPass Customization
-<b>Customizing Database Source</b>
+
+<b>StreetPass Cycle Time</b>
+
+By default, PiPass will be a particular Nintendo Zone for 30 minutes, before moving onto the next one. This should give you enough time to play all the mini-games before you get your next batch. If this time is too long or too short for you, you can edit this setting through the PiPass Dashboard.
+
+<b>Shuffle Zones</b>
+
+Like most of the settings, this feature can be enabled or disabled through the PiPass Dashboard. Enabling shuffling will visit Nintendo Zones in your current list in random order, ensuring that each pass-through is different.
+
+<b>Database Source Customization</b>
 
 The baseline database will use the Nintendo Zones worksheet found on FatMagic's database. This section will show you how to set up a custom source where you can easily define multiple custom configurations and load them on demand.
 
@@ -193,29 +174,32 @@ The KEY would be the value 1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M between 
 
 Now you will need to enter the worksheet you want to use. "PiPass DB Worksheet" controls which worksheet to use. The default value of 1 selects the very first worksheet and the value of 2 selects the second worksheet. For example, setting PiPass DB Worksheet to the value of 2 would use the "nintendo_zones" worksheet in the templated spreadsheet that you just copied.
 
-<b>PiPass Nintendo Zone Cycle Time</b>
+<b>3DS Authentication</b>
 
-By default, PiPass will be a particular Nintendo Zone for 15 minutes, before moving onto the next one. This should give you enough time to play all the mini-games before you get your next batch. If this time is too long or too short for you, you can edit this setting through the PiPass Dashboard.
+The authenticated list of 3DS systems that are allowed to connect to PiPass. Enter the 3DS MAC addresses on a separate line and in the format of XX:XX:XX:XX:XX:XX. This option can be found through the dashboard.
 
-<b>Advance PiPass</b>
+<b>Hostapd Driver</b>
 
-If you want to manually advance PiPass to the next Nintendo Zone in the list, you can now. This gives greater control in how you Homepass.
+In most cases, the default hostapd driver will work. However, the driver is configurable through the dashboard if need be.
 
-    +  Click 'PiPass' in the dashboard.
-    +  Click 'Advance'.
+<b>Dashboard Path</b>
 
-<b>Shuffle Nintendo Zones</b>
+There are some users who use a different Linux configuration when manually installing. Configuring the dashboard install path through the PiPass Dashboard allows one the flexibility in choosing which web server is best for their purpose. However, PiPass will assume that the main program is installed in /opt/PiPass/. The PiPass Dashboard is configurable in that you may choose to install it somewhere else.
 
-Like most of the settings, this feature can be enabled or disabled through the PiPass Dashboard. Enabling shuffling will visit Nintendo Zones in your current list in random order, ensuring that each pass-through is different.
+#PiPass Maintenance
 
 <b>Updating PiPass</b>
 
-PiPass can be updated through the dashboard. This will pull updates from the master branch and provide PiPass with 'bleeding edge' updates. Especially useful for those who are unfamiliar with Linux. Updating can be done by:
+PiPass can be updated through the dashboard. This will pull updates from the master branch and provide PiPass with 'bleeding edge' updates. This is especially useful for those who are unfamiliar with Linux. Updating can be done by:
 
     +  Click 'PiPass' in the dashboard.
     +  Click 'Update'.
 
 Please allow for 30 seconds for all the updates to complete.
+
+<b>Reset Network</b>
+
+This will force your Raspberry Pi to re-detect and reconfigure all Ethernet and Wifi devices. PiPass uses your very first installed WiFi dongle, so if you want PiPass to use another one instead, please remove all WiFi dongles connected to your Raspberry Pi and ensure that the one you want to use is connected before you reset the network.
 
 # Hardware
 I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referral links would be helpful. The pricing on these items are exactly the same as a non-referral.
@@ -245,7 +229,8 @@ Please let me know if any other hardware is compatible and I will add them to th
 # Future Features
 I want to expand the functionality of PiPass by adding the following:
 
-    +   Complete logging for debugging and historical analysis.
+* PiPass TBD: I am looking for suggestions, but I cannot guarantee that I will implement a requested feature.
+* Borrowing a Raspberry Pi Model B and Raspberry Pi Model B+ for an expanded list of pre-made images.
 
 # Support
 If you have any problems with PiPass, please let me know through my GitHub. I will do my best to help you out. Thanks for trying out PiPass!
