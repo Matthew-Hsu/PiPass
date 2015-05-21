@@ -77,10 +77,10 @@ def loadSettings():
     try:
         STREETPASS_CYCLE_MINUTES = int(pipass_config['STREETPASS_CYCLE_MINUTES'])
     except KeyError:
-        STREETPASS_CYCLE_MINUTES = 15
+        STREETPASS_CYCLE_MINUTES = 30
         logger.warning('Missing the STREETPASS_CYCLE_MINUTES key in: ' + DASHBOARD + 'assets/json/pipass_config.json. Defaulting to: ' + str(STREETPASS_CYCLE_MINUTES) + '.')
     except ValueError:
-        STREETPASS_CYCLE_MINUTES = 15
+        STREETPASS_CYCLE_MINUTES = 30
         logger.warning('Invalid value for the STREETPASS_CYCLE_MINUTES key in: ' + DASHBOARD + 'assets/json/pipass_config.json. Defaulting to: ' + str(STREETPASS_CYCLE_MINUTES) + '.')
     
     # Converting STREETPASS_CYCLE_MINUTES to seconds.
@@ -93,7 +93,7 @@ def loadSettings():
     try:
         PIPASS_SHUFFLE = pipass_config['PIPASS_SHUFFLE']
     except KeyError:
-        PIPASS_SHUFFLE = "off"
+        PIPASS_SHUFFLE = "on"
         logger.warning('Missing the PIPASS_SHUFFLE key in: ' + DASHBOARD + 'assets/json/pipass_config.json. Defaulting to: ' + PIPASS_SHUFFLE + '.')
 
     # The Google Spreadsheet's KEY that is used for PIPASS_DB.
