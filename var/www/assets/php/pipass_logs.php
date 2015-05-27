@@ -20,10 +20,10 @@ if (!file_exists($LOG_FILENAME))
 
         <!-- BOOTSTRAP CORE CSS -->
         <link href='../../assets/css/bootstrap.css' rel='stylesheet'>
-        
+
         <!-- EXTERNAL CSS -->
         <link href='../../assets/font-awesome/css/font-awesome.css' rel='stylesheet'/>
-            
+
         <!-- CUSTOM STYLES FOR THIS TEMPLATE -->
         <link href='../../assets/css/style.css' rel='stylesheet'>
         <link href='../../assets/css/style-responsive.css' rel='stylesheet'>
@@ -39,7 +39,7 @@ if (!file_exists($LOG_FILENAME))
             <!-- LOGO END -->
           </header>
           <!-- HEADER END -->
-          
+
           <!-- MAIN CONTENT START -->
           <section id='main-content' style='margin-left: 0px;'>
             <section class='wrapper site-min-height'>

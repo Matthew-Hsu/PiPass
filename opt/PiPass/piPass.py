@@ -86,7 +86,7 @@ def loadSettings():
     except ValueError:
         STREETPASS_CYCLE_MINUTES = 30
         logger.warning('Invalid value for the STREETPASS_CYCLE_MINUTES key in: ' + DASHBOARD + 'assets/json/pipass_config.json. Defaulting to: ' + str(STREETPASS_CYCLE_MINUTES) + '.')
-    
+
     # Converting STREETPASS_CYCLE_MINUTES to seconds.
     global STREETPASS_CYCLE_SECONDS
     STREETPASS_CYCLE_SECONDS = STREETPASS_CYCLE_MINUTES * 60
@@ -256,7 +256,7 @@ while doExecute:
         logger.error('Unable to parse the JSON in: ' + PIPASS_DB + '.')
         updateStatus()
         exit(1)
-    
+
     # Shall we shuffle the Nintendo Zone list?
     if PIPASS_SHUFFLE == "on":
         # Shuffle results, so each list pass through is different each time.
@@ -292,7 +292,7 @@ while doExecute:
         # Loop variables to store Nintendo Zone information.
         zoneValues = [' ',' ',' ']
         zoneValueIndex = 0
-        
+
         # Saves the current Nintendo Zone information.
         for label in results['feed']['entry'][currentZoneIndex]:
             if label[:3]=='gsx':
@@ -322,21 +322,34 @@ while doExecute:
             logger.error('Unable to write the file: ' + NETWORK_CONFIGURATION + '.')
             updateStatus()
             exit(1)
-        
+
         conf = "interface=wlan0\nbridge=br0\ndriver=" + HOSTAPD_DRIVER + "\nssid=" + zoneValues[0] + "\nbssid=" + zoneValues[1] + "\nhw_mode=g\nchannel=6\nauth_algs=1\nwpa=0\nmacaddr_acl=1\naccept_mac_file=/etc/hostapd/mac_accept\nwmm_enabled=0\nignore_broadcast_ssid=0"
 
         fo.write(conf)
         fo.close()
 
-        # Restart hostapd to ensure NETWORK_CONFIGURATION is used. Restarting hostapd will also ensure that it is running if it is currently off.
-        # subprocess.call() will wait for the service command to finish before moving on.
-        subprocess.call('sudo service hostapd restart', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
+        # Hostapd resilience in that we should try starting the services up again if it fails. We will try up to three times.
+        hostapdState = None
+        for retryHostapd in range(0, 3):
+            # Restart hostapd to ensure NETWORK_CONFIGURATION is used. Restarting hostapd will also ensure that it is running if it is currently off.
+            # subprocess.call() will wait for the service command to finish before moving on.
+            subprocess.call('sudo service hostapd restart', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
 
-        # Verify that hostapd is running. If it is not, there is possibly a WiFi driver issue.
-        hostapdState = subprocess.check_output(['ps', '-A'])
+            # Verify that hostapd is running.
+            hostapdState = subprocess.check_output(['ps', '-A'])
+
+            # Handle potential timing issue if hostapd needs more time to fully startup.
+            if 'hostapd' not in hostapdState:
+                time.sleep(15)
+                hostapdState = subprocess.check_output(['ps', '-A'])
+
+            if 'hostapd' in hostapdState:
+                break
+
+            logger.warning('Unable to start hostapd. Attempting to start hostapd again.')
 
         if 'hostapd' not in hostapdState:
-            logger.critical('Unable to start hostapd.')
+            logger.critical('Cannot start hostapd.')
             updateStatus()
             exit(1)
 

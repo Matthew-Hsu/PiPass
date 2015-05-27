@@ -18,10 +18,10 @@ if (!file_exists('/opt/PiPass/config/pipass_dashboard.json'))
 
         <!-- BOOTSTRAP CORE CSS -->
         <link href='../../assets/css/bootstrap.css' rel='stylesheet'>
-        
+
         <!-- EXTERNAL CSS -->
         <link href='../../assets/font-awesome/css/font-awesome.css' rel='stylesheet'/>
-            
+
         <!-- CUSTOM STYLES FOR THIS TEMPLATE -->
         <link href='../../assets/css/style.css' rel='stylesheet'>
         <link href='../../assets/css/style-responsive.css' rel='stylesheet'>
@@ -37,7 +37,7 @@ if (!file_exists('/opt/PiPass/config/pipass_dashboard.json'))
             <!-- LOGO END -->
           </header>
           <!-- HEADER END -->
-          
+
           <!-- MAIN CONTENT START -->
           <section id='main-content' style='margin-left: 0px;'>
             <section class='wrapper site-min-height'>
@@ -157,10 +157,10 @@ if (file_exists('/tmp/PiPass/master.zip'))
 
         <!-- BOOTSTRAP CORE CSS -->
         <link href='../../assets/css/bootstrap.css' rel='stylesheet'>
-        
+
         <!-- EXTERNAL CSS -->
         <link href='../../assets/font-awesome/css/font-awesome.css' rel='stylesheet'/>
-            
+
         <!-- CUSTOM STYLES FOR THIS TEMPLATE -->
         <link href='../../assets/css/style.css' rel='stylesheet'>
         <link href='../../assets/css/style-responsive.css' rel='stylesheet'>
@@ -176,7 +176,7 @@ if (file_exists('/tmp/PiPass/master.zip'))
             <!-- LOGO END -->
           </header>
           <!-- HEADER END -->
-          
+
           <!-- MAIN CONTENT START -->
           <section id='main-content' style='margin-left: 0px;'>
             <section class='wrapper site-min-height'>
@@ -246,10 +246,10 @@ echo "
 
       <!-- BOOTSTRAP CORE CSS -->
       <link href='../../assets/css/bootstrap.css' rel='stylesheet'>
-      
+
       <!-- EXTERNAL CSS -->
       <link href='../../assets/font-awesome/css/font-awesome.css' rel='stylesheet'/>
-          
+
       <!-- CUSTOM STYLES FOR THIS TEMPLATE -->
       <link href='../../assets/css/style.css' rel='stylesheet'>
       <link href='../../assets/css/style-responsive.css' rel='stylesheet'>
@@ -265,7 +265,7 @@ echo "
           <!-- LOGO END -->
         </header>
         <!-- HEADER END -->
-        
+
         <!-- MAIN CONTENT START -->
         <section id='main-content' style='margin-left: 0px;'>
           <section class='wrapper site-min-height'>

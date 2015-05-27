@@ -16,10 +16,10 @@
 
     <!-- BOOTSTRAP CORE CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
-    
+
     <!-- EXTERNAL CSS -->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
-        
+
     <!-- CUSTOM STYLES FOR THIS TEMPLATE -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
@@ -41,23 +41,23 @@
             <!-- LOGO END -->
       </header>
       <!-- HEADER END -->
-      
+
       <!-- SIDEBAR START -->
       <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- SIDEBAR MENU START -->
               <ul class="sidebar-menu" id="nav-accordion">
-              
+
                   <p class="centered"><img src="assets/img/mario.png" class="img-circle" width="60"></p>
                   <h5 class="centered">Mario</h5>
-                    
+
                   <li class="mt">
                       <a class="active" href="index.html">
                           <i class="fa fa-dashboard"></i>
                           <span>Dashboard</span>
                       </a>
                   </li>
-                  
+
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-desktop"></i>
@@ -100,7 +100,7 @@
           </div>
       </aside>
       <!-- SIDEBAR END -->
-      
+
       <!-- MAIN CONTENT START -->
       <section id="main-content">
         <section class="wrapper site-min-height">
@@ -121,17 +121,17 @@
                         var post_html = '</tbody></table>';
                         var len = json.length;
 
-                        for (var i=0; i<len; i++) 
+                        for (var i=0; i<len; i++)
                         {
                           actual_html += [
-                          '<tr><td>', 
-                          json[i].gsx$mac.$t, 
-                          '</td><td>',   
-                          json[i].gsx$ssid.$t, 
+                          '<tr><td>',
+                          json[i].gsx$mac.$t,
                           '</td><td>',
-                          json[i].gsx$description.$t, 
+                          json[i].gsx$ssid.$t,
+                          '</td><td>',
+                          json[i].gsx$description.$t,
                           '</td></tr>',
-                          ].join('');  
+                          ].join('');
                         }
 
                         document.getElementById('unseen').innerHTML = pre_html + actual_html + post_html;
@@ -143,7 +143,7 @@
                   </script>
                 </section>
               </div><!-- /CONTENT-PANEL -->
-            </div><!-- /COL-LG-12 -->     
+            </div><!-- /COL-LG-12 -->
           </div><!-- /ROW -->
           <div class="row mt">
             <div class="col-lg-13">

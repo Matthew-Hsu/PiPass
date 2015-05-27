@@ -2,7 +2,7 @@
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine-tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
 
 This does not showcase a complete list of features, but it gives a sense in what PiPass looks like: <a href="https://www.youtube.com/watch?v=ttoDlpEBqBU" target="_blank">PiPass Video Overview</a>. The video shown is based on PiPass 1.4, however the general work-flow is relatively the same as in PiPass 1.5 with some minor differences.
-    
+
 # What's New in Version 1.5
 PiPass 1.5 focuses on overall polish and being informative about what is exactly going on "behind the scenes". The biggest feature addition is the logging system that provides extra information regarding status and it also aids in troubleshooting. The changelog for this version of PiPass is as follows:
 
@@ -103,7 +103,7 @@ For security sake, PiPass will only work on the Nintendo 3DS systems that you au
 Likewise, you can add the MAC address of your Nintendo 3DS by entering the following command:
 
     ->  sudo nano /etc/hostapd/mac_accept
-    
+
 Like the dashboard, each MAC address should be on a new line.
 
 Most of the features controlled by PiPass can actually be ran through the PiPass Dashboard. Since your Raspberry Pi will act as a web server as well, you will need to make sure it has the permissions to do so. The following commands can grant execution:
@@ -115,11 +115,11 @@ Now this part is a little more involved as we will need to grant the Dashboard s
 
     ->  su
     ->  visudo -f /etc/sudoers
-    
+
 Now add the following line at the end of the file:
 
     +   www-data ALL=(ALL:ALL) NOPASSWD: ALL
-    
+
 If you are experiencing WiFi driver problems, there might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to use the PiPass Dashboard to configure the correct driver:
 
     +   Navigate to the PiPass Dashboard with your web browser.
@@ -151,15 +151,15 @@ The baseline database will use the Nintendo Zones worksheet found on FatMagic's 
 
     +   Use your own or create a Google account to store your database.
 
-Now, make a copy of this <a href="https://drive.google.com/open?id=1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M&authuser=0" target="_blank">spreadsheet</a> and save it on Google Drive. 
+Now, make a copy of this <a href="https://drive.google.com/open?id=1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M&authuser=0" target="_blank">spreadsheet</a> and save it on Google Drive.
 
     +   You can copy the spreadsheet easily by clicking "File" -> "Make a copy...".
-    
+
 Publish your spreadsheet to the Web by clicking:
 
     +   "File" -> "Publish to the web..."
     +   "Publish"
-    
+
 Also, make sure to copy the URL link of that spreadsheet. Now, open up the PiPass Dashboard:
 
     +   Navigate to the PiPass Dashboard with your web browser.
