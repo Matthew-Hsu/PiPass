@@ -47,6 +47,7 @@ def loadDashboard():
     except IOError:
         logger.error('Unable to read the file: /opt/PiPass/config/pipass_dashboard.json.')
         updateStatus()
+        logger.info('PiPass has been shutdown with an error.')
         exit(1)
 
     # Controls the location to where the PiPass Dashboard is installed.
@@ -69,6 +70,7 @@ def loadSettings():
     except IOError:
         logger.error('Unable to read the file: ' + DASHBOARD + 'assets/json/pipass_config.json.')
         updateStatus()
+        logger.info('PiPass has been shutdown with an error.')
         exit(1)
 
     # Controls the minutes between each Nintendo Zone cycle.
@@ -144,6 +146,7 @@ def updateStatus():
             f.write(unicode('[{"gsx$ssid": {"$t": "Not Available."}, "gsx$mac": {"$t": "Not Available."}, "gsx$description": {"$t": "PiPass is not running."}}]'))
     except IOError:
         logger.error('Unable to write the file: ' + DASHBOARD_INFO + '.')
+        logger.info('PiPass has been shutdown with an error.')
         exit(1)
 
     return None
@@ -248,6 +251,7 @@ while doExecute:
     except Exception:
         logger.error('Unable to read the URL: ' + PIPASS_DB + '.')
         updateStatus()
+        logger.info('PiPass has been shutdown with an error.')
         exit(1)
 
     try:
@@ -255,6 +259,7 @@ while doExecute:
     except ValueError:
         logger.error('Unable to parse the JSON in: ' + PIPASS_DB + '.')
         updateStatus()
+        logger.info('PiPass has been shutdown with an error.')
         exit(1)
 
     # Shall we shuffle the Nintendo Zone list?
@@ -269,6 +274,7 @@ while doExecute:
     except IOError:
         logger.error('Unable to write the file: ' + CURRENT_LIST + '.')
         updateStatus()
+        logger.info('PiPass has been shutdown with an error.')
         exit(1)
 
     # The index of the current Nintendo Zone we are visiting.
@@ -321,6 +327,7 @@ while doExecute:
         except IOError:
             logger.error('Unable to write the file: ' + NETWORK_CONFIGURATION + '.')
             updateStatus()
+            logger.info('PiPass has been shutdown with an error.')
             exit(1)
 
         conf = "interface=wlan0\nbridge=br0\ndriver=" + HOSTAPD_DRIVER + "\nssid=" + zoneValues[0] + "\nbssid=" + zoneValues[1] + "\nhw_mode=g\nchannel=6\nauth_algs=1\nwpa=0\nmacaddr_acl=1\naccept_mac_file=/etc/hostapd/mac_accept\nwmm_enabled=0\nignore_broadcast_ssid=0"
@@ -328,29 +335,18 @@ while doExecute:
         fo.write(conf)
         fo.close()
 
-        # Hostapd resilience in that we should try starting the services up again if it fails. We will try up to three times.
-        hostapdState = None
-        for retryHostapd in range(0, 3):
-            # Restart hostapd to ensure NETWORK_CONFIGURATION is used. Restarting hostapd will also ensure that it is running if it is currently off.
-            # subprocess.call() will wait for the service command to finish before moving on.
-            subprocess.call('sudo service hostapd restart', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
+        # Restart hostapd to ensure NETWORK_CONFIGURATION is used. Restarting hostapd will also ensure that it is running if it is currently off.
+        # subprocess.call() will wait for the service command to finish before moving on.
+        subprocess.call('sudo service hostapd restart', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
 
-            # Verify that hostapd is running.
-            hostapdState = subprocess.check_output(['ps', '-A'])
+        # Verify that hostapd is running. If it is not, there is a possible WiFi driver issue or hostapd is using an invalid MAC address.
+        hostapdStatus = subprocess.check_output(['ps', '-A'])
 
-            # Handle potential timing issue if hostapd needs more time to fully startup.
-            if 'hostapd' not in hostapdState:
-                time.sleep(15)
-                hostapdState = subprocess.check_output(['ps', '-A'])
-
-            if 'hostapd' in hostapdState:
-                break
-
-            logger.warning('Unable to start hostapd. Attempting to start hostapd again.')
-
-        if 'hostapd' not in hostapdState:
-            logger.critical('Cannot start hostapd.')
+        if 'hostapd' not in hostapdStatus:
+            logger.error('Unable to start hostapd with the MAC address: ' + zoneValues[1] + '.')
             updateStatus()
+            logger.warning('A possible WiFi driver issue or invalid MAC address has been detected.')
+            logger.info('PiPass has been shutdown with an error.')
             exit(1)
 
         # Note the current time for the current visit to the Nintendo Zone.
@@ -368,6 +364,7 @@ while doExecute:
         except IOError:
             logger.error('Unable to write the file: ' + DASHBOARD_INFO + '.')
             updateStatus()
+            logger.info('PiPass has been shutdown with an error.')
             exit(1)
 
         currentZoneIndex = currentZoneIndex + 1
