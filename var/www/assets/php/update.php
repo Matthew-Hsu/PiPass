@@ -188,7 +188,7 @@ if (file_exists('/tmp/PiPass/master.zip'))
                       PiPass has been upgraded successfully!
                     </p>
                     <p>
-                      Redirecting back to PiPass Update in 5 seconds...
+                      Redirecting back to PiPass Update in 3 seconds...
                     </p>
                   </div>
                 </div>
@@ -225,7 +225,7 @@ if (file_exists('/tmp/PiPass/master.zip'))
     </html>
   ";
 
-  header("refresh:5;url=../../update_pi_pass.html");
+  header("refresh:3;url=../../update_pi_pass.html");
 
   exit(0);
 }
