@@ -176,6 +176,10 @@ def sigUsr1(signum, stack):
     global piPassStatus
     piPassStatus = "update"
 
+    # There is a possibility that the WiFi driver can change, so let's re-test the WiFi driver if hostapd fails.
+    global doTestDriver
+    doTestDriver = True
+
     loadDashboard()
     loadSettings()
 
@@ -233,6 +237,9 @@ piPassStatus = "execute"
 # Indicates whether the Nintendo Zone visit records need to be cleared. It is set to
 # True initially so that it initializes on the first pass.
 clearVisits = True
+
+# Flag that informs PiPass if we should test for any potential hostapd driver issues.
+doTestDriver = True
 
 #### PiPass Main #####
 
@@ -342,12 +349,50 @@ while doExecute:
         # Verify that hostapd is running. If it is not, there is a possible WiFi driver issue or hostapd is using an invalid MAC address.
         hostapdStatus = subprocess.check_output(['ps', '-A'])
 
+        # When hostapd fails to startup, it can be caused by two reasons: [1] hostapd is experiencing a WiFi driver issue or
+        # [2] hostapd is trying to spoof with a invalid MAC address.
         if 'hostapd' not in hostapdStatus:
-            logger.error('Unable to start hostapd with the MAC address: ' + zoneValues[1] + '.')
+            # Test for issue [1] by getting hostapd to spoof with a known good MAC address. If hostapd still fails, there is a good chance
+            # that this is a potential WiFi driver issue. Although, if hostapd passes, we do not want to perform this test every time
+            # since a pass means that the WiFi driver is correctly installed and configured.
+            if doTestDriver:
+                # Write a known valid MAC address to NETWORK_CONFIGURATION.
+                try:
+                    fo = open(NETWORK_CONFIGURATION, "w")
+                except IOError:
+                    logger.error('Unable to write the file: ' + NETWORK_CONFIGURATION + '.')
+                    updateStatus()
+                    logger.info('PiPass has been shutdown with an error.')
+                    exit(1)
+
+                conf = "interface=wlan0\nbridge=br0\ndriver=" + HOSTAPD_DRIVER + "\nssid=" + HOSTAPD_DRIVER + "\nbssid=02:00:00:00:00:01\nhw_mode=g\nchannel=6\nauth_algs=1\nwpa=0\nmacaddr_acl=1\naccept_mac_file=/etc/hostapd/mac_accept\nwmm_enabled=0\nignore_broadcast_ssid=0"
+
+                fo.write(conf)
+                fo.close()
+
+                # Restart hostapd to ensure NETWORK_CONFIGURATION is used. Restarting hostapd will also ensure that it is running if it is currently off.
+                # subprocess.call() will wait for the service command to finish before moving on.
+                subprocess.call('sudo service hostapd restart', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
+
+                # Verify that hostapd is running. If it is not, there is a possible WiFi driver issue.
+                hostapdStatus = subprocess.check_output(['ps', '-A'])
+
+                if 'hostapd' not in hostapdStatus:
+                    logger.warning('A possible WiFi driver issue has been detected.')
+                    logger.error('Unable to start hostapd.')
+                    updateStatus()
+                    logger.info('PiPass has been shutdown with an error.')
+                    exit(1)
+
+                doTestDriver = False
+
+            # If we are here, we know that issue [2] is affecting hostapd.
+            logger.warning('A possible invalid MAC address has been detected: ' + zoneValues[1] + '.')
+            logger.error('Unable to start hostapd.')
             updateStatus()
-            logger.warning('A possible WiFi driver issue or invalid MAC address has been detected.')
-            logger.info('PiPass has been shutdown with an error.')
-            exit(1)
+            logger.info('PiPass is moving onto the next Nintendo Zone.')
+
+            continue
 
         # Note the current time for the current visit to the Nintendo Zone.
         zoneVisits[visit] = time.time()

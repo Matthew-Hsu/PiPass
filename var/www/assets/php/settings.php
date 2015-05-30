@@ -174,7 +174,7 @@ if ($_POST)
                       The PiPass settings have been saved successfully!
                     </p>
                     <p>
-                      Redirecting back to PiPass Settings in 5 seconds...
+                      Redirecting back to PiPass Settings in 3 seconds...
                     </p>
                   </div>
                 </div>
@@ -214,7 +214,7 @@ if ($_POST)
   // Redirect to settings.html.
   $date = date_create();
   $timestamp = date_timestamp_get($date);
-  $settingsURL = "refresh:5;url=../../settings.html?time=";
+  $settingsURL = "refresh:3;url=../../settings.html?time=";
   $settingsURL .= $timestamp;
 
   header('Cache-Control: no-cache, no-store, must-revalidate');
