@@ -155,7 +155,7 @@ For WiFi driver issues, PiPass has drivers pre-installed for Ralink, ZyDAS ZD121
     +   Enter the correct driver name for "Hostapd Driver".
     +   Click "Save".
 
-Semperverus' guide is a excellent resource for troubleshooting if problems persist. With luck, you should have PiPass working manually.
+If problems persist, Semperverus' guide is an excellent resource for troubleshooting. With luck, you should have PiPass working manually.
 
 # Using PiPass
 
