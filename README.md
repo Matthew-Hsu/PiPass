@@ -132,7 +132,7 @@ Now add the following line at the end of the file:
 
     +   www-data ALL=(ALL:ALL) NOPASSWD: ALL
 
-With the previous steps completed, you will want to start PiPass. Access the PiPass Dashboard by opening up a web browser on a device of your choice and enter your Raspberry Pi's IP address into the address bar. The PiPass Dashboard should be displayed. Now do the following:
+With the previous steps completed, you will want to start PiPass. Access the PiPass Dashboard and do the following:
 
     +   Click "PiPass".
     +   Click "Start".
