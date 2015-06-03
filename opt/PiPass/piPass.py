@@ -99,8 +99,7 @@ def loadSettings():
     try:
         PIPASS_SHUFFLE = pipass_config['PIPASS_SHUFFLE']
     except KeyError:
-        PIPASS_SHUFFLE = "on"
-        logger.warning('Missing the PIPASS_SHUFFLE key in: ' + DASHBOARD + 'assets/json/pipass_config.json. Defaulting to: ' + PIPASS_SHUFFLE + '.')
+        PIPASS_SHUFFLE = "off"
 
     # The Google Spreadsheet's KEY that is used for PIPASS_DB.
     global GSX_KEY
@@ -125,6 +124,20 @@ def loadSettings():
     # https://github.com/Matthew-Hsu/PiPass/blob/master/README.md
     global PIPASS_DB
     PIPASS_DB = "https://spreadsheets.google.com/feeds/list/" + GSX_KEY + "/" + GSX_WORKSHEET + "/public/values?alt=json"
+
+    # Controls whether PiPass should have WiFi security enabled or disabled.
+    global HOSTAPD_SECURITY
+
+    try:
+        HOSTAPD_SECURITY = pipass_config['HOSTAPD_SECURITY']
+    except KeyError:
+        HOSTAPD_SECURITY = "0"
+
+    # Hostapd uses a binary flag to signal if WiFi security is enabled or disabled. So, perform the conversions here.
+    if HOSTAPD_SECURITY == "on":
+        HOSTAPD_SECURITY = "1"
+    else:
+        HOSTAPD_SECURITY = "0"
 
     # Hostapd driver for your USB WiFi dongle. If the default value does not work for
     # you, you may need to research which driver is compatible. Refer to README at
@@ -208,6 +221,7 @@ PIPASS_SHUFFLE = None
 GSX_KEY = None
 GSX_WORKSHEET = None
 PIPASS_DB = None
+HOSTAPD_SECURITY = None
 HOSTAPD_DRIVER = None
 DASHBOARD = None
 
@@ -337,7 +351,7 @@ while doExecute:
             logger.info('PiPass has been shutdown with an error.')
             exit(1)
 
-        conf = "interface=wlan0\nbridge=br0\ndriver=" + HOSTAPD_DRIVER + "\nssid=" + zoneValues[0] + "\nbssid=" + zoneValues[1] + "\nhw_mode=g\nchannel=6\nauth_algs=1\nwpa=0\nmacaddr_acl=1\naccept_mac_file=/etc/hostapd/mac_accept\nwmm_enabled=0\nignore_broadcast_ssid=0"
+        conf = "interface=wlan0\nbridge=br0\ndriver=" + HOSTAPD_DRIVER + "\nssid=" + zoneValues[0] + "\nbssid=" + zoneValues[1] + "\nhw_mode=g\nchannel=6\nauth_algs=1\nwpa=0\nmacaddr_acl=" + HOSTAPD_SECURITY + "\naccept_mac_file=/etc/hostapd/mac_accept\nwmm_enabled=0\nignore_broadcast_ssid=0"
 
         fo.write(conf)
         fo.close()
@@ -365,7 +379,7 @@ while doExecute:
                     logger.info('PiPass has been shutdown with an error.')
                     exit(1)
 
-                conf = "interface=wlan0\nbridge=br0\ndriver=" + HOSTAPD_DRIVER + "\nssid=" + HOSTAPD_DRIVER + "\nbssid=02:00:00:00:00:01\nhw_mode=g\nchannel=6\nauth_algs=1\nwpa=0\nmacaddr_acl=1\naccept_mac_file=/etc/hostapd/mac_accept\nwmm_enabled=0\nignore_broadcast_ssid=0"
+                conf = "interface=wlan0\nbridge=br0\ndriver=" + HOSTAPD_DRIVER + "\nssid=" + HOSTAPD_DRIVER + "\nbssid=02:00:00:00:00:01\nhw_mode=g\nchannel=6\nauth_algs=1\nwpa=0\nmacaddr_acl=" + HOSTAPD_SECURITY + "\naccept_mac_file=/etc/hostapd/mac_accept\nwmm_enabled=0\nignore_broadcast_ssid=0"
 
                 fo.write(conf)
                 fo.close()
