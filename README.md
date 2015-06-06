@@ -1,5 +1,34 @@
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
 
+## Table of Contents
+- [About PiPass](#about-pipass)
+- [What's New in Version 1.52](#whats-new-in-version-152)
+- [Known Behaviours](#known-behaviours)
+- [Helpful Information](#helpful-information)
+    - [RTL8188CUS Chipset](#rtl8188cus-chipset)
+- [Testing Environment](#testing-environment)
+- [Installation](#installation)
+    - [PiPass Premade Image](#pipass-premade-image)
+    - [Manually Installing PiPass](#manually-installing-pipass)
+- [Using PiPass](#using-pipass)
+- [The PiPass Dashboard](#the-pipass-dashboard)
+- [PiPass Customization](#pipass-customization)
+    - [StreetPass Cycle Time](#streetpass-cycle-time)
+    - [Shuffle Zones](#shuffle-zones)
+    - [Database Source Customization](#database-source-customization)
+    - [Hostapd Security](#hostapd-security)
+    - [3DS Authentication](#3ds-authentication)
+    - [Hostapd Driver](#hostapd-driver)
+    - [Dashboard Path](#dashboard-path)
+- [PiPass Maintenance](#pipass-maintenance)
+    - [Updating PiPass](#updating-pipass)
+    - [Reset Network](#reset-network)
+- [Hardware](#hardware)
+    - [Canadian Links](#canadian-links)
+    - [United States of America Links](#united-states-of-america-links)
+- [Future Features](#future-features)
+    - [Support](#support)
+
 ## About PiPass
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine-tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
 
