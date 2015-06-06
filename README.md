@@ -1,9 +1,11 @@
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
+
+## About PiPass
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine-tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
 
 This does not showcase a complete list of features, but it gives a sense in what PiPass looks like: <a href="https://www.youtube.com/watch?v=ttoDlpEBqBU" target="_blank">PiPass Video Overview</a>. The video shown is based on PiPass 1.4, however the general work-flow is relatively the same as in PiPass 1.52 with some minor differences.
 
-# What's New in Version 1.52
+## What's New in Version 1.52
 <b>Note: </b>Those who are using 'PiPass Update' on versions below PiPass 1.52, please go to 'PiPass Settings' and verify 'Hostapd Security'. PiPass 1.52 can now enable / disable hostapd security and it will assume no security if this setting is not updated after updating PiPass to PiPass 1.52. Once this setting has been updated, PiPass will automatically remember this setting for future versions.
 
 PiPass 1.52 focuses on overall polish and being informative about what is exactly going on "behind the scenes". The biggest feature addition is the logging system that provides extra information regarding status and it also aids in troubleshooting. The changelog for this version of PiPass is as follows:
@@ -22,25 +24,22 @@ PiPass 1.52 focuses on overall polish and being informative about what is exactl
 * Minor rewording.
 * Minor tweaks.
 
-# Known Behaviours
+## Known Behaviours
 PiPass sometimes does not display expected or up-to-date values. Chrome is known to be finicky with this and will NOT cause issues with PiPass. When in doubt, manually refresh your browser as this is related to browser caching.
 
-# Helpful Information
-
-<b>RTL8188CUS Chipset</b>
-
+## Helpful Information
+##### RTL8188CUS Chipset
 Many people have been trying to get the RTL8188CUS chipset to work with PiPass and with other Homepass solutions as well. There is a <a href="https://github.com/Matthew-Hsu/PiPass/issues/20" target="_blank">thread</a> found in my issue list that has a discussion where someone was able to get the RTL8188CUS working with PiPass. It will require a bit of Linux knowledge to follow and so far many others have not been able to reproduce the workaround. Due to this, it is still recommended to purchase a compatible WiFi dongle that is known to work.
 
-# Testing Environment
+## Testing Environment
 Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A -=new=- Nintendo 3DS XL with the 9.8.0-25U firmware was used to verify functionality of 'Homepass'.
 
 PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, Atheros AR5007UG, and Realtek chipsets. The WiFi chipset that I tested on was the Ralink RT5370.
 
-# Installation
+## Installation
 PiPass can be installed by downloading a pre-made image for your Raspberry Pi 2 or by downloading the source files here on GitHub and setting it up manually. Manual setup will be more work, but it has the advantage of being able to use PiPass on older Raspberry Pi models and other Linux based operating systems.
 
-<b>PiPass Premade Image</b>
-
+##### PiPass Premade Image
 PiPass can be downloaded through these mirrors:
 
 * <a href="https://drive.google.com/folderview?id=0B8bbfqFbkJvVfk55dzhwWUZNUkNpQ2lXMHk3bnZXOUl5V2FlOTZqX2RmZE9OQWZQOEJZYjA&usp=sharing" target="_blank">Mirror 1 @ Google Drive</a>.
@@ -92,8 +91,7 @@ For WiFi driver issues, PiPass has drivers pre-installed for Ralink, ZyDAS ZD121
 
 If problems persist, refer to the manual guide down below for some extra help.
 
-<b>Manually Installing PiPass</b>
-
+##### Manually Installing PiPass
 Before you begin, there is a great guide that explains in detail on how to setup a Homepass Relay Station. It is a good read and I encourage everyone to take a look at it. It is especially helpful to those who are having WiFi driver issues. The guide, written by Semperverus, can be found <a href="https://docs.google.com/document/d/1EvmIwTIjPva5MHSFEIN0qsHtRmdRRiX3WNHu_ThxnOs/edit" target="_blank">here</a>. The following instructions will assume you are familiar with Linux and will briefly explain where everything is.
 
 Here is a list of dependencies needed for PiPass, so install the following packages through these commands:
@@ -161,24 +159,20 @@ For WiFi driver issues, PiPass has drivers pre-installed for Ralink, ZyDAS ZD121
 
 If problems persist, Semperverus' guide is an excellent resource for troubleshooting. With luck, you should have PiPass working manually.
 
-# Using PiPass
+## Using PiPass
 
-<b>The PiPass Dashboard</b>
+##### The PiPass Dashboard
 
 The PiPass Dashboard can be accessed on a device on your network by typing in your Raspberry Pi's IP address on your computer's or mobile device's browser. Most of what you need can be accessed through the Dashboard, including the ability to configure PiPass.
 
-# PiPass Customization
-
-<b>StreetPass Cycle Time</b>
-
+## PiPass Customization
+##### StreetPass Cycle Time
 By default, PiPass will be a particular Nintendo Zone for 30 minutes, before moving onto the next one. This should give you enough time to play all the mini-games before you get your next batch. If this time is too long or too short for you, you can edit this setting through the PiPass Dashboard.
 
-<b>Shuffle Zones</b>
-
+##### Shuffle Zones
 Like most of the settings, this feature can be enabled or disabled through the PiPass Dashboard. Enabling shuffling will visit Nintendo Zones in your current list in random order, ensuring that each pass-through is different.
 
-<b>Database Source Customization</b>
-
+##### Database Source Customization
 The baseline database will use the Nintendo Zones worksheet found on FatMagic's database. This section will show you how to set up a custom source where you can easily define multiple custom configurations and load them on demand.
 
     +   Use your own or create a Google account to store your database.
@@ -206,26 +200,20 @@ The KEY would be the value 1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M between 
 
 Now you will need to enter the worksheet you want to use. "PiPass DB Worksheet" controls which worksheet to use. The default value of 1 selects the very first worksheet and the value of 2 selects the second worksheet. For example, setting PiPass DB Worksheet to the value of 2 would use the "nintendo_zones" worksheet in the templated spreadsheet that you just copied.
 
-<b>Hostapd Security</b>
-
+##### Hostapd Security
 This feature can be enabled or disabled through the PiPass Dashboard. Enabling security will make PiPass use the 3DS MAC addresses that are inputted in '3DS Authentication'. Disabling security will allow anyone access to your network. When disabling security, discretion is advised.
 
-<b>3DS Authentication</b>
-
+##### 3DS Authentication
 The authenticated list of 3DS systems that are allowed to connect to PiPass. Enter the 3DS MAC addresses on a separate line and in the format of XX:XX:XX:XX:XX:XX. This option can be found through the dashboard.
 
-<b>Hostapd Driver</b>
-
+##### Hostapd Driver
 In most cases, the default hostapd driver will work. However, the driver is configurable through the dashboard if need be.
 
-<b>Dashboard Path</b>
-
+##### Dashboard Path
 There are some users who use a different Linux configuration when manually installing. Configuring the dashboard install path through the PiPass Dashboard allows one the flexibility in choosing which web server is best for their purpose. However, PiPass will assume that the main program is installed in /opt/PiPass/. The PiPass Dashboard is configurable in that you may choose to install it somewhere else.
 
-#PiPass Maintenance
-
-<b>Updating PiPass</b>
-
+## PiPass Maintenance
+##### Updating PiPass
 PiPass can be updated through the dashboard. This will pull updates from the master branch and provide PiPass with 'bleeding edge' updates. This is especially useful for those who are unfamiliar with Linux. Updating can be done by:
 
     +  Click 'PiPass' in the dashboard.
@@ -233,17 +221,15 @@ PiPass can be updated through the dashboard. This will pull updates from the mas
 
 Please allow for 30 seconds for all the updates to complete.
 
-<b>Reset Network</b>
-
+##### Reset Network
 This will force your Raspberry Pi to re-detect and reconfigure all Ethernet and Wifi devices. PiPass uses your very first installed WiFi dongle, so if you want PiPass to use another one instead, please remove all WiFi dongles connected to your Raspberry Pi and ensure that the one you want to use is connected before you reset the network.
 
-# Hardware
+## Hardware
 I have listed some kits that are quite good if you will be purchasing a Raspberry Pi for the first time. I'm not asking for any donations, but if you will be purchasing any hardware, these Amazon referral links would be helpful. The pricing on these items are exactly the same as a non-referral.
 
 Please let me know if any other hardware is compatible and I will add them to this list.
 
-<b>Canadian Links</b>
-
+##### Canadian Links
 <a href="http://www.amazon.ca/gp/product/B00T2U7R7I/ref=as_li_ss_tl?ie=UTF8&camp=15121&creative=390961&creativeASIN=B00T2U7R7I&linkCode=as2&tag=matthew084-20">Raspberry Pi 2 Model B 1GB</a><img src="http://ir-ca.amazon-adsystem.com/e/ir?t=matthew084-20&l=as2&o=15&a=B00T2U7R7I" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
 <a href="http://www.amazon.ca/gp/product/B0096M7IJY/ref=as_li_ss_tl?ie=UTF8&camp=15121&creative=390961&creativeASIN=B0096M7IJY&linkCode=as2&tag=matthew084-20">CanaKit Raspberry Pi 2 Complete Starter Kit (Raspberry Pi 2 + WiFi + 8GB SD Card + Case + Power Supply + HDMI Cable)</a><img src="http://ir-ca.amazon-adsystem.com/e/ir?t=matthew084-20&l=as2&o=15&a=B0096M7IJY" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
@@ -252,8 +238,7 @@ Please let me know if any other hardware is compatible and I will add them to th
 
 <a href="http://www.amazon.ca/gp/product/B00OL8JSIM/ref=as_li_ss_tl?ie=UTF8&camp=15121&creative=390961&creativeASIN=B00OL8JSIM&linkCode=as2&tag=matthew084-20">Mini RT5370 150Mbps USB Wifi Wireless LAN Card 802.11 N/g/b Adapter with Antenna</a><img src="http://ir-ca.amazon-adsystem.com/e/ir?t=matthew084-20&l=as2&o=15&a=B00OL8JSIM" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
-<b>United States of America Links</b>
-
+##### United States of America Links
 <a href="http://www.amazon.com/gp/product/B00T2U7R7I/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00T2U7R7I&linkCode=as2&tag=matthew08b-20&linkId=W2HA4PU55DSRWDWA">Raspberry Pi 2 Model B Project Board - 1GB RAM - 900 MHz Quad-Core CPU</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=matthew08b-20&l=as2&o=1&a=B00T2U7R7I" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
 <a href="http://www.amazon.com/gp/product/B008XVAVAW/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B008XVAVAW&linkCode=as2&tag=matthew08b-20&linkId=IN557BBG3PJEAU7M">CanaKit Raspberry Pi 2 Complete Starter Kit with WiFi (Latest Version Raspberry Pi 2 + WiFi + Original Preloaded 8GB SD Card + Case + Power Supply + HDMI Cable)</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=matthew08b-20&l=as2&o=1&a=B008XVAVAW" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
@@ -266,11 +251,11 @@ Please let me know if any other hardware is compatible and I will add them to th
 
 <a href="http://www.amazon.com/gp/product/B00H95C0A2/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00H95C0A2&linkCode=as2&tag=matthew08b-20&linkId=W6TR3BCW32NGSPW7">Wifi With Antenna For Raspberry Pi - Instructions Included - PLUG and PLAY</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=matthew08b-20&l=as2&o=1&a=B00H95C0A2" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
-# Future Features
+## Future Features
 I want to expand the functionality of PiPass by adding the following:
 
 * Borrowing a Raspberry Pi Model B and Raspberry Pi Model B+ for an expanded list of pre-made images.
 * I am always looking for suggestions, but I cannot guarantee that I will implement a requested feature. I will try my best though!
 
-# Support
+## Support
 If you have any problems with PiPass, please let me know through my GitHub. I will do my best to help you out. Thanks for trying out PiPass!
