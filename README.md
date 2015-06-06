@@ -11,7 +11,7 @@
     - [PiPass Premade Image](#pipass-premade-image)
     - [Manually Installing PiPass](#manually-installing-pipass)
 - [Using PiPass](#using-pipass)
-- [The PiPass Dashboard](#the-pipass-dashboard)
+    - [The PiPass Dashboard](#the-pipass-dashboard)
 - [PiPass Customization](#pipass-customization)
     - [StreetPass Cycle Time](#streetpass-cycle-time)
     - [Shuffle Zones](#shuffle-zones)
