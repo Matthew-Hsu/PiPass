@@ -27,7 +27,7 @@
     - [Canadian Links](#canadian-links)
     - [United States of America Links](#united-states-of-america-links)
 - [Future Features](#future-features)
-    - [Support](#support)
+- [Support](#support)
 
 ## About PiPass
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine-tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
