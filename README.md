@@ -8,7 +8,7 @@
     - [RTL8188CUS Chipset](#rtl8188cus-chipset)
 - [Testing Environment](#testing-environment)
 - [Installation](#installation)
-    - [PiPass Pre-made Image](#pipass-premade-image)
+    - [PiPass Pre-made Image](#pipass-pre-made-image)
     - [Manually Installing PiPass](#manually-installing-pipass)
 - [Using PiPass](#using-pipass)
     - [The PiPass Dashboard](#the-pipass-dashboard)
