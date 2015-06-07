@@ -8,7 +8,7 @@
     - [RTL8188CUS Chipset](#rtl8188cus-chipset)
 - [Testing Environment](#testing-environment)
 - [Installation](#installation)
-    - [PiPass Premade Image](#pipass-premade-image)
+    - [PiPass Pre-made Image](#pipass-premade-image)
     - [Manually Installing PiPass](#manually-installing-pipass)
 - [Using PiPass](#using-pipass)
     - [The PiPass Dashboard](#the-pipass-dashboard)
@@ -71,14 +71,14 @@ Many people have been trying to get the RTL8188CUS chipset to work with PiPass a
 ## Testing Environment
 Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A -=new=- Nintendo 3DS XL with the 9.8.0-25U firmware was used to verify functionality of 'Homepass'.
 
-PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, Atheros AR5007UG, and Realtek chipsets. The WiFi chipset that I tested on was the Ralink RT5370.
+The PiPass pre-made image has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, Atheros AR5007UG, and Realtek chipsets. The WiFi chipset that I tested on was the Ralink RT5370.
 
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
 ## Installation
 PiPass can be installed by downloading a pre-made image for your Raspberry Pi 2 or by downloading the source files here on GitHub and setting it up manually. Manual setup will be more work, but it has the advantage of being able to use PiPass on older Raspberry Pi models and other Linux based operating systems.
 
-##### PiPass Premade Image
+##### PiPass Pre-made Image
 PiPass can be downloaded through these mirrors:
 
 * <a href="https://drive.google.com/folderview?id=0B8bbfqFbkJvVfk55dzhwWUZNUkNpQ2lXMHk3bnZXOUl5V2FlOTZqX2RmZE9OQWZQOEJZYjA&usp=sharing" target="_blank">Mirror 1 @ Google Drive</a>.
@@ -120,7 +120,7 @@ Generally speaking, if hostapd services are running, you should be OK. The PiPas
 
 If the PiPass logging system is sending a warning message regarding invalid MAC addresses, then you should make a note of the offending MAC addresses and double check if you have entered them correctly. PiPass will automatically skip invalid MAC addresses and move to the next valid Nintendo Zone in the list. Please note that some MAC addresses appear to be valid, but they are actually invalid according to hostapd. In these cases, it is best to edit PiPass DB. More information about editing PiPass DB can be found in the sections below.
 
-For WiFi driver issues, PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, Atheros AR5007UG, and Realtek chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point". There might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to use the PiPass Dashboard to configure the correct driver:
+For WiFi driver issues, the PiPass pre-made image has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, Atheros AR5007UG, and Realtek chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point". There might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to use the PiPass Dashboard to configure the correct driver:
 
     +   Navigate to the PiPass Dashboard with your web browser.
     +   Click "PiPass".
@@ -133,7 +133,7 @@ If problems persist, refer to the manual guide down below for some extra help.
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
 ##### Manually Installing PiPass
-Before you begin, there is a great guide that explains in detail on how to setup a Homepass Relay Station. It is a good read and I encourage everyone to take a look at it. It is especially helpful to those who are having WiFi driver issues. The guide, written by Semperverus, can be found <a href="https://docs.google.com/document/d/1EvmIwTIjPva5MHSFEIN0qsHtRmdRRiX3WNHu_ThxnOs/edit" target="_blank">here</a>. The following instructions will assume you are familiar with Linux and will briefly explain where everything is.
+Before you begin, there is a great guide that explains in detail on how to setup a Homepass Relay Station. It is a good read and I encourage everyone to take a look at it. It is especially helpful to those who are having WiFi driver issues. The guide, written by Semperverus, can be found <a href="https://docs.google.com/document/d/1EvmIwTIjPva5MHSFEIN0qsHtRmdRRiX3WNHu_ThxnOs/edit" target="_blank">here</a>. The following instructions will assume you are familiar with Linux and will briefly explain the installation process.
 
 Here is a list of dependencies needed for PiPass, so install the following packages through these commands:
 
@@ -144,22 +144,18 @@ Here is a list of dependencies needed for PiPass, so install the following packa
     ->  sudo apt-get install bridge-utils -y
     ->  sudo apt-get install p7zip-full -y
 
-This would also be a good point where you would install the correct WiFi driver for your WiFi USB dongle.
+This would also be a good point where you would install the correct WiFi driver for your WiFi USB dongle. As a reference, these are the WiFi drivers that the PiPass pre-made image uses:
+
+    ->  sudo apt-get install firmware-ralink -y
+    ->  sudo apt-get install firmware-realtek -y
+    ->  sudo apt-get install zd1211-firmware -y
+
+You may want to install the following in addition to the correct WiFi driver:
+
+    ->  sudo apt-get install firmware-linux-nonfree -y
+    ->  sudo apt-get install wireless-tools -y
 
 Now download PiPass from the 1.52 branch as a zip file and extract the contents on your local machine. You will notice three directories inside PiPass: etc, opt, and var. These three directories are the locations where you want to install PiPass (e.g., Linux root locations would be /etc/, /opt/, and /var/). Go ahead and merge the directories and it will be safe to overwrite the files with PiPass' configuration files.
-
-For security sake, PiPass will only work on the Nintendo 3DS systems that you authorize. Access the PiPass Dashboard by opening up a web browser on a device of your choice and enter your Raspberry Pi's IP address into the address bar. The PiPass Dashboard should be displayed. Go to your Nintendo 3DS and open up your connection settings to find out your 3DS' MAC address. Once you have your MAC address, you can add it to the authenticated list by doing the following:
-
-    +   Click "PiPass".
-    +   Click "Settings".
-    +   Enter your 3DS' MAC address on a separate line and in the format of XX:XX:XX:XX:XX:XX.
-    +   Click "Save".
-
-Likewise, you can add the MAC address of your Nintendo 3DS by entering the following command:
-
-    ->  sudo nano /etc/hostapd/mac_accept
-
-Like the dashboard, each MAC address should be on a new line.
 
 Most of the features controlled by PiPass can actually be ran through the PiPass Dashboard. Since your Raspberry Pi will act as a web server as well, you will need to make sure it has the permissions to do so. The following commands can grant execution:
 
@@ -175,7 +171,20 @@ Now add the following line at the end of the file:
 
     +   www-data ALL=(ALL:ALL) NOPASSWD: ALL
 
-With the previous steps completed, you will want to start PiPass. Access the PiPass Dashboard and do the following:
+For security sake, PiPass will only work on the Nintendo 3DS systems that you authorize. Access the PiPass Dashboard by opening up a web browser on a device of your choice and enter your Raspberry Pi's IP address into the address bar. The PiPass Dashboard should be displayed. Go to your Nintendo 3DS and open up your connection settings to find out your 3DS' MAC address. Once you have your MAC address, you can add it to the authenticated list by doing the following:
+
+    +   Click "PiPass".
+    +   Click "Settings".
+    +   Enter your 3DS' MAC address on a separate line and in the format of XX:XX:XX:XX:XX:XX.
+    +   Click "Save".
+
+Likewise, you can add the MAC address of your Nintendo 3DS by entering the following command:
+
+    ->  sudo nano /etc/hostapd/mac_accept
+
+Like the dashboard, each MAC address should be on a new line.
+
+With the previous steps completed, you will want to start PiPass. In the PiPass Dashboard:
 
     +   Click "PiPass".
     +   Click "Start".
@@ -190,7 +199,7 @@ Generally speaking, if hostapd services are running, you should be OK. The PiPas
 
 If the PiPass logging system is sending a warning message regarding invalid MAC addresses, then you should make a note of the offending MAC addresses and double check if you have entered them correctly. PiPass will automatically skip invalid MAC addresses and move to the next valid Nintendo Zone in the list. Please note that some MAC addresses appear to be valid, but they are actually invalid according to hostapd. In these cases, it is best to edit PiPass DB. More information about editing PiPass DB can be found in the sections below.
 
-For WiFi driver issues, PiPass has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, Atheros AR5007UG, and Realtek chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point". There might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to use the PiPass Dashboard to configure the correct driver:
+For WiFi driver issues, check to see if your WiFi driver is correctly installed and working. There might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to use the PiPass Dashboard to configure the correct driver:
 
     +   Navigate to the PiPass Dashboard with your web browser.
     +   Click "PiPass".
