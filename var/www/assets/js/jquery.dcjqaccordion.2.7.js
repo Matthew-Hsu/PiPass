@@ -12,7 +12,7 @@
 
 	$.fn.dcAccordion = function(options) {
 
-		//set default options 
+		//set default options
 		var defaults = {
 			classParent	 : 'dcjq-parent',
 			classActive	 : 'active',
@@ -78,7 +78,7 @@
 				}
 
 			} else {
-			
+
 				$('li a',obj).click(function(e){
 
 					$activeLi = $(this).parent('li');
@@ -104,7 +104,7 @@
 						$(this).siblings('ul').slideToggle(defaults.speed);
 						$('> a',$activeLi).addClass(defaults.classActive);
 					}
-					
+
 //					// Write cookie if save state is on
 //					if(defaults.saveState == true){
 //						createCookie(defaults.cookie, obj);
@@ -136,7 +136,7 @@
 					});
 				}
 			}
-			
+
 			function linkOver(){
 
 			$activeLi = $(this).parent('li');

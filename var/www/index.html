@@ -25,7 +25,7 @@
     <link href="assets/css/style-responsive.css" rel="stylesheet">
 
     <!-- JQUERY -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
   </head>
 
   <body>
@@ -190,7 +190,7 @@
                   </div>
                   <h4>About PiPass</h4>
                   <p>
-                    Huzzah! You are running on master branch updates based on PiPass 1.52. An updated PiPass is an adventurous PiPass!
+                    The night is dark and full of terrors... but PiPass 1.52M, based on master branch updates, burns them all away.
                   </p>
                 </div>
                 <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="About PiPass" aria-hidden="true">
@@ -201,25 +201,19 @@
                         <h4 class="modal-title" id="About PiPass">About PiPass</h4>
                       </div>
                       <div class="modal-body">
-                        <p>Master Branch Changelog:</p>
+                        <p>Important Notice:</p>
+                        <ul>
+                          <li>[+] Hostapd security can now be enabled / disabled through 'PiPass Settings'. PiPass will assume no security if this setting is not updated after updating PiPass from version 1.51 or lower. Please go to 'PiPass Settings' and verify 'Hostapd Security'. Users of PiPass 1.52 or higher can ignore this message.</li>
+                        </ul>
+                        <p>PiPass Master Branch Changelog:</p>
                         <ul>
                           <li>[+] User interface tweaks.</li>
+                          <li>[+] 'PiPass Settings' uses JQuery form validation instead of HTML5 form validation.</li>
+                          <li>[+] HTML code cleanup.</li>
                         </ul>
                         <p>PiPass 1.52 Changelog:</p>
                         <ul>
-                          <li>[+] Hostapd security can now be enabled / disabled through 'PiPass Settings'. View the README for important information regarding this change.</li>
-                          <li>[+] Fixed 'Shuffle Zones' bug where piPass.py would force it to be enabled.</li>
-                          <li>[+] PiPass now features a logging system that is accessible through the dashboard.</li>
-                          <li>[+] piPass.py works with the logging system to diagnose issues (e.g., hostapd WiFi drivers).</li>
-                          <li>[+] PiPass will log all invalid MAC addresses encountered and skip to the next zone.</li>
-                          <li>[+] PiPass can now reset the network through the dashboard.</li>
-                          <li>[+] PiPass PHP form validation messages now conforms to responsive design and the user interface.</li>
-                          <li>[+] The PiPass version can now be viewed through the dashboard.</li>
-                          <li>[+] Changelogs are accessible through 'About PiPass' in the dashboard.</li>
-                          <li>[+] The dashboard only refreshes the 'Spoofing Status' and the 'Show Current' table, instead of the entire page.</li>
-                          <li>[+] Scrollable modals.</li>
-                          <li>[+] Minor rewording.</li>
-                          <li>[+] Minor tweaks.</li>
+                          <li>[+] Visit the PiPass GitHub page for more information.
                         </ul>
                       </div>
                       <div class="modal-footer">
@@ -252,9 +246,9 @@
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
   <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
-  <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+  <script src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
   <script src="assets/js/jquery.scrollTo.min.js"></script>
-  <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+  <script src="assets/js/jquery.nicescroll.js"></script>
 
   <!--COMMON SCRIPT FOR ALL PAGES-->
   <script src="assets/js/common-scripts.js"></script>

@@ -2,6 +2,7 @@
 
 ## Table of Contents
 - [About PiPass](#about-pipass)
+- [Master Branch Updates](#master-branch-updates)
 - [What's New in Version 1.52](#whats-new-in-version-152)
 - [Known Behaviours](#known-behaviours)
 - [Helpful Information](#helpful-information)
@@ -33,6 +34,15 @@
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine-tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
 
 This does not showcase a complete list of features, but it gives a sense in what PiPass looks like: <a href="https://www.youtube.com/watch?v=ttoDlpEBqBU" target="_blank">PiPass Video Overview</a>. The video shown is based on PiPass 1.4, however the general work-flow is relatively the same as in PiPass 1.52 with some minor differences.
+
+<strong><a href="#table-of-contents">[Back to Top]</a></strong>
+
+## Master Branch Updates
+Please use 'PiPass Update' to receive the following changes that were implemented after PiPass 1.52:
+
+* User interface tweaks.
+* 'PiPass Settings' uses JQuery form validation instead of HTML5 form validation.
+* HTML code cleanup.
 
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
