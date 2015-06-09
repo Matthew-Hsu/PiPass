@@ -111,10 +111,10 @@
                 <h4><i class="fa fa-angle-right"></i> Spoofing Status</h4>
                 <section id="unseen">
                   <script>
-                    setInterval(function refresh()
+                    setInterval(function refreshStatus()
                     {
                       $.getJSON("assets/json/current_state.json",
-                      function displayContent(json)
+                      function displayStatusContent(json)
                       {
                         var pre_html = '<table class="table table-bordered table-striped table-condensed"><thead><tr><th>MAC Address</th><th>SSID</th><th>Description</th></tr></thead><tbody>';
                         var actual_html='';
@@ -137,18 +137,63 @@
                         document.getElementById('unseen').innerHTML = pre_html + actual_html + post_html;
                       });
 
-                      return refresh;
+                      return refreshStatus;
 
-                    }(), 10000);
+                    }(), 5000);
                   </script>
                 </section>
               </div><!-- /CONTENT-PANEL -->
             </div><!-- /COL-LG-12 -->
           </div><!-- /ROW -->
+
+          <div class="row mt">
+            <div class="col-lg-12">
+              <!-- BASIC PROGRESS BARS-->
+              <div class="showback">
+                <h4><i class="fa fa-angle-right"></i> Time Until Next Zone</h4>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-warning" id="nextZone" role="progressbar"></div>
+                </div>
+                <script>
+                  setInterval(function refreshTime()
+                  {
+                    $.getJSON("assets/json/current_zone_end_time.json",
+                    function displayTimeContent(json)
+                    {
+                      var UTC_END_TIME = json.CURRENT_ZONE_END_TIME;
+                      var STREETPASS_CYCLE_SECONDS = json.STREETPASS_CYCLE_SECONDS;
+
+                      if (UTC_END_TIME == 0)
+                      {
+                        $("#nextZone").css("width", "0%");
+                      }
+                      else
+                      {
+                        var UTCCurrentTime = new Date();
+                        UTCCurrentTime.toUTCString();
+
+                        var zoneRemainingTime = (UTC_END_TIME - Math.floor(UTCCurrentTime.getTime()) / 1000);
+                        var zoneCompletionPercentage = (Math.abs(zoneRemainingTime - STREETPASS_CYCLE_SECONDS) / STREETPASS_CYCLE_SECONDS) * 100;
+                        zoneCompletionPercentage = String(zoneCompletionPercentage) + "%";
+
+                        $("#nextZone").css("width", zoneCompletionPercentage);
+                      }
+
+                    });
+
+                    return refreshTime;
+
+                  }(), 5000);
+                </script>
+              </div><!--/SHOWBACK -->
+            </div><!-- /COL-LG-12 -->
+          </div><!-- /ROW -->
+
+          <h3><i class="fa fa-info-circle"></i> Additional Information</h3>
           <div class="row mt">
             <div class="col-lg-13">
-              <div class="col-lg-3 col-md-3 col-sm-13">
-                <div class="dmbox">
+              <div class="col-lg-6 col-md-6 col-sm-13">
+                <div class="showback centered">
                   <div class="service-icon">
                     <a class="" href="https://github.com/Matthew-Hsu/PiPass" target="_blank"><i class="dm-icon fa fa-github fa-5x"></i></a>
                   </div>
@@ -157,10 +202,10 @@
                     Visit the PiPass GitHub page for an in-depth guide and to keep up-to-date with the latest developmental news and updates.
                   </p>
                 </div>
-              </div><!-- END DMBOX -->
+              </div><!-- END SHOWBACK -->
 
-              <div class="col-lg-3 col-md-3 col-sm-13">
-                <div class="dmbox">
+              <div class="col-lg-6 col-md-6 col-sm-13">
+                <div class="showback centered">
                   <div class="service-icon">
                     <a class="" href="assets/php/pipass_logs.php"><i class="dm-icon fa fa-book fa-5x"></i></a>
                   </div>
@@ -169,10 +214,10 @@
                     Want to check under the hood of PiPass? Trying to debug something? If so, check out the PiPass logs for a console view.
                   </p>
                 </div>
-              </div><!-- END DMBOX -->
+              </div><!-- END SHOWBACK -->
 
-              <div class="col-lg-3 col-md-3 col-sm-13">
-                <div class="dmbox">
+              <div class="col-lg-6 col-md-6 col-sm-13">
+                <div class="showback centered">
                   <div class="service-icon">
                     <a class="" href="https://github.com/Matthew-Hsu/PiPass/issues" target="_blank"><i class="dm-icon fa fa-bug fa-5x"></i></a>
                   </div>
@@ -181,10 +226,10 @@
                     Something not working correctly? Read the documentation? If so, report your issue with as much detail as you can provide.
                   </p>
                 </div>
-              </div><!-- END DMBOX -->
+              </div><!-- END SHOWBACK -->
 
-              <div class="col-lg-3 col-md-3 col-sm-13">
-                <div class="dmbox">
+              <div class="col-lg-6 col-md-6 col-sm-13">
+                <div class="showback centered">
                   <div class="service-icon">
                     <a class="" data-toggle="modal" data-target="#info"><i class="dm-icon fa fa-question fa-5x"></i></a>
                   </div>
@@ -207,8 +252,9 @@
                         </ul>
                         <p>PiPass Master Branch Changelog:</p>
                         <ul>
-                          <li>[+] User interface tweaks.</li>
                           <li>[+] 'PiPass Settings' uses JQuery form validation instead of HTML5 form validation.</li>
+                          <li>[+] Added 'Time Until Next Zone' progress bar to the dashboard.</li>
+                          <li>[+] User interface tweaks.</li>
                           <li>[+] HTML code cleanup.</li>
                         </ul>
                         <p>PiPass 1.52 Changelog:</p>
@@ -222,7 +268,7 @@
                     </div>
                   </div>
                 </div><!-- END MODAL -->
-              </div><!-- END DMBOX -->
+              </div><!-- END SHOWBACK -->
             </div><!-- /COL-LG-13 -->
           </div><!-- /ROW -->
         </section>

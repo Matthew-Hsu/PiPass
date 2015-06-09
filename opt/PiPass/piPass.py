@@ -10,6 +10,7 @@ import urllib
 import signal
 import os.path
 import logging
+import datetime
 import subprocess
 import logging.handlers
 
@@ -152,13 +153,33 @@ def loadSettings():
 
     return None
 
-# Write PiPass status to DASHBOARD_INFO.
+# Reset the PiPass Dashboard.
 def updateStatus():
     try:
         with io.open(DASHBOARD_INFO, 'w', encoding='utf-8') as f:
             f.write(unicode('[{"gsx$ssid": {"$t": "Not Available."}, "gsx$mac": {"$t": "Not Available."}, "gsx$description": {"$t": "PiPass is not running."}}]'))
     except IOError:
         logger.error('Unable to write the file: ' + DASHBOARD_INFO + '.')
+        logger.info('PiPass has been shutdown with an error.')
+        exit(1)
+
+    try:
+        with io.open(CURRENT_ZONE_END_TIME, 'w', encoding='utf-8') as f:
+            f.write(unicode('{"CURRENT_ZONE_END_TIME":"0", "STREETPASS_CYCLE_SECONDS":"0"}'))
+    except IOError:
+        logger.error('Unable to write the file: ' + CURRENT_ZONE_END_TIME + '.')
+        logger.info('PiPass has been shutdown with an error.')
+        exit(1)
+
+    return None
+
+# Update the end time for the current Nintendo Zone.
+def updateZoneEndTime(myZoneStartTime, mySteetPassCycleSeconds):
+    try:
+        with io.open(CURRENT_ZONE_END_TIME, 'w', encoding='utf-8') as f:
+            f.write(unicode('{"CURRENT_ZONE_END_TIME":"' + str(myZoneStartTime + mySteetPassCycleSeconds) + '", "STREETPASS_CYCLE_SECONDS":"' + str(mySteetPassCycleSeconds) + '"}'))
+    except IOError:
+        logger.error('Unable to write the file: ' + CURRENT_ZONE_END_TIME + '.')
         logger.info('PiPass has been shutdown with an error.')
         exit(1)
 
@@ -195,6 +216,11 @@ def sigUsr1(signum, stack):
 
     loadDashboard()
     loadSettings()
+
+    global currentZoneStartTime
+    global STREETPASS_CYCLE_SECONDS
+
+    updateZoneEndTime(currentZoneStartTime, STREETPASS_CYCLE_SECONDS)
 
     logger.info('Refresh Detected - Using the updated PiPass configuration.')
 
@@ -236,6 +262,9 @@ NETWORK_CONFIGURATION = "/etc/hostapd/hostapd.conf"
 # Path to the JSON file where PiPass will write to for the PiPass Dashboard to display connection information.
 DASHBOARD_INFO = DASHBOARD + "assets/json/current_state.json"
 
+# Path to the JSON file where PiPass will write to for the PiPass Dashboard to calculate the time until the next Nintendo Zone.
+CURRENT_ZONE_END_TIME = DASHBOARD + "assets/json/current_zone_end_time.json"
+
 # Path to the JSON file where PiPass will write to for the 'Show Current' page on the PiPass Dashboard.
 CURRENT_LIST = DASHBOARD + "assets/json/current_list.json"
 
@@ -254,6 +283,9 @@ clearVisits = True
 
 # Flag that informs PiPass if we should test for any potential hostapd driver issues.
 doTestDriver = True
+
+# The start time for the current Nintendo Zone.
+currentZoneStartTime = 0
 
 #### PiPass Main #####
 
@@ -333,7 +365,7 @@ while doExecute:
 
         # If the Nintendo Zone was visited too recently, skip it.
         try:
-            if time.time() - zoneVisits[visit] < STREETPASS_VISIT_INTERVAL:
+            if (datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds() - zoneVisits[visit] < STREETPASS_VISIT_INTERVAL:
                 logger.info('Recent Zone Detected - Trying the next Nintendo Zone.')
                 continue
         except KeyError:
@@ -409,7 +441,11 @@ while doExecute:
             continue
 
         # Note the current time for the current visit to the Nintendo Zone.
-        zoneVisits[visit] = time.time()
+        zoneVisits[visit] = (datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds()
+
+        # Prepare to calculate the end time for the current Nintendo Zone.
+        currentZoneStartTime = zoneVisits[visit]
+        updateZoneEndTime(currentZoneStartTime, STREETPASS_CYCLE_SECONDS)
 
         # Nintendo Zone identity acquired for PiPass spoofing.
         logger.info('Spoofing as ' + zoneValues[1] + ' on ' + zoneValues[0] + ' ( ' + zoneValues[2] + ' ) for ' + str(STREETPASS_CYCLE_MINUTES) + ' minute(s).')
@@ -430,8 +466,8 @@ while doExecute:
 
         # Receiving SIGUSR1 or SIGUSR2 will interrupt the time.sleep call. The loop allows
         # for sleep to be resumed up to the current cycle setting.
-        start = time.time()
-        while time.time() - start < STREETPASS_CYCLE_SECONDS:
+        start = (datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds()
+        while (datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds() - start < STREETPASS_CYCLE_SECONDS:
             time.sleep(5)
 
 logger.info('PiPass has been shutdown successfully.')

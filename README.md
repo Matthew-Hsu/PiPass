@@ -40,8 +40,9 @@ This does not showcase a complete list of features, but it gives a sense in what
 ## Master Branch Updates
 Please use 'PiPass Update' to receive the following changes that were implemented after PiPass 1.52:
 
-* User interface tweaks.
 * 'PiPass Settings' uses JQuery form validation instead of HTML5 form validation.
+* Added 'Time Until Next Zone' progress bar to the dashboard.
+* User interface tweaks.
 * HTML code cleanup.
 
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
