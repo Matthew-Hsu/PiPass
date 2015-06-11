@@ -35,6 +35,8 @@ PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The P
 
 This does not showcase a complete list of features, but it gives a sense in what PiPass looks like: <a href="https://www.youtube.com/watch?v=ttoDlpEBqBU" target="_blank">PiPass Video Overview</a>. The video shown is based on PiPass 1.4, however the general work-flow is relatively the same as in PiPass 1.52 with some minor differences.
 
+If you like PiPass, please star the project on GitHub and thanks for trying out PiPass!
+
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
 ## Master Branch Updates
@@ -336,6 +338,6 @@ I want to expand the functionality of PiPass by adding the following:
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
 ## Support
-If you have any problems with PiPass, please let me know through my GitHub. I will do my best to help you out. Thanks for trying out PiPass!
+If you have any problems with PiPass, please let me know through my GitHub. I will do my best to help you out. 
 
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
