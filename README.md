@@ -91,6 +91,8 @@ PiPass can be installed by downloading a pre-made image for your Raspberry Pi 2 
 
 Before moving onto your chosen installation method, please ensure that your Raspberry Pi is connected to your router via a Ethernet cable and that your WiFi USB dongle is plugged into your Raspberry Pi as well.
 
+<strong><a href="#table-of-contents">[Back to Top]</a></strong>
+
 ##### PiPass Pre-made Image
 PiPass can be downloaded through these mirrors:
 
