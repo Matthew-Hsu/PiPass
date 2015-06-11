@@ -89,6 +89,8 @@ The PiPass pre-made image has drivers pre-installed for Ralink, ZyDAS ZD1211/121
 ## Installation
 PiPass can be installed by downloading a pre-made image for your Raspberry Pi 2 or by downloading the source files here on GitHub and setting it up manually. Manual setup will be more work, but it has the advantage of being able to use PiPass on older Raspberry Pi models and other Linux based operating systems.
 
+Before moving onto your chosen installation method, please ensure that your Raspberry Pi is connected to your router via a Ethernet cable and that your WiFi USB dongle is plugged into your Raspberry Pi as well.
+
 ##### PiPass Pre-made Image
 PiPass can be downloaded through these mirrors:
 
