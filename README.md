@@ -42,6 +42,7 @@ If you like PiPass, please star the project on GitHub and thanks for trying out 
 ## Master Branch Updates
 Please use 'PiPass Update' to receive the following changes that were implemented after PiPass 1.52:
 
+* PiPass will now check network connectivity and try up to five times to reconnect, with one minute intervals, before exiting if a network connectivity problem is detected.
 * 'PiPass Settings' uses JQuery form validation instead of HTML5 form validation.
 * Added 'Time Until Next Zone' progress bar to the dashboard.
 * User interface tweaks.
@@ -50,7 +51,7 @@ Please use 'PiPass Update' to receive the following changes that were implemente
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
 ## What's New in Version 1.52
-<b>Note: </b>Those who are using 'PiPass Update' on versions below PiPass 1.52, please go to 'PiPass Settings' and verify 'Hostapd Security'. PiPass 1.52 can now enable / disable hostapd security and it will assume no security if this setting is not updated after updating PiPass to PiPass 1.52. Once this setting has been updated, PiPass will automatically remember this setting for future versions.
+<b>NOTE: </b>Those who are using 'PiPass Update' on versions below PiPass 1.52, please go to 'PiPass Settings' and verify 'Hostapd Security'. PiPass 1.52 can now enable / disable hostapd security and it will assume no security if this setting is not updated after updating PiPass to PiPass 1.52. Once this setting has been updated, PiPass will automatically remember this setting for future versions.
 
 PiPass 1.52 focuses on overall polish and being informative about what is exactly going on "behind the scenes". The biggest feature addition is the logging system that provides extra information regarding status and it also aids in troubleshooting. The changelog for this version of PiPass is as follows:
 
@@ -160,6 +161,7 @@ Here is a list of dependencies needed for PiPass, so install the following packa
     ->  sudo apt-get install hostapd -y
     ->  sudo apt-get install bridge-utils -y
     ->  sudo apt-get install p7zip-full -y
+    ->  sudo apt-get install iputils-ping -y
 
 This would also be a good point where you would install the correct WiFi driver for your WiFi USB dongle. As a reference, these are the WiFi drivers that the PiPass pre-made image uses:
 
@@ -270,6 +272,8 @@ The KEY would be the value 1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M between 
 
 Now you will need to enter the worksheet you want to use. "PiPass DB Worksheet" controls which worksheet to use. The default value of 1 selects the very first worksheet and the value of 2 selects the second worksheet. For example, setting PiPass DB Worksheet to the value of 2 would use the "nintendo_zones" worksheet in the templated spreadsheet that you just copied.
 
+<b>NOTE: </b> When creating your own PiPass DB, please keep the formatting of the Google Spreadsheet consistent with the default PiPass DB. You may add/remove worksheets and change the content, but do not introduce new formatting (e.g., colouring of cells) as Google may return incorrect identifiers that PiPass will not understand.
+
 ##### Hostapd Security
 This feature can be enabled or disabled through the PiPass Dashboard. Enabling security will make PiPass use the 3DS MAC addresses that are inputted in '3DS Authentication'. Disabling security will allow anyone access to your network. When disabling security, discretion is advised.
 
@@ -338,6 +342,6 @@ I want to expand the functionality of PiPass by adding the following:
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
 ## Support
-If you have any problems with PiPass, please let me know through my GitHub. I will do my best to help you out. 
+If you have any problems with PiPass, please let me know through my GitHub. I will do my best to help you out.
 
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>

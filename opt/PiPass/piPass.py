@@ -185,6 +185,21 @@ def updateZoneEndTime(myZoneStartTime, mySteetPassCycleSeconds):
 
     return None
 
+# Determines if PiPass has network connectivity.
+def checkNetworkConnection():
+    for retry in xrange(1,6):
+        # Ping the Google DNS server to determine if PiPass has Internet access.
+        if subprocess.call('sudo ping -c 1 8.8.8.8', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True) == 1:
+            logger.warning('Internet access is not available. Trying to reconnect in one minute.')
+            time.sleep(60)
+        else:
+            return None
+
+    logger.error('Unable to connect to the Internet.')
+    updateStatus()
+    logger.info('PiPass has been shutdown with an error.')
+    exit(1)
+
 # Handles SIGQUIT, which is interpreted as a request to terminate PiPass.
 def sigQuit(signum, stack):
     updateStatus()
@@ -298,6 +313,9 @@ logger.info('PiPass is now running.')
 
 # PiPass will keep running until it is requested to stop.
 while doExecute:
+    # Check to see if PiPass has a network connection.
+    checkNetworkConnection()
+
     # Load the Nintendo Zone information from PIPASS_DB.
     try:
         response = urllib.urlopen(PIPASS_DB)
