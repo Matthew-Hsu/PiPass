@@ -47,7 +47,7 @@ def loadDashboard():
             pipass_dashboard = json.load(f)
     except IOError:
         logger.error('Unable to read the file: /opt/PiPass/config/pipass_dashboard.json.')
-        updateStatus()
+        updateStatus('Not Available', 'Not Available', 'PiPass is not running')
         logger.info('PiPass has been shutdown with an error.')
         exit(1)
 
@@ -70,7 +70,7 @@ def loadSettings():
             pipass_config = json.load(f)
     except IOError:
         logger.error('Unable to read the file: ' + DASHBOARD + 'assets/json/pipass_config.json.')
-        updateStatus()
+        updateStatus('Not Available', 'Not Available', 'PiPass is not running')
         logger.info('PiPass has been shutdown with an error.')
         exit(1)
 
@@ -154,10 +154,10 @@ def loadSettings():
     return None
 
 # Reset the PiPass Dashboard.
-def updateStatus():
+def updateStatus(mySSID, myMAC, myDescription):
     try:
         with io.open(DASHBOARD_INFO, 'w', encoding='utf-8') as f:
-            f.write(unicode('[{"gsx$ssid": {"$t": "Not Available."}, "gsx$mac": {"$t": "Not Available."}, "gsx$description": {"$t": "PiPass is not running."}}]'))
+            f.write(unicode('[{"gsx$ssid": {"$t": "' + mySSID + '."}, "gsx$mac": {"$t": "' + myMAC + '."}, "gsx$description": {"$t": "' + myDescription + '."}}]'))
     except IOError:
         logger.error('Unable to write the file: ' + DASHBOARD_INFO + '.')
         logger.info('PiPass has been shutdown with an error.')
@@ -185,24 +185,28 @@ def updateZoneEndTime(myZoneStartTime, mySteetPassCycleSeconds):
 
     return None
 
-# Determines if PiPass has network connectivity.
-def checkNetworkConnection():
-    for retry in xrange(1,6):
-        # Ping the Google DNS server to determine if PiPass has Internet access.
-        if subprocess.call('sudo ping -c 1 8.8.8.8', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True) == 1:
-            logger.warning('Internet access is not available. Trying to reconnect in one minute.')
-            time.sleep(60)
-        else:
-            return None
+# Determines the network connectivity status of PiPass.
+def isNetworkConnected():
+    global isDisconnected
 
-    logger.error('Unable to connect to the Internet.')
-    updateStatus()
-    logger.info('PiPass has been shutdown with an error.')
-    exit(1)
+    while True:
+        # Ping the Google DNS server to determine if PiPass has Internet access.
+        if subprocess.call('sudo ping -c 3 8.8.8.8', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True) == 1:
+            # Ping another Google DNS server to have higher certainty that the network connectivity issue is real.
+            if subprocess.call('sudo ping -c 3 8.8.4.4', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True) == 1:
+                subprocess.call('sudo service hostapd stop', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
+                isDisconnected = True
+                updateStatus('Not Available', 'Not Available', 'Internet access is not available. PiPass is trying to reconnect')
+                logger.warning('Internet access is not available. Trying to reconnect in one minute.')
+                time.sleep(60)
+            else:
+                return True
+        else:
+            return True
 
 # Handles SIGQUIT, which is interpreted as a request to terminate PiPass.
 def sigQuit(signum, stack):
-    updateStatus()
+    updateStatus('Not Available', 'Not Available', 'PiPass is not running')
 
     # The time elapsed loop records its start time in "start". By setting to 0,
     # this forces the elapsed time to a huge number which results in advancing
@@ -302,6 +306,9 @@ doTestDriver = True
 # The start time for the current Nintendo Zone.
 currentZoneStartTime = 0
 
+# Flag that informs PiPass if a network disconnection has been detected.
+isDisconnected = False
+
 #### PiPass Main #####
 
 # Lighting the beacons...
@@ -314,14 +321,14 @@ logger.info('PiPass is now running.')
 # PiPass will keep running until it is requested to stop.
 while doExecute:
     # Check to see if PiPass has a network connection.
-    checkNetworkConnection()
+    isNetworkConnected()
 
     # Load the Nintendo Zone information from PIPASS_DB.
     try:
         response = urllib.urlopen(PIPASS_DB)
     except Exception:
         logger.error('Unable to read the URL: ' + PIPASS_DB + '.')
-        updateStatus()
+        updateStatus('Not Available', 'Not Available', 'PiPass is not running')
         logger.info('PiPass has been shutdown with an error.')
         exit(1)
 
@@ -329,7 +336,7 @@ while doExecute:
         results = json.loads(response.read())
     except ValueError:
         logger.error('Unable to parse the JSON in: ' + PIPASS_DB + '.')
-        updateStatus()
+        updateStatus('Not Available', 'Not Available', 'PiPass is not running')
         logger.info('PiPass has been shutdown with an error.')
         exit(1)
 
@@ -344,7 +351,7 @@ while doExecute:
             f.write(unicode(json.dumps(results, ensure_ascii=False)))
     except IOError:
         logger.error('Unable to write the file: ' + CURRENT_LIST + '.')
-        updateStatus()
+        updateStatus('Not Available', 'Not Available', 'PiPass is not running')
         logger.info('PiPass has been shutdown with an error.')
         exit(1)
 
@@ -360,6 +367,9 @@ while doExecute:
 
     # Begin looping through all the Nintendo Zones in the collection.
     for data in results['feed']['entry']:
+        # Ensure isDisconnected is False.
+        isDisconnected = False
+
         # If the user has issued an update, then restart with the updated Nintendo Zones.
         if piPassStatus == "update":
             piPassStatus = "execute"
@@ -397,7 +407,7 @@ while doExecute:
             fo = open(NETWORK_CONFIGURATION, "w")
         except IOError:
             logger.error('Unable to write the file: ' + NETWORK_CONFIGURATION + '.')
-            updateStatus()
+            updateStatus('Not Available', 'Not Available', 'PiPass is not running')
             logger.info('PiPass has been shutdown with an error.')
             exit(1)
 
@@ -425,7 +435,7 @@ while doExecute:
                     fo = open(NETWORK_CONFIGURATION, "w")
                 except IOError:
                     logger.error('Unable to write the file: ' + NETWORK_CONFIGURATION + '.')
-                    updateStatus()
+                    updateStatus('Not Available', 'Not Available', 'PiPass is not running')
                     logger.info('PiPass has been shutdown with an error.')
                     exit(1)
 
@@ -444,7 +454,7 @@ while doExecute:
                 if 'hostapd' not in hostapdStatus:
                     logger.warning('A possible WiFi driver issue has been detected.')
                     logger.error('Unable to start hostapd.')
-                    updateStatus()
+                    updateStatus('Not Available', 'Not Available', 'PiPass is not running')
                     logger.info('PiPass has been shutdown with an error.')
                     exit(1)
 
@@ -453,7 +463,7 @@ while doExecute:
             # If we are here, we know that issue [2] is affecting hostapd.
             logger.warning('A possible invalid MAC address has been detected: ' + zoneValues[1] + '.')
             logger.error('Unable to start hostapd.')
-            updateStatus()
+            updateStatus('Not Available', 'Not Available', 'PiPass is not running')
             logger.info('PiPass is moving onto the next Nintendo Zone.')
 
             continue
@@ -476,7 +486,7 @@ while doExecute:
                 f.write(unicode(']'))
         except IOError:
             logger.error('Unable to write the file: ' + DASHBOARD_INFO + '.')
-            updateStatus()
+            updateStatus('Not Available', 'Not Available', 'PiPass is not running')
             logger.info('PiPass has been shutdown with an error.')
             exit(1)
 
@@ -486,6 +496,11 @@ while doExecute:
         # for sleep to be resumed up to the current cycle setting.
         start = (datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds()
         while (datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds() - start < STREETPASS_CYCLE_SECONDS:
+            # Verify network connection. If network connectivity is lost, we want to halt StreetPass cycling and attempt to reconnect.
+            # Once reconnected, move to the next Nintendo Zone in the list.
+            if isNetworkConnected() and isDisconnected:
+                break
+
             time.sleep(5)
 
 logger.info('PiPass has been shutdown successfully.')

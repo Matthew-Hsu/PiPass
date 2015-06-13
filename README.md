@@ -42,7 +42,7 @@ If you like PiPass, please star the project on GitHub and thanks for trying out 
 ## Master Branch Updates
 Please use 'PiPass Update' to receive the following changes that were implemented after PiPass 1.52:
 
-* PiPass will now check network connectivity and try up to five times to reconnect, with one minute intervals, before exiting if a network connectivity problem is detected.
+* PiPass will now check network connectivity. If there is a network connectivity issue, PiPass will stop cycling and stop hostapd. Once network connectivity has been re-established, PiPass will continue cycling again.
 * 'PiPass Settings' uses JQuery form validation instead of HTML5 form validation.
 * Added 'Time Until Next Zone' progress bar to the dashboard.
 * User interface tweaks.
