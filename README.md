@@ -163,7 +163,7 @@ If problems persist, refer to the manual guide for some extra help.
 
 The PiPass automatic installer is meant to help those install PiPass on all models of the Raspberry Pi. Depending on the operating system, the automatic installer will work on all Raspbian / Debian distributions. Before you begin, the automatic installer assumes that you have a operating system already installed and configured on your Raspberry Pi.
 
-The installer can be downloaded <a href="https://drive.google.com/open?id=0B8bbfqFbkJvVflpDNWhndW5ZNVV5VkpVWWNGZUhWdjJ4bVNreGI0NXlteVBEX3NYZkRZLU0&authuser=0" target="_blank">here</a>. After downloading, simply copy install_pipass.sh to your Raspberry Pi and execute it through the terminal. There may be some permission issues, so run this command in the same directory in where you copied install_pipass.sh:
+The installer can be downloaded through <a href="https://drive.google.com/open?id=0B8bbfqFbkJvVflpDNWhndW5ZNVV5VkpVWWNGZUhWdjJ4bVNreGI0NXlteVBEX3NYZkRZLU0&authuser=0" target="_blank">Google Drive</a> or through <a href="https://www.dropbox.com/sh/pe2v63t476pmg9n/AADfRQVSMloUKkOhmEkGcjdwa?dl=0" target="_blank">Dropbox</a>. After downloading, simply copy install_pipass.sh to your Raspberry Pi and execute it through the terminal. There may be some permission issues, so run this command in the same directory in where you copied install_pipass.sh:
 
     ->    sudo chmod 755 install_pipass.sh
 
