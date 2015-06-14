@@ -99,8 +99,8 @@ Before moving onto your chosen installation method, please ensure that your Rasp
 ##### PiPass Pre-made Image
 PiPass can be downloaded through these mirrors:
 
-* <a href="https://drive.google.com/folderview?id=0B8bbfqFbkJvVfk55dzhwWUZNUkNpQ2lXMHk3bnZXOUl5V2FlOTZqX2RmZE9OQWZQOEJZYjA&usp=sharing" target="_blank">Mirror 1 @ Google Drive</a>.
-* <a href="https://www.dropbox.com/sh/91rdhi212d1vqnj/AADKzZCSQg89t68nU5R_quu9a?dl=0" target="_blank">Mirror 2 @ Dropbox</a>.
+* <a href="https://drive.google.com/open?id=0B8bbfqFbkJvVfnE0amxxcXYyd0lMQVFwTjhnNUFRaXpnVi1YWnd2MDVUYW5tUkR6bVk3c2s&authuser=0" target="_blank">Mirror 1 @ Google Drive</a>.
+* <a href="https://www.dropbox.com/sh/aflyu5ncey33fqs/AAC2AKM-udIwXSnqZuxGT4XJa?dl=0" target="_blank">Mirror 2 @ Dropbox</a>.
 
 The PiPass image was built using <a href="https://minibianpi.wordpress.com/" target="_blank">Minibian</a>, a light weight image based on the Raspbian operating system. The smallest SD card at my availability was 4GB, so a 4GB SD card will be required at minimum. The actual "real" size of everything is just a little over 500MB.
 
