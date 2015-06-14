@@ -195,7 +195,7 @@ Generally speaking, if hostapd services are running, you should be OK. The PiPas
 
 If the PiPass logging system is sending a warning message regarding invalid MAC addresses, then you should make a note of the offending MAC addresses and double check if you have entered them correctly. PiPass will automatically skip invalid MAC addresses and move to the next valid Nintendo Zone in the list. Please note that some MAC addresses appear to be valid, but they are actually invalid according to hostapd. In these cases, it is best to edit PiPass DB. More information about editing PiPass DB can be found in the sections below.
 
-For WiFi driver issues, the PiPass pre-made image has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, Atheros AR5007UG, and Realtek chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point". There might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to use the PiPass Dashboard to configure the correct driver:
+For WiFi driver issues, the PiPass automatic installer installs drivers for Ralink, ZyDAS ZD1211/1211B, Atheros AR5007UG, and Realtek chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point". There might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to use the PiPass Dashboard to configure the correct driver:
 
     +   Navigate to the PiPass Dashboard with your web browser.
     +   Click "PiPass".
