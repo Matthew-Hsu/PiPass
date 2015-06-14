@@ -252,6 +252,7 @@
                         </ul>
                         <p>PiPass Master Branch Changelog:</p>
                         <ul>
+                          <li>[+] PiPass will now accept incorrectly formatted MAC addresses that use dashes instead of colons. PiPass will internally convert dashes to colons when dealing with Nintendo Zone MAC addresses and externally make this change for authenticated MAC addresses.</li>
                           <li>[+] PiPass will now check network connectivity. If there is a network connectivity issue, PiPass will stop cycling and stop hostapd. Once network connectivity has been re-established, PiPass will continue cycling again.</li>
                           <li>[+] 'PiPass Settings' uses JQuery form validation instead of HTML5 form validation.</li>
                           <li>[+] Added 'Time Until Next Zone' progress bar to the dashboard.</li>

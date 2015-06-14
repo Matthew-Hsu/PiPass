@@ -116,6 +116,9 @@ if ($_POST)
   // Convert the list of authenticated Nintendo 3DS MAC addresses to uppercase.
   $_POST['AUTHENTICATION'] = strtoupper($_POST['AUTHENTICATION']);
 
+  // Replace all dashes with colons to help guard against hostapd errors.
+  $_POST['AUTHENTICATION'] = str_replace('-', ':', $_POST['AUTHENTICATION']);
+
   // Save the list of authenticated Nintendo 3DS systems to /etc/hostapd/mac_accept.
   file_put_contents('/tmp/mac_accept', $_POST['AUTHENTICATION']);
   exec('sudo cp /tmp/mac_accept /etc/hostapd/mac_accept');

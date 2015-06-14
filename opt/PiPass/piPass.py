@@ -386,10 +386,12 @@ while doExecute:
                 zoneValues[zoneValueIndex] = str(data[label]['$t'].encode('utf-8'))
                 zoneValueIndex = zoneValueIndex + 1
 
-        # Nintendo Zone visits use a key based on the SSID and the MAC address. The MAC
-        # address is forced to uppercase to detect duplicates that might vary
-        # by case.
-        visit = (zoneValues[0], zoneValues[1].upper())
+        # Ensure data format consistency with MAC addresses.
+        zoneValues[1] = str(zoneValues[1])
+        zoneValues[1] = zoneValues[1].upper().replace("-", ":")
+
+        # Nintendo Zone visits use a key based on the SSID and the MAC address.
+        visit = (zoneValues[0], zoneValues[1])
 
         # If the Nintendo Zone was visited too recently, skip it.
         try:
