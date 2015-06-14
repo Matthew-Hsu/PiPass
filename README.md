@@ -10,6 +10,7 @@
 - [Testing Environment](#testing-environment)
 - [Installation](#installation)
     - [PiPass Pre-made Image](#pipass-pre-made-image)
+    - [Automatic Installer](#automatic-installer)
     - [Manually Installing PiPass](#manually-installing-pipass)
 - [Using PiPass](#using-pipass)
     - [The PiPass Dashboard](#the-pipass-dashboard)
@@ -91,14 +92,20 @@ The PiPass pre-made image has drivers pre-installed for Ralink, ZyDAS ZD1211/121
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
 ## Installation
-PiPass can be installed by downloading a pre-made image for your Raspberry Pi 2 or by downloading the source files here on GitHub and setting it up manually. Manual setup will be more work, but it has the advantage of being able to use PiPass on older Raspberry Pi models and other Linux based operating systems.
+PiPass can be installed in three ways:
+
+1. Downloading and installing a pre-made image for your Raspberry Pi 2.
+
+2. Downloading and using a automatic installer for all Raspbian / Debian distributions. This will include the original Raspberry Pi Model B and Raspberry Pi Model B+.
+
+3. Downloading the source code and installing PiPass manually. Others have used the manual install to fit certain Raspberry Pi customization that they have and others have successfully installed PiPass on their router running custom firmware (e.g., Tomato). Manual setup will be more work, but it has the advantage of being used on many Linux based devices that support Python.
 
 Before moving onto your chosen installation method, please ensure that your Raspberry Pi is connected to your router via a Ethernet cable and that your WiFi USB dongle is plugged into your Raspberry Pi as well.
 
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
 ##### PiPass Pre-made Image
-PiPass can be downloaded through these mirrors:
+Currently, the pre-made image can only be used for the Raspberry Pi 2. PiPass can be downloaded through these mirrors:
 
 * <a href="https://drive.google.com/open?id=0B8bbfqFbkJvVfnE0amxxcXYyd0lMQVFwTjhnNUFRaXpnVi1YWnd2MDVUYW5tUkR6bVk3c2s&authuser=0" target="_blank">Mirror 1 @ Google Drive</a>.
 * <a href="https://www.dropbox.com/sh/aflyu5ncey33fqs/AAC2AKM-udIwXSnqZuxGT4XJa?dl=0" target="_blank">Mirror 2 @ Dropbox</a>.
@@ -147,7 +154,56 @@ For WiFi driver issues, the PiPass pre-made image has drivers pre-installed for 
     +   Enter the correct driver name for "Hostapd Driver".
     +   Click "Save".
 
-If problems persist, refer to the manual guide down below for some extra help.
+If problems persist, refer to the manual guide for some extra help.
+
+<strong><a href="#table-of-contents">[Back to Top]</a></strong>
+
+##### Automatic Installer
+<b>NOTE: </b>The automatic installer is considered BETA at the moment. It works for me on a clean and configured image of Minibian and it should work just the same on a clean and configured image of Raspbian. If there are some issues with the installer, please let me know.
+
+The PiPass automatic installer is meant to help those install PiPass on all models of the Raspberry Pi. Depending on the operating system, the automatic installer will work on all Raspbian / Debian distributions. Before you begin, the automatic installer assumes that you have a operating system already installed and configured on your Raspberry Pi.
+
+The installer can be downloaded <a href="https://drive.google.com/open?id=0B8bbfqFbkJvVflpDNWhndW5ZNVV5VkpVWWNGZUhWdjJ4bVNreGI0NXlteVBEX3NYZkRZLU0&authuser=0" target="_blank">here</a>. After downloading, simply copy install_pipass.sh to your Raspberry Pi and execute it through the terminal. There may be some permission issues, so run this command in the same directory in where you copied install_pipass.sh:
+
+    ->    sudo chmod 755 install_pipass.sh
+
+While in the same directory as install_pipass.sh, run this command to begin the installation:
+
+    ->    ./install_pipass.sh
+
+Once the installation is completed, your Raspberry Pi will restart. On another device, open up the web browser and enter the IP address of your Raspberry Pi to access the PiPass Dashboard.
+
+For security sake, PiPass will only work on the Nintendo 3DS systems that you authorize. Go to your Nintendo 3DS and open up your connection settings to find out your 3DS' MAC address. Once you have your MAC address, you can add it to the authenticated list by doing the following:
+
+    +   Click "PiPass".
+    +   Click "Settings".
+    +   Enter your 3DS' MAC address on a separate line and in the format of XX:XX:XX:XX:XX:XX.
+    +   Click "Save".
+
+With your 3DS' MAC address saved, you will want to start PiPass:
+
+    +   Click "PiPass".
+    +   Click "Start".
+    +   Click "Start PiPass".
+
+Wait a few seconds for the PiPass services to fully startup. At this point, you may have StreetPasses waiting for you already. If not, you may want to check the PiPass Logs for detailed information:
+
+    +   Click "Dashboard".
+    +   Click "PiPass Logs".
+
+Generally speaking, if hostapd services are running, you should be OK. The PiPass logging system will send a warning message if a driver issue or invalid MAC address is suspected to be a problem.
+
+If the PiPass logging system is sending a warning message regarding invalid MAC addresses, then you should make a note of the offending MAC addresses and double check if you have entered them correctly. PiPass will automatically skip invalid MAC addresses and move to the next valid Nintendo Zone in the list. Please note that some MAC addresses appear to be valid, but they are actually invalid according to hostapd. In these cases, it is best to edit PiPass DB. More information about editing PiPass DB can be found in the sections below.
+
+For WiFi driver issues, the PiPass pre-made image has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, Atheros AR5007UG, and Realtek chipsets. Check to see if your WiFi adapter is based on one of these chipsets and make sure that it can function as an "Access Point". There might be some changes that you will need to do. I've tried to make these changes easy, so if it is a driver issue, you may want to use the PiPass Dashboard to configure the correct driver:
+
+    +   Navigate to the PiPass Dashboard with your web browser.
+    +   Click "PiPass".
+    +   Click "Settings".
+    +   Enter the correct driver name for "Hostapd Driver".
+    +   Click "Save".
+
+If problems persist, refer to the manual guide for some extra help.
 
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
