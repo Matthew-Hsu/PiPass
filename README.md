@@ -7,6 +7,7 @@
 - [Known Behaviours](#known-behaviours)
 - [Helpful Information](#helpful-information)
     - [RTL8188CUS Chipset](#rtl8188cus-chipset)
+    - [Receiving StreetPasses](#receiving-streetpasses)
 - [Testing Environment](#testing-environment)
 - [Installation](#installation)
     - [PiPass Pre-made Image](#pipass-pre-made-image)
@@ -81,6 +82,9 @@ PiPass sometimes does not display expected or up-to-date values. Chrome is known
 ## Helpful Information
 ##### RTL8188CUS Chipset
 Many people have been trying to get the RTL8188CUS chipset to work with PiPass and with other Homepass solutions as well. There is a <a href="https://github.com/Matthew-Hsu/PiPass/issues/20" target="_blank">thread</a> found in my issue list that has a discussion where someone was able to get the RTL8188CUS working with PiPass. It will require a bit of Linux knowledge to follow and so far many others have not been able to reproduce the workaround. Due to this, it is still recommended to purchase a compatible WiFi dongle that is known to work.
+
+##### Receiving StreetPasses
+When using PiPass or any other Homepass solution, you may notice that StreetPasses only occur when your Nintendo 3DS is in sleep mode. To get StreetPasses while your Nintendo 3DS is 'awake', you must ensure that your Nintendo 3DS is not connected to a network.
 
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
