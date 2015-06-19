@@ -216,13 +216,14 @@ Before you begin, there is a great guide that explains in detail on how to setup
 
 Here is a list of dependencies needed for PiPass, so install the following packages through these commands:
 
-    ->  sudo apt-get install python -y
     ->  sudo apt-get install apache2 -y
-    ->  sudo apt-get install php5 -y
-    ->  sudo apt-get install hostapd -y
     ->  sudo apt-get install bridge-utils -y
-    ->  sudo apt-get install p7zip-full -y
+    ->  sudo apt-get install hostapd -y
     ->  sudo apt-get install iputils-ping -y
+    ->  sudo apt-get install p7zip-full -y
+    ->  sudo apt-get install php5 -y
+    ->  sudo apt-get install python -y
+    ->  sudo apt-get install sudo -y
 
 This would also be a good point where you would install the correct WiFi driver for your WiFi USB dongle. As a reference, these are the WiFi drivers that the PiPass pre-made image uses:
 
@@ -239,8 +240,8 @@ Now download PiPass from the 1.52 branch as a zip file and extract the contents 
 
 Most of the features controlled by PiPass can actually be ran through the PiPass Dashboard. Since your Raspberry Pi will act as a web server as well, you will need to make sure it has the permissions to do so. The following commands can grant execution:
 
-    ->  sudo chmod -R 755 /var/www/
     ->  sudo chmod -R 755 /opt/PiPass/
+    ->  sudo chmod -R 755 /var/www/
 
 Now this part is a little more involved as we will need to grant the Dashboard some rights for execution. Typically, you would not want to do this on a public webpage, but since PiPass is ran locally and that we have some security measures in place, it should be fine. We'll need root access, so run the following commands:
 
