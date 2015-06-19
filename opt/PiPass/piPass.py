@@ -140,7 +140,7 @@ def loadSettings():
     else:
         HOSTAPD_SECURITY = "0"
 
-    # Hostapd driver for your USB WiFi dongle. If the default value does not work for
+    # Hostapd driver for your WiFi adapter. If the default value does not work for
     # you, you may need to research which driver is compatible. Refer to README at
     # https://github.com/Matthew-Hsu/PiPass/blob/master/README.md
     global HOSTAPD_DRIVER
@@ -423,7 +423,7 @@ while doExecute:
         subprocess.call('sudo service hostapd restart', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
 
         # Verify that hostapd is running. If it is not, there is a possible WiFi driver issue or hostapd is using an invalid MAC address.
-        hostapdStatus = subprocess.check_output(['ps', '-A'])
+        hostapdStatus = subprocess.check_output('sudo ps -A', shell=True)
 
         # When hostapd fails to startup, it can be caused by two reasons: [1] hostapd is experiencing a WiFi driver issue or
         # [2] hostapd is trying to spoof with a invalid MAC address.
@@ -451,7 +451,7 @@ while doExecute:
                 subprocess.call('sudo service hostapd restart', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
 
                 # Verify that hostapd is running. If it is not, there is a possible WiFi driver issue.
-                hostapdStatus = subprocess.check_output(['ps', '-A'])
+                hostapdStatus = subprocess.check_output('sudo ps -A', shell=True)
 
                 if 'hostapd' not in hostapdStatus:
                     logger.warning('A possible WiFi driver issue has been detected.')
@@ -469,6 +469,17 @@ while doExecute:
             logger.info('PiPass is moving onto the next Nintendo Zone.')
 
             continue
+
+        # Verify that the WiFi adapter is actually able to change MAC addresses.
+        currentWirelessMAC = subprocess.check_output("sudo ifconfig wlan0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'", shell=True)
+        currentWirelessMAC = currentWirelessMAC.upper().replace('\n', '')
+
+        if currentWirelessMAC != zoneValues[1]:
+            logger.warning('A possible incompatible hostapd WiFi chipset has been detected.')
+            logger.error('Unable to change the MAC address of the WiFi adapter.')
+            updateStatus('Not Available', 'Not Available', 'PiPass is not running')
+            logger.info('PiPass has been shutdown with an error.')
+            exit(1)
 
         # Note the current time for the current visit to the Nintendo Zone.
         zoneVisits[visit] = (datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds()
