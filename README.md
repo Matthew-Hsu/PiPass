@@ -335,7 +335,7 @@ The KEY would be the value 1OfgyryUHeCPth76ziFT985XNLS-O5EXtjQDa0kA1L6M between 
 
 Now you will need to enter the worksheet you want to use. "PiPass DB Worksheet" controls which worksheet to use. The default value of 1 selects the very first worksheet and the value of 2 selects the second worksheet. For example, setting PiPass DB Worksheet to the value of 2 would use the "nintendo_zones" worksheet in the templated spreadsheet that you just copied.
 
-<b>NOTE: </b>When creating your own PiPass DB, please keep the formatting of the Google Spreadsheet consistent with the default PiPass DB. You may add/remove worksheets and change the content, but do not introduce new formatting (e.g., colouring of cells) as Google may return incorrect identifiers that PiPass will not understand.
+<b>NOTE: </b>When creating your own PiPass DB, please keep the formatting of the Google Spreadsheet consistent with the default PiPass DB. You may add / remove worksheets and change the content, but do not introduce new formatting (e.g., colouring of cells) as Google may return incorrect identifiers that PiPass will not understand.
 
 ##### Hostapd Security
 This feature can be enabled or disabled through the PiPass Dashboard. Enabling security will make PiPass use the 3DS MAC addresses that are inputted in '3DS Authentication'. Disabling security will allow anyone access to your network. When disabling security, discretion is advised.
