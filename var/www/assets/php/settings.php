@@ -119,6 +119,9 @@ if ($_POST)
   // Replace all dashes with colons to help guard against hostapd errors.
   $_POST['AUTHENTICATION'] = str_replace('-', ':', $_POST['AUTHENTICATION']);
 
+  // Strip leading/trailing whitespaces to help guard against hostapd errors.
+  $_POST['AUTHENTICATION'] = implode("\n", array_filter(array_map('trim', explode("\n", $_POST['AUTHENTICATION']))));
+
   // Save the list of authenticated Nintendo 3DS systems to /etc/hostapd/mac_accept.
   file_put_contents('/tmp/mac_accept', $_POST['AUTHENTICATION']);
   exec('sudo cp /tmp/mac_accept /etc/hostapd/mac_accept');
