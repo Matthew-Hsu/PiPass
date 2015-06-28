@@ -3,7 +3,7 @@
 ## Table of Contents
 - [About PiPass](#about-pipass)
 - [Master Branch Updates](#master-branch-updates)
-- [What's New in Version 1.52](#whats-new-in-version-152)
+- [What's New in Version 1.6](#whats-new-in-version-16)
 - [Known Behaviours](#known-behaviours)
 - [Helpful Information](#helpful-information)
     - [RTL8188CUS Chipset](#rtl8188cus-chipset)
@@ -35,14 +35,21 @@
 ## About PiPass
 PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine-tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
 
-This does not showcase a complete list of features, but it gives a sense in what PiPass looks like: <a href="https://www.youtube.com/watch?v=ttoDlpEBqBU" target="_blank">PiPass Video Overview</a>. The video shown is based on PiPass 1.4, however the general work-flow is relatively the same as in PiPass 1.52 with some minor differences.
+This video does not showcase a complete list of features, but it shows what PiPass looks like and how it operates: <a href="https://www.youtube.com/watch?v=g4XBIxps6Tc" target="_blank">PiPass Video Overview</a>.
 
 If you like PiPass, please star the project on GitHub and thanks for trying out PiPass!
 
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
 ## Master Branch Updates
-Please use 'PiPass Update' to receive the following changes that were implemented after PiPass 1.52:
+The master branch is currently on par with PiPass 1.6.
+
+<strong><a href="#table-of-contents">[Back to Top]</a></strong>
+
+## What's New in Version 1.6
+PiPass 1.6 builds upon on its logging system by offering relevant information for identifying a wider range of potential issues relating to WiFi chipsets and network connectivity. This new release also focuses on tightening up the dashboard to offer a better user experience.
+
+The list of changes are as follows:
 
 * PiPass will now accept incorrectly formatted MAC addresses that use dashes instead of colons. PiPass will internally convert dashes to colons when dealing with Nintendo Zone MAC addresses and externally make this change for authenticated MAC addresses.
 * PiPass will now check network connectivity. If there is a network connectivity issue, PiPass will stop cycling and stop hostapd. Once network connectivity has been re-established, PiPass will continue cycling again.
@@ -51,27 +58,6 @@ Please use 'PiPass Update' to receive the following changes that were implemente
 * Added 'Time Until Next Zone' progress bar to the dashboard.
 * User interface tweaks.
 * HTML code cleanup.
-
-<strong><a href="#table-of-contents">[Back to Top]</a></strong>
-
-## What's New in Version 1.52
-<b>NOTE: </b>Those who are using 'PiPass Update' on versions below PiPass 1.52, please go to 'PiPass Settings' and verify 'Hostapd Security'. PiPass 1.52 can now enable / disable hostapd security and it will assume no security if this setting is not updated after updating PiPass to PiPass 1.52. Once this setting has been updated, PiPass will automatically remember this setting for future versions.
-
-PiPass 1.52 focuses on overall polish and being informative about what is exactly going on "behind the scenes". The biggest feature addition is the logging system that provides extra information regarding status and it also aids in troubleshooting. The changelog for this version of PiPass is as follows:
-
-* Hostapd security can now be enabled / disabled through 'PiPass Settings'.
-* Fixed 'Shuffle Zones' bug where piPass.py would force it to be enabled.
-* PiPass now features a logging system that is accessible through the dashboard.
-* piPass.py works with the logging system to diagnose issues (e.g., hostapd WiFi drivers).
-* PiPass will log all invalid MAC addresses encountered and skip to the next zone.
-* PiPass can now reset the network through the dashboard.
-* PiPass PHP form validation messages now conforms to responsive design and the user interface.
-* The PiPass version can now be viewed through the dashboard.
-* Changelogs are accessible through 'About PiPass' in the dashboard.
-* The dashboard only refreshes the 'Spoofing Status' and the 'Show Current' table, instead of the entire page.
-* Scrollable modals.
-* Minor rewording.
-* Minor tweaks.
 
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
@@ -237,7 +223,7 @@ You may want to install the following in addition to the correct WiFi driver:
     ->  sudo apt-get install firmware-linux-nonfree -y
     ->  sudo apt-get install wireless-tools -y
 
-Now download PiPass from the 1.52 branch as a zip file and extract the contents on your local machine. You will notice three directories inside PiPass: etc, opt, and var. These three directories are the locations where you want to install PiPass (e.g., Linux root locations would be /etc/, /opt/, and /var/). Go ahead and merge the directories and it will be safe to overwrite the files with PiPass' configuration files.
+Now download PiPass from the 1.6 branch as a zip file and extract the contents on your local machine. You will notice three directories inside PiPass: etc, opt, and var. These three directories are the locations where you want to install PiPass (e.g., Linux root locations would be /etc/, /opt/, and /var/). Go ahead and merge the directories and it will be safe to overwrite the files with PiPass' configuration files.
 
 Most of the features controlled by PiPass can actually be ran through the PiPass Dashboard. Since your Raspberry Pi will act as a web server as well, you will need to make sure it has the permissions to do so. The following commands can grant execution:
 
