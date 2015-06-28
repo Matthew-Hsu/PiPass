@@ -54,11 +54,24 @@ def loadDashboard():
     # Controls the location to where the PiPass Dashboard is installed.
     global DASHBOARD
 
+    # Path to the JSON file where PiPass will write to for the PiPass Dashboard to display connection information.
+    global DASHBOARD_INFO
+
+    # Path to the JSON file where PiPass will write to for the PiPass Dashboard to calculate the time until the next Nintendo Zone.
+    global CURRENT_ZONE_END_TIME
+
+    # Path to the JSON file where PiPass will write to for the 'Show Current' page on the PiPass Dashboard.
+    global CURRENT_LIST
+
     try:
         DASHBOARD = pipass_dashboard['DASHBOARD']
     except KeyError:
         DASHBOARD = "/var/www/"
         logger.warning('Missing the DASHBOARD key in: /opt/PiPass/config/pipass_dashboard.json. Defaulting to: ' + DASHBOARD + '.')
+
+    DASHBOARD_INFO = DASHBOARD + "assets/json/current_state.json"
+    CURRENT_ZONE_END_TIME = DASHBOARD + "assets/json/current_zone_end_time.json"
+    CURRENT_LIST = DASHBOARD + "assets/json/current_list.json"
 
     return None
 
@@ -260,6 +273,10 @@ def sigUsr2(signum, stack):
 #### Load PiPass Settings ####
 
 # PiPass configuration variables. They will be overridden with correct values from loadDashboard() and loadSettings().
+DASHBOARD = None
+DASHBOARD_INFO = None
+CURRENT_ZONE_END_TIME = None
+CURRENT_LIST = None
 STREETPASS_CYCLE_MINUTES = None
 STREETPASS_CYCLE_SECONDS = None
 PIPASS_SHUFFLE = None
@@ -268,7 +285,6 @@ GSX_WORKSHEET = None
 PIPASS_DB = None
 HOSTAPD_SECURITY = None
 HOSTAPD_DRIVER = None
-DASHBOARD = None
 
 loadDashboard()
 loadSettings()
@@ -277,15 +293,6 @@ loadSettings()
 
 # Network configuration file path for PiPass to spoof as a Nintendo Zone.
 NETWORK_CONFIGURATION = "/etc/hostapd/hostapd.conf"
-
-# Path to the JSON file where PiPass will write to for the PiPass Dashboard to display connection information.
-DASHBOARD_INFO = DASHBOARD + "assets/json/current_state.json"
-
-# Path to the JSON file where PiPass will write to for the PiPass Dashboard to calculate the time until the next Nintendo Zone.
-CURRENT_ZONE_END_TIME = DASHBOARD + "assets/json/current_zone_end_time.json"
-
-# Path to the JSON file where PiPass will write to for the 'Show Current' page on the PiPass Dashboard.
-CURRENT_LIST = DASHBOARD + "assets/json/current_list.json"
 
 # Time interval in seconds that StreetPass requires between successive visits to a Nintendo Zone.
 STREETPASS_VISIT_INTERVAL = (8 * 60) * 60
