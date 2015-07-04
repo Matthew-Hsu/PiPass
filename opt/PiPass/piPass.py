@@ -203,10 +203,10 @@ def isNetworkConnected():
     global isDisconnected
 
     while True:
-        # Ping the Google DNS server to determine if PiPass has Internet access.
-        if subprocess.call('sudo ping -c 3 8.8.8.8', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True) == 1:
-            # Ping another Google DNS server to have higher certainty that the network connectivity issue is real.
-            if subprocess.call('sudo ping -c 3 8.8.4.4', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True) == 1:
+        # Ping the OpenDNS server to determine if PiPass has Internet access.
+        if subprocess.call('sudo ping -c 3 208.67.222.222', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True) == 1:
+            # Ping the Google DNS server to have higher certainty that the network connectivity issue is real.
+            if subprocess.call('sudo ping -c 3 8.8.8.8', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True) == 1:
                 subprocess.call('sudo service hostapd stop', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
                 isDisconnected = True
                 updateStatus('Not Available', 'Not Available', 'Internet access is not available. PiPass is trying to reconnect')
