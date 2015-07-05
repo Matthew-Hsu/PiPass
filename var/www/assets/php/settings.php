@@ -2,6 +2,9 @@
 // Double check to see if we actually got the form data from settings.html.
 if ($_POST)
 {
+  // Trim leading/trailing whitespaces to help guard against dashboard path errors.
+  $_POST['DASHBOARD'] = trim($_POST['DASHBOARD']);
+
   // Ensure that the dashboard path ends with the appropriate ' / '.
   if (strcmp(substr($_POST['DASHBOARD'], -1), "/") != 0)
   {
