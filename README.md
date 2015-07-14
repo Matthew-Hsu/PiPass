@@ -76,7 +76,7 @@ When using PiPass or any other Homepass solution, you may notice that StreetPass
 <strong><a href="#table-of-contents">[Back to Top]</a></strong>
 
 ## Testing Environment
-Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A -=new=- Nintendo 3DS XL with the 9.8.0-25U firmware was used to verify functionality of 'Homepass'.
+Development and testing was done using all the components from the Canakit Raspberry Pi 2 Complete Starter Kit with WiFi. A -=new=- Nintendo 3DS XL with the 9.9.0-26U firmware was used to verify functionality of 'Homepass'.
 
 The PiPass pre-made image has drivers pre-installed for Ralink, ZyDAS ZD1211/1211B, Atheros AR5007UG, and Realtek chipsets. The WiFi chipset that I tested on was the Ralink RT5370.
 
