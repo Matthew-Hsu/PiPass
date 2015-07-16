@@ -209,6 +209,9 @@ Here is a list of dependencies needed for PiPass, so install the following packa
     ->  sudo apt-get install iputils-ping -y
     ->  sudo apt-get install p7zip-full -y
     ->  sudo apt-get install php5 -y
+    ->  sudo apt-get install php5-common -y
+    ->  sudo apt-get install php5-cli -y
+    ->  sudo apt-get install libapache2-mod-php5 -y
     ->  sudo apt-get install python -y
     ->  sudo apt-get install sudo -y
 
