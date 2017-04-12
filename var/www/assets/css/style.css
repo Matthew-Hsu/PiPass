@@ -169,7 +169,10 @@ ul.top-menu>li>.logout {
     width: 210px;
     height: 100%;
     position: fixed;
-    background: #424a5d
+    background: rgba(66, 74, 93, 0.95);
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }
 #sidebar h5 {
     color: #f2f2f2;
@@ -211,7 +214,7 @@ ul.sidebar-menu li ul.sub {
     padding: 0
 }
 ul.sidebar-menu {
-    margin-top: 75px
+    margin-top: 75px;
 }
 #sidebar>ul>li>ul.sub {
     display: none
@@ -306,7 +309,10 @@ ul.sidebar-menu li a:hover i {
     font-size: 11px
 }
 #main-content {
-    margin-left: 210px
+    margin-left: 210px;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s
 }
 .footer,
 .header {
