@@ -75,6 +75,14 @@
     .header {
         position: absolute;
     }
+    /*nav-accordion*/
+
+    #nav-accordion {
+      margin-top: -300px;
+      -webkit-transition-duration: 0.3s;
+      -moz-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+    }
     /*sidebar*/
 
     #sidebar {
@@ -83,6 +91,9 @@
         position: absolute;
         width: 100%;
         z-index: 1001;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
     }
     /* body container */
 
