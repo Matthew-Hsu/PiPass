@@ -1,5 +1,7 @@
 # PiPass - Nintendo 3DS Homepass for the Raspberry Pi
 
+# This project is unfortunately useless now that [Nintendo have shut down StreetPass Relay servers](https://www.nintendo.co.jp/support/information/2018/0228.html)
+
 ## Table of Contents
 - [About PiPass](#about-pipass)
 - [Master Branch Updates](#master-branch-updates)
@@ -33,7 +35,7 @@
 - [Support](#support)
 
 ## About PiPass
-PiPass turns your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine-tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
+PiPass turned your Raspberry Pi into a Nintendo 3DS Homepass Relay Station. The PiPass Dashboard can be accessed through a computer or mobile device. It can manage features without the need of opening up any files manually. However, some fine-tuning may require getting your hands 'dirty'. Though the process is relatively fast and easy.
 
 This video does not showcase a complete list of features, but it shows what PiPass looks like and how it operates: <a href="https://www.youtube.com/watch?v=g4XBIxps6Tc" target="_blank">PiPass Video Overview</a>.
 
