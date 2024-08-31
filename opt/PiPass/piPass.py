@@ -411,6 +411,10 @@ while doExecute:
         # A usable Nintendo Zone was found, so visits should not get cleared on the next pass.
         clearVisits = False
 
+        # Shut down hostapd so NETWORK_CONFIGURATION will write out properly
+        # subprocess.call() will wait for the service command to finish before moving on.
+        subprocess.call('sudo service hostapd stop', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
+        
         # Write the current zone information to NETWORK_CONFIGURATION.
         try:
             fo = open(NETWORK_CONFIGURATION, "w")
@@ -425,9 +429,10 @@ while doExecute:
         fo.write(conf)
         fo.close()
 
-        # Restart hostapd to ensure NETWORK_CONFIGURATION is used. Restarting hostapd will also ensure that it is running if it is currently off.
+        # Start hostapd to use new NETWORK_CONFIGURATION.
+        # Start will also save 8+ seconds as there is a sleep(8) in the restart script.
         # subprocess.call() will wait for the service command to finish before moving on.
-        subprocess.call('sudo service hostapd restart', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
+        subprocess.call('sudo service hostapd start', stdout=open(os.devnull, 'w'), stderr=open(os.devnull, 'w'), shell=True)
 
         # Verify that hostapd is running. If it is not, there is a possible WiFi driver issue or hostapd is using an invalid MAC address.
         hostapdStatus = subprocess.check_output('sudo ps -A', shell=True)
